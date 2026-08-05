@@ -459,25 +459,40 @@ p{ margin:0 0 1.1em; }
   text-transform:uppercase;
 }
 
-/* La máscara suaviza los bordes de la foto para que se integre con el fondo
-   en vez de quedar como un recuadro pegado encima. */
+/* ------------------------------------------------------------
+   FOTO FUNDIDA CON EL FONDO
+   Las fotos vienen de un día nublado: salen frías y con los bordes
+   duros, así que pegadas sobre el fondo cálido parecen un recorte.
+   Tres capas arreglan eso:
+     1. la máscara disuelve los cuatro bordes,
+     2. el filtro baja el azul y acerca la foto a la paleta,
+     3. la viñeta encima repite el color del fondo en los bordes.
+   La máscara va en el contenedor, no en la imagen, para que también
+   recorte la viñeta y no queden esquinas duras.
+   ------------------------------------------------------------ */
 .oficio__foto{
   position:relative;
-  border-radius:var(--radio);
-  overflow:hidden;
+  /* Los radios van pequeños a propósito (49% del ancho): con radios grandes
+     el degradado no alcanza a llegar a transparente antes del borde y la
+     foto vuelve a verse como un recorte pegado encima. */
+  -webkit-mask-image:radial-gradient(49% 65% at 50% 45%, #000 40%, rgba(0,0,0,.62) 70%, rgba(0,0,0,.22) 90%, transparent 100%);
+          mask-image:radial-gradient(49% 65% at 50% 45%, #000 40%, rgba(0,0,0,.62) 70%, rgba(0,0,0,.22) 90%, transparent 100%);
 }
 .oficio__foto img{
   width:100%;
   aspect-ratio:4/3;
   object-fit:cover;
-  -webkit-mask-image:radial-gradient(120% 100% at 50% 45%, #000 55%, transparent 100%);
-          mask-image:radial-gradient(120% 100% at 50% 45%, #000 55%, transparent 100%);
+  /* el local es oscuro y el día estaba nublado: se levanta un poco la luz
+     y se baja el azul para acercarla a los tonos del sitio */
+  filter:saturate(.88) contrast(1.06) brightness(1.02);
 }
 .oficio__foto::after{
   content:"";
   position:absolute; inset:0;
-  background:linear-gradient(to top, rgba(18,35,42,.55), transparent 55%);
   pointer-events:none;
+  background:
+    radial-gradient(36% 48% at 50% 45%, rgba(232,163,61,.14) 0%, rgba(18,35,42,.18) 60%, rgba(18,35,42,.62) 100%),
+    linear-gradient(to top, rgba(18,35,42,.45) 0%, transparent 45%);
 }
 
 
@@ -555,9 +570,25 @@ p{ margin:0 0 1.1em; }
   aspect-ratio:4/3;
   object-fit:cover;
   transition:transform .8s cubic-bezier(.22,.61,.36,1), filter var(--t-rapida);
-  filter:saturate(.92);
+  /* en reposo van tiradas a la paleta del sitio; en hover vuelven a su color */
+  filter:saturate(.84) contrast(1.05) brightness(.96);
 }
-.galeria__item:hover img{ transform:scale(1.06); filter:saturate(1.05); }
+.galeria__item:hover img{ transform:scale(1.06); filter:saturate(1.02) contrast(1) brightness(1.02); }
+
+/* Velo cálido que une la retícula con el fondo. Acá no usamos máscara:
+   la galería necesita orden, y difuminar doce bordes la volvería una sopa. */
+.galeria__item::before{
+  content:"";
+  position:absolute; inset:0;
+  z-index:1;
+  pointer-events:none;
+  background:
+    linear-gradient(to top, rgba(18,35,42,.5) 0%, transparent 58%),
+    radial-gradient(70% 62% at 50% 45%, rgba(232,163,61,.12) 0%, rgba(18,35,42,.26) 100%);
+  transition:opacity var(--t-rapida);
+}
+.galeria__item:hover::before{ opacity:.25; }
+.galeria__item figcaption{ z-index:2; }
 
 .galeria__item figcaption{
   position:absolute; left:0; right:0; bottom:0;
@@ -855,6 +886,20 @@ p{ margin:0 0 1.1em; }
 .js .galeria__item:nth-child(3){ transition-delay:.16s; }
 .js .tarjeta:nth-child(4),
 .js .razon:nth-child(4){ transition-delay:.24s; }
+/* La segunda fila de servicios entra igual que la primera: el retardo se
+   cuenta dentro de la fila, no acumulado sobre las ocho tarjetas. */
+.js .tarjeta:nth-child(6){ transition-delay:.08s; }
+.js .tarjeta:nth-child(7){ transition-delay:.16s; }
+.js .tarjeta:nth-child(8){ transition-delay:.24s; }
+
+/* Foco visible para quien navega con teclado */
+.galeria__item:focus-visible,
+.btn:focus-visible,
+.nav a:focus-visible,
+.flotante:focus-visible{
+  outline:2px solid var(--ambar);
+  outline-offset:3px;
+}
 
 
 /* ============================================================
@@ -911,7 +956,9 @@ p{ margin:0 0 1.1em; }
     grid-template-columns:1.05fr .95fr;
     gap:64px; align-items:center;
   }
-  .oficio__foto img{ aspect-ratio:3/4; }
+  /* La panorámica del local es horizontal: recortarla a vertical le quitaría
+     justo lo que la hace valer, que es el ancho del local. */
+  .oficio__foto img{ aspect-ratio:4/3; }
 
   .tarjetas{ grid-template-columns:repeat(4,1fr); }
 

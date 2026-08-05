@@ -245,6 +245,7 @@
 
     var figuras = galeria.querySelectorAll(".galeria__item");
     var actual  = 0;
+    var origen  = null;   // desde qué foto se abrió, para devolver el foco al cerrar
 
     function pintar(i) {
       actual = (i + figuras.length) % figuras.length;
@@ -257,6 +258,7 @@
     }
 
     function abrir(i) {
+      origen = figuras[i];
       pintar(i);
       caja.hidden = false;
       requestAnimationFrame(function () { caja.classList.add("abierto"); });
@@ -268,11 +270,21 @@
       caja.classList.remove("abierto");
       document.body.style.overflow = "";
       setTimeout(function () { caja.hidden = true; }, 250);
+      if (origen) { origen.focus(); origen = null; }
     }
 
+    // Las fotos se vuelven interactivas recién acá: si el visor no existe,
+    // tampoco tiene sentido que aparezcan como botones para el teclado.
     for (var i = 0; i < figuras.length; i++) {
       (function (n) {
-        figuras[n].addEventListener("click", function () { abrir(n); });
+        var f = figuras[n];
+        f.setAttribute("tabindex", "0");
+        f.setAttribute("role", "button");
+        f.setAttribute("aria-label", "Ampliar foto: " + (f.querySelector("figcaption") || {}).textContent);
+        f.addEventListener("click", function () { abrir(n); });
+        f.addEventListener("keydown", function (e) {
+          if (e.key === "Enter" || e.key === " ") { e.preventDefault(); abrir(n); }
+        });
       })(i);
     }
 

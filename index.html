@@ -7,12 +7,19 @@
 <meta name="description" content="Hojalatería y fábrica de cocinas en Loncoche. Cañones de chimenea, codos, sombreretes, canaletas, campanas y trabajos en plancha a medida. Lord Cochrane 121.">
 <meta name="theme-color" content="#12232A">
 
-<!-- Open Graph / vista previa al compartir por WhatsApp -->
+<!-- Open Graph / vista previa al compartir por WhatsApp.
+     og:image TIENE que ser una URL absoluta: con ruta relativa WhatsApp no
+     muestra ninguna miniatura. Si el sitio se muda a otro dominio, hay que
+     cambiar estas dos líneas. -->
 <meta property="og:type" content="website">
+<meta property="og:url" content="https://yordyserna.github.io/calor-del-hogar/">
 <meta property="og:title" content="Hojalatería Calor de Hogar — Loncoche">
 <meta property="og:description" content="Fábrica de cocinas y hojalatería en general. Trabajo de plancha hecho a mano en Loncoche.">
-<meta property="og:image" content="images/taller-banco-trabajo.jpg">
+<meta property="og:image" content="https://yordyserna.github.io/calor-del-hogar/images/local-interior-general.jpg">
+<meta property="og:image:width" content="1500">
+<meta property="og:image:height" content="1125">
 <meta property="og:locale" content="es_CL">
+<meta name="twitter:card" content="summary_large_image">
 
 <!-- Favicon dibujado a mano en SVG: la casita con llama del cartel del local.
      Va incrustado para no depender de ningún archivo extra. -->
@@ -26,8 +33,13 @@
 
 <!-- Ficha de negocio local para Google. Es lo que hace que el local pueda
      salir en el mapa y en las búsquedas de "hojalatería Loncoche".
-     EJEMPLO — reemplazar: telephone, email y openingHours con los datos reales.
-     El resto está verificado (cartel del local y patente municipal). -->
+     Todo lo que está acá está verificado (cartel del local y patente municipal).
+     EJEMPLO — reemplazar: cuando lleguen los datos reales, agregar las líneas
+       "telephone": "+56912345678",
+       "email": "...",
+       "openingHours": "Mo-Fr 09:00-18:00",
+     A propósito NO van con valores de relleno: Google indexaría un teléfono
+     falso y después cuesta sacarlo. -->
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -41,12 +53,10 @@
     "addressRegion": "Región de La Araucanía",
     "addressCountry": "CL"
   },
-  "telephone": "+56900000000",
-  "email": "correo@ejemplo.cl",
   "areaServed": "Loncoche y alrededores",
   "paymentAccepted": "Efectivo, tarjeta de débito, tarjeta de crédito",
-  "openingHours": "Mo-Fr 00:00-00:00",
-  "image": "images/local-fachada.jpg"
+  "image": "https://yordyserna.github.io/calor-del-hogar/images/local-fachada.jpg",
+  "url": "https://yordyserna.github.io/calor-del-hogar/"
 }
 </script>
 </head>
@@ -170,8 +180,8 @@
     <!-- Observamos el contenedor, no la imagen recortada: un elemento con la
          máscara cerrada nunca dispararía el IntersectionObserver. -->
     <div class="oficio__foto rev">
-      <img src="images/taller-herramientas.jpg" width="1500" height="1125" loading="lazy"
-           alt="Herramientas y plantillas de zinc colgadas en la pared del taller">
+      <img src="images/local-interior-general.jpg" width="1500" height="1125" loading="lazy"
+           alt="Vista del local desde la entrada: estanterías con cañones y campanas a ambos lados, y el mesón de atención al fondo">
     </div>
 
   </div>

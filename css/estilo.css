@@ -470,13 +470,15 @@ p{ margin:0 0 1.1em; }
    La máscara va en el contenedor, no en la imagen, para que también
    recorte la viñeta y no queden esquinas duras.
    ------------------------------------------------------------ */
+/* En móvil la foto va a lo ancho, a sangre, y se disuelve hacia arriba:
+   hacia el texto que viene justo encima. */
+.oficio{ position:relative; overflow:hidden; }
+
 .oficio__foto{
   position:relative;
-  /* Los radios van pequeños a propósito (49% del ancho): con radios grandes
-     el degradado no alcanza a llegar a transparente antes del borde y la
-     foto vuelve a verse como un recorte pegado encima. */
-  -webkit-mask-image:radial-gradient(49% 65% at 50% 45%, #000 40%, rgba(0,0,0,.62) 70%, rgba(0,0,0,.22) 90%, transparent 100%);
-          mask-image:radial-gradient(49% 65% at 50% 45%, #000 40%, rgba(0,0,0,.62) 70%, rgba(0,0,0,.22) 90%, transparent 100%);
+  margin-inline:-20px;                 /* rompe el padding del contenedor */
+  -webkit-mask-image:linear-gradient(to bottom, transparent 0%, rgba(0,0,0,.45) 16%, #000 42%);
+          mask-image:linear-gradient(to bottom, transparent 0%, rgba(0,0,0,.45) 16%, #000 42%);
 }
 .oficio__foto img{
   width:100%;
@@ -486,13 +488,15 @@ p{ margin:0 0 1.1em; }
      y se baja el azul para acercarla a los tonos del sitio */
   filter:saturate(.88) contrast(1.06) brightness(1.02);
 }
+/* Tinte cálido que la amarra a la paleta, más el fundido contra el borde
+   inferior de la sección. */
 .oficio__foto::after{
   content:"";
   position:absolute; inset:0;
   pointer-events:none;
   background:
-    radial-gradient(36% 48% at 50% 45%, rgba(232,163,61,.14) 0%, rgba(18,35,42,.18) 60%, rgba(18,35,42,.62) 100%),
-    linear-gradient(to top, rgba(18,35,42,.45) 0%, transparent 45%);
+    linear-gradient(to bottom, transparent 55%, rgba(18,35,42,.9) 100%),
+    radial-gradient(120% 90% at 70% 40%, rgba(232,163,61,.13) 0%, rgba(18,35,42,.3) 70%, rgba(18,35,42,.55) 100%);
 }
 
 
@@ -952,13 +956,41 @@ p{ margin:0 0 1.1em; }
   .contenedor{ padding-inline:34px; }
   .galeria{ grid-template-columns:repeat(3,1fr); padding-inline:34px; }
 
+  /* ----------------------------------------------------------
+     De aquí para arriba la foto deja de ser un recuadro dentro de
+     una columna: ocupa todo el panel derecho, de borde a borde de la
+     pantalla y de arriba abajo de la sección, y se disuelve hacia la
+     izquierda justo donde empieza el texto.
+     ---------------------------------------------------------- */
+  .oficio{ min-height:620px; display:flex; align-items:center; }
+
   .oficio__grid{
-    grid-template-columns:1.05fr .95fr;
-    gap:64px; align-items:center;
+    grid-template-columns:minmax(0, 520px);
+    gap:0;
   }
-  /* La panorámica del local es horizontal: recortarla a vertical le quitaría
-     justo lo que la hace valer, que es el ancho del local. */
-  .oficio__foto img{ aspect-ratio:4/3; }
+  .oficio__texto{ position:relative; z-index:2; }
+
+  .oficio__foto{
+    position:absolute;
+    top:0; right:0; bottom:0;
+    width:56%;
+    margin:0;
+    z-index:1;
+    /* horizontal: invisible donde está el texto, sólida hacia la derecha */
+    -webkit-mask-image:linear-gradient(to right, transparent 0%, rgba(0,0,0,.28) 22%, rgba(0,0,0,.8) 48%, #000 68%);
+            mask-image:linear-gradient(to right, transparent 0%, rgba(0,0,0,.28) 22%, rgba(0,0,0,.8) 48%, #000 68%);
+  }
+  .oficio__foto img{
+    width:100%; height:100%;
+    aspect-ratio:auto;
+    object-fit:cover;
+  }
+  /* vertical: funde contra las secciones de arriba y de abajo */
+  .oficio__foto::after{
+    background:
+      linear-gradient(to bottom, var(--carbon) 0%, transparent 20%, transparent 78%, var(--carbon) 100%),
+      radial-gradient(90% 100% at 85% 45%, rgba(232,163,61,.12) 0%, rgba(18,35,42,.22) 60%, rgba(18,35,42,.42) 100%);
+  }
 
   .tarjetas{ grid-template-columns:repeat(4,1fr); }
 

@@ -1,0 +1,950 @@
+/* ============================================================
+   HOJALATERÍA CALOR DE HOGAR — Loncoche
+   CSS único, sin build ni dependencias.
+
+   La paleta NO es inventada: son los colores reales del local.
+   Verde petróleo de las paredes, naranja de las estanterías,
+   rojo óxido del piso y el zinc de todo el producto.
+   ============================================================ */
+
+:root{
+  --carbon:   #12232A;   /* fondo general */
+  --taller:   #1B3B42;   /* verde de la pared del local */
+  --oxido:    #C8551E;   /* naranja de las estanterías — acento y botones */
+  --ambar:    #E8A33D;   /* brillo cálido, hover */
+  --zinc:     #B9C2C6;   /* texto secundario y líneas */
+  --cal:      #F2EFE9;   /* texto sobre oscuro */
+  --brasa:    #8A2E12;   /* rojo profundo del letrero */
+
+  --borde:    rgba(185,194,198,.16);
+  --sombra:   0 18px 50px rgba(0,0,0,.45);
+
+  --ancho:    1180px;
+  --radio:    4px;       /* casi recto: es chapa doblada, no plástico */
+
+  --t-rapida: .25s cubic-bezier(.22,.61,.36,1);
+  --t-suave:  .7s  cubic-bezier(.22,.61,.36,1);
+}
+
+*,*::before,*::after{ box-sizing:border-box; }
+
+/* el atributo hidden tiene que ganarle a cualquier display de más abajo */
+[hidden]{ display:none !important; }
+
+html{ scroll-behavior:smooth; -webkit-text-size-adjust:100%; }
+
+body{
+  margin:0;
+  background:var(--carbon);
+  color:var(--cal);
+  font-family:"Barlow",system-ui,-apple-system,"Segoe UI",sans-serif;
+  font-size:17px;
+  line-height:1.65;
+  overflow-x:hidden;
+}
+
+img{ max-width:100%; height:auto; display:block; }
+a{ color:inherit; }
+
+::selection{ background:var(--oxido); color:#fff; }
+
+
+/* ============================================================
+   FONDO AMBIENTAL — manchas de brasa que se mueven muy lento
+   Categoría "manchas difusas", en tonos de forja en vez de violeta.
+   CSS puro: cuatro divs con blur y keyframes. Cero librerías.
+   ============================================================ */
+
+.brasas{
+  position:fixed; inset:0;
+  z-index:-1;
+  overflow:hidden;
+  pointer-events:none;
+  contain:strict;
+}
+
+.brasa{
+  position:absolute;
+  border-radius:50%;
+  filter:blur(70px);
+  opacity:.5;
+  will-change:transform;
+}
+
+.brasa--1{
+  width:60vw; height:60vw; max-width:620px; max-height:620px;
+  top:-12%; left:-18%;
+  background:radial-gradient(circle, rgba(200,85,30,.75) 0%, rgba(200,85,30,0) 70%);
+  animation:deriva1 44s ease-in-out infinite alternate;
+}
+.brasa--2{
+  width:55vw; height:55vw; max-width:560px; max-height:560px;
+  top:22%; right:-20%;
+  background:radial-gradient(circle, rgba(232,163,61,.5) 0%, rgba(232,163,61,0) 70%);
+  animation:deriva2 58s ease-in-out infinite alternate;
+}
+.brasa--3{
+  width:70vw; height:70vw; max-width:700px; max-height:700px;
+  bottom:-15%; left:5%;
+  background:radial-gradient(circle, rgba(138,46,18,.6) 0%, rgba(138,46,18,0) 70%);
+  animation:deriva3 66s ease-in-out infinite alternate;
+}
+.brasa--4{
+  width:45vw; height:45vw; max-width:480px; max-height:480px;
+  top:55%; left:38%;
+  background:radial-gradient(circle, rgba(27,59,66,.85) 0%, rgba(27,59,66,0) 70%);
+  animation:deriva2 52s ease-in-out infinite alternate-reverse;
+}
+
+@keyframes deriva1{
+  0%  { transform:translate3d(0,0,0) scale(1); }
+  100%{ transform:translate3d(14vw,10vh,0) scale(1.22); }
+}
+@keyframes deriva2{
+  0%  { transform:translate3d(0,0,0) scale(1.1); }
+  100%{ transform:translate3d(-12vw,14vh,0) scale(.9); }
+}
+@keyframes deriva3{
+  0%  { transform:translate3d(0,0,0) scale(1); }
+  100%{ transform:translate3d(10vw,-12vh,0) scale(1.15); }
+}
+
+/* en pantallas chicas el blur grande cuesta caro: menos manchas y menos radio */
+@media (max-width:700px){
+  .brasa{ filter:blur(48px); opacity:.42; }
+  .brasa--4{ display:none; }
+}
+
+
+/* ============================================================
+   TIPOGRAFÍA BASE
+   Anton para titulares (aire de letrero de taller pintado a mano),
+   Barlow para el cuerpo (viene de señalética vial: legible y sobrio).
+   ============================================================ */
+
+.titulo{
+  font-family:"Anton",Impact,sans-serif;
+  font-weight:400;
+  font-size:clamp(2.1rem,7vw,3.6rem);
+  line-height:.98;
+  letter-spacing:.005em;
+  text-transform:uppercase;
+  margin:.1em 0 .5em;
+}
+
+.etiqueta{
+  font-size:.72rem;
+  letter-spacing:.22em;
+  text-transform:uppercase;
+  font-weight:600;
+  color:var(--oxido);
+  margin:0 0 .4em;
+}
+
+.entrada{
+  max-width:56ch;
+  color:var(--zinc);
+  font-size:1.06rem;
+}
+
+p{ margin:0 0 1.1em; }
+
+
+/* ============================================================
+   PIEZAS REUTILIZABLES
+   ============================================================ */
+
+.contenedor{
+  width:100%;
+  max-width:var(--ancho);
+  margin-inline:auto;
+  padding-inline:20px;
+}
+
+.seccion{
+  padding-block:clamp(64px,11vw,120px);
+  position:relative;
+}
+
+.btn{
+  display:inline-flex; align-items:center; justify-content:center;
+  gap:.5em;
+  padding:.85em 1.5em;
+  border-radius:var(--radio);
+  font-weight:600;
+  font-size:.98rem;
+  letter-spacing:.02em;
+  text-decoration:none;
+  border:1px solid transparent;
+  cursor:pointer;
+  transition:transform var(--t-rapida), background var(--t-rapida),
+             border-color var(--t-rapida), box-shadow var(--t-rapida);
+}
+.btn--sol{
+  background:var(--oxido);
+  color:#fff;
+  box-shadow:0 8px 22px rgba(200,85,30,.28);
+}
+.btn--sol:hover{
+  background:var(--ambar);
+  color:#20140A;
+  transform:translateY(-2px);
+  box-shadow:0 12px 28px rgba(232,163,61,.34);
+}
+.btn--linea{
+  border-color:var(--borde);
+  color:var(--cal);
+  background:rgba(242,239,233,.03);
+}
+.btn--linea:hover{
+  border-color:var(--zinc);
+  background:rgba(242,239,233,.08);
+  transform:translateY(-2px);
+}
+.btn--ancho{ width:100%; }
+
+
+/* ============================================================
+   BARRA SUPERIOR
+   ============================================================ */
+
+.barra{
+  position:fixed; top:0; left:0; right:0;
+  z-index:60;
+  display:flex; align-items:center; gap:16px;
+  padding:12px 20px;
+  background:rgba(18,35,42,0);
+  border-bottom:1px solid transparent;
+  transition:background var(--t-rapida), border-color var(--t-rapida), padding var(--t-rapida);
+}
+.barra.pegada{
+  background:rgba(18,35,42,.9);
+  backdrop-filter:blur(12px);
+  -webkit-backdrop-filter:blur(12px);
+  border-bottom-color:var(--borde);
+  padding-block:9px;
+}
+
+.marca{
+  display:flex; align-items:center; gap:10px;
+  text-decoration:none;
+  margin-right:auto;
+}
+.marca__llama{
+  width:26px; height:30px;
+  flex:none;
+  background:var(--oxido);
+  /* silueta de casa con techo a dos aguas, como el logo del cartel */
+  clip-path:polygon(50% 0%, 100% 38%, 100% 100%, 0% 100%, 0% 38%);
+  position:relative;
+}
+.marca__llama::after{
+  content:"";
+  position:absolute; left:50%; top:52%;
+  transform:translate(-50%,-40%);
+  width:9px; height:13px;
+  background:var(--ambar);
+  border-radius:50% 50% 50% 50% / 60% 60% 40% 40%;
+}
+.marca__txt{
+  font-family:"Anton",sans-serif;
+  font-size:1.06rem;
+  text-transform:uppercase;
+  letter-spacing:.02em;
+  line-height:1;
+  display:flex; flex-direction:column; gap:3px;
+}
+.marca__txt small{
+  font-family:"Barlow",sans-serif;
+  font-size:.6rem;
+  letter-spacing:.16em;
+  font-weight:500;
+  color:var(--zinc);
+  text-transform:uppercase;
+}
+
+.nav{ display:none; }
+.barra__cta{ display:none; }
+
+.hamburguesa{
+  width:42px; height:38px;
+  display:flex; flex-direction:column; justify-content:center; gap:5px;
+  padding:0 9px;
+  background:rgba(242,239,233,.06);
+  border:1px solid var(--borde);
+  border-radius:var(--radio);
+  cursor:pointer;
+}
+.hamburguesa span{
+  display:block; height:2px; width:100%;
+  background:var(--cal);
+  transition:transform var(--t-rapida), opacity var(--t-rapida);
+}
+.hamburguesa[aria-expanded="true"] span:nth-child(1){ transform:translateY(7px) rotate(45deg); }
+.hamburguesa[aria-expanded="true"] span:nth-child(2){ opacity:0; }
+.hamburguesa[aria-expanded="true"] span:nth-child(3){ transform:translateY(-7px) rotate(-45deg); }
+
+.nav-movil{
+  position:fixed; top:62px; left:0; right:0;
+  z-index:55;
+  display:grid;
+  background:rgba(18,35,42,.97);
+  backdrop-filter:blur(14px);
+  -webkit-backdrop-filter:blur(14px);
+  border-bottom:1px solid var(--borde);
+  max-height:0; overflow:hidden;
+  transition:max-height .35s ease;
+}
+.nav-movil.abierto{ max-height:340px; }
+.nav-movil a{
+  padding:15px 24px;
+  text-decoration:none;
+  border-bottom:1px solid var(--borde);
+  font-weight:500;
+  letter-spacing:.03em;
+}
+.nav-movil a:last-child{ border-bottom:0; }
+.nav-movil a:hover{ background:rgba(200,85,30,.14); color:var(--ambar); }
+
+
+/* ============================================================
+   PORTADA
+   ============================================================ */
+
+.portada{
+  position:relative;
+  min-height:100svh;
+  display:flex; flex-direction:column; justify-content:flex-end;
+  padding:120px 20px 76px;
+  overflow:hidden;
+  isolation:isolate;
+}
+
+.portada__fondo{
+  position:absolute; inset:0;
+  z-index:-1;
+  overflow:hidden;
+}
+
+/* El video va desenfocado a propósito: da textura y movimiento sin
+   competir con el titular. La máscara lo funde con el fondo abajo. */
+.portada__video{
+  width:100%; height:100%;
+  object-fit:cover;
+  filter:blur(11px) saturate(.85) brightness(.55);
+  transform:scale(1.12);            /* tapa el borde claro que deja el blur */
+  opacity:0;                        /* el JS lo sube cuando puede reproducir */
+  transition:opacity 1.4s ease;
+  -webkit-mask-image:linear-gradient(to bottom, #000 0%, #000 58%, transparent 100%);
+          mask-image:linear-gradient(to bottom, #000 0%, #000 58%, transparent 100%);
+}
+.portada__video.visible{ opacity:1; }
+
+/* El video no cierra el bucle en el mismo encuadre, así que lo bajamos casi
+   a cero medio segundo antes del corte. Bajo el desenfoque se lee como un
+   cambio de luz, no como un salto. */
+.portada__video.visible.parpadeo{
+  opacity:.12;
+  transition:opacity .55s linear;
+}
+
+.portada__velo{
+  position:absolute; inset:0;
+  background:
+    linear-gradient(to top, var(--carbon) 2%, rgba(18,35,42,.72) 38%, rgba(18,35,42,.5) 100%),
+    radial-gradient(ellipse at 30% 70%, rgba(200,85,30,.2) 0%, transparent 60%);
+}
+
+.portada__cuerpo{ position:relative; max-width:var(--ancho); margin-inline:auto; width:100%; }
+
+.ojo{
+  font-size:.74rem;
+  letter-spacing:.2em;
+  text-transform:uppercase;
+  color:var(--zinc);
+  font-weight:600;
+  margin-bottom:1.1em;
+  display:flex; align-items:center; gap:.8em;
+}
+.ojo::before{
+  content:""; width:34px; height:2px; background:var(--oxido); flex:none;
+}
+
+.portada__titulo{
+  font-family:"Anton",Impact,sans-serif;
+  font-weight:400;
+  text-transform:uppercase;
+  line-height:.86;
+  letter-spacing:-.01em;
+  margin:0 0 .38em;
+  display:flex; flex-direction:column;
+  font-size:clamp(3.4rem,17vw,9rem);
+}
+.portada__titulo .l2{
+  color:var(--oxido);
+  -webkit-text-stroke:0;
+}
+
+.portada__bajada{
+  max-width:46ch;
+  font-size:clamp(1.02rem,3.4vw,1.24rem);
+  color:#DCE3E5;
+  margin-bottom:1.9em;
+}
+.portada__bajada strong{ color:var(--cal); font-weight:600; }
+
+.portada__botones{
+  display:flex; flex-wrap:wrap; gap:12px;
+  margin-bottom:2.4em;
+}
+
+.portada__sellos{
+  display:flex; flex-wrap:wrap; gap:10px 26px;
+  list-style:none; margin:0; padding:0;
+  font-size:.82rem;
+  letter-spacing:.1em;
+  text-transform:uppercase;
+  color:var(--zinc);
+  font-weight:600;
+}
+.portada__sellos li{ display:flex; align-items:center; gap:.6em; }
+.portada__sellos li::before{
+  content:""; width:6px; height:6px; background:var(--ambar);
+  transform:rotate(45deg); flex:none;
+}
+
+.portada__baja{
+  position:absolute; bottom:22px; left:50%;
+  transform:translateX(-50%);
+  width:26px; height:42px;
+  border:1.5px solid var(--borde);
+  border-radius:14px;
+  display:none;
+}
+.portada__baja span{
+  position:absolute; left:50%; top:9px;
+  width:3px; height:8px; border-radius:2px;
+  background:var(--ambar);
+  transform:translateX(-50%);
+  animation:rueda 2.1s ease-in-out infinite;
+}
+@keyframes rueda{
+  0%,100%{ transform:translate(-50%,0);   opacity:1; }
+  60%    { transform:translate(-50%,14px); opacity:0; }
+}
+
+
+/* ============================================================
+   EL OFICIO
+   ============================================================ */
+
+.oficio__grid{ display:grid; gap:38px; }
+
+.firma{
+  display:flex; flex-direction:column;
+  border-left:3px solid var(--oxido);
+  padding-left:16px;
+  margin-top:2em;
+}
+.firma span{
+  font-family:"Anton",sans-serif;
+  font-size:1.24rem;
+  text-transform:uppercase;
+  letter-spacing:.03em;
+}
+.firma small{
+  color:var(--zinc);
+  font-size:.8rem;
+  letter-spacing:.1em;
+  text-transform:uppercase;
+}
+
+/* La máscara suaviza los bordes de la foto para que se integre con el fondo
+   en vez de quedar como un recuadro pegado encima. */
+.oficio__foto{
+  position:relative;
+  border-radius:var(--radio);
+  overflow:hidden;
+}
+.oficio__foto img{
+  width:100%;
+  aspect-ratio:4/3;
+  object-fit:cover;
+  -webkit-mask-image:radial-gradient(120% 100% at 50% 45%, #000 55%, transparent 100%);
+          mask-image:radial-gradient(120% 100% at 50% 45%, #000 55%, transparent 100%);
+}
+.oficio__foto::after{
+  content:"";
+  position:absolute; inset:0;
+  background:linear-gradient(to top, rgba(18,35,42,.55), transparent 55%);
+  pointer-events:none;
+}
+
+
+/* ============================================================
+   SERVICIOS
+   ============================================================ */
+
+.servicios{
+  background:linear-gradient(to bottom, transparent, rgba(27,59,66,.55) 18%, rgba(27,59,66,.55) 82%, transparent);
+}
+
+.tarjetas{
+  list-style:none; margin:2.6em 0 0; padding:0;
+  display:grid; gap:14px;
+}
+
+.tarjeta{
+  position:relative;
+  padding:24px 22px 22px;
+  background:rgba(18,35,42,.55);
+  border:1px solid var(--borde);
+  border-radius:var(--radio);
+  overflow:hidden;
+  transition:border-color var(--t-rapida), transform var(--t-rapida), background var(--t-rapida);
+}
+/* filo caliente arriba, como plancha recién cortada */
+.tarjeta::before{
+  content:"";
+  position:absolute; top:0; left:0; right:0; height:2px;
+  background:linear-gradient(to right, var(--oxido), var(--ambar));
+  transform:scaleX(0); transform-origin:left;
+  transition:transform .45s cubic-bezier(.22,.61,.36,1);
+}
+.tarjeta:hover{
+  border-color:rgba(232,163,61,.4);
+  background:rgba(18,35,42,.8);
+  transform:translateY(-3px);
+}
+.tarjeta:hover::before{ transform:scaleX(1); }
+
+.tarjeta h3{
+  font-family:"Anton",sans-serif;
+  font-weight:400;
+  font-size:1.16rem;
+  text-transform:uppercase;
+  letter-spacing:.02em;
+  margin:0 0 .5em;
+}
+.tarjeta p{ margin:0; color:var(--zinc); font-size:.95rem; line-height:1.6; }
+.tarjeta em{ color:var(--ambar); font-style:italic; }
+
+
+/* ============================================================
+   GALERÍA
+   ============================================================ */
+
+.galeria{
+  margin-top:2.6em;
+  display:grid; gap:10px;
+  padding-inline:20px;
+  max-width:calc(var(--ancho) + 120px);
+  margin-inline:auto;
+}
+
+.galeria__item{
+  position:relative;
+  margin:0;
+  overflow:hidden;
+  border-radius:var(--radio);
+  cursor:zoom-in;
+  background:#0C171C;
+}
+.galeria__item img{
+  width:100%;
+  aspect-ratio:4/3;
+  object-fit:cover;
+  transition:transform .8s cubic-bezier(.22,.61,.36,1), filter var(--t-rapida);
+  filter:saturate(.92);
+}
+.galeria__item:hover img{ transform:scale(1.06); filter:saturate(1.05); }
+
+.galeria__item figcaption{
+  position:absolute; left:0; right:0; bottom:0;
+  padding:34px 14px 12px;
+  font-size:.8rem;
+  letter-spacing:.13em;
+  text-transform:uppercase;
+  font-weight:600;
+  background:linear-gradient(to top, rgba(12,23,28,.92), transparent);
+  pointer-events:none;
+}
+
+
+/* ============================================================
+   POR QUÉ NOSOTROS
+   ============================================================ */
+
+.razones{
+  list-style:none; margin:2.6em 0 0; padding:0;
+  display:grid; gap:26px;
+}
+.razon{
+  position:relative;
+  padding-top:16px;
+  border-top:1px solid var(--borde);
+}
+.razon__num{
+  font-family:"Anton",sans-serif;
+  font-size:2.6rem;
+  line-height:1;
+  color:transparent;
+  -webkit-text-stroke:1px rgba(200,85,30,.65);
+  display:block;
+  margin-bottom:.12em;
+}
+.razon h3{
+  font-family:"Anton",sans-serif;
+  font-weight:400;
+  font-size:1.22rem;
+  text-transform:uppercase;
+  letter-spacing:.02em;
+  margin:0 0 .45em;
+}
+.razon p{ margin:0; color:var(--zinc); font-size:.96rem; }
+
+
+/* ============================================================
+   COTIZACIÓN
+   ============================================================ */
+
+.cotiza{
+  background:linear-gradient(to bottom, transparent, rgba(27,59,66,.45) 20%, rgba(27,59,66,.45) 80%, transparent);
+}
+.cotiza__grid{ display:grid; gap:34px; }
+.cotiza__tip{ color:var(--zinc); font-size:.93rem; }
+
+.cotiza__form{
+  display:grid; gap:14px;
+  padding:26px 22px;
+  background:rgba(12,23,28,.72);
+  border:1px solid var(--borde);
+  border-radius:var(--radio);
+  box-shadow:var(--sombra);
+}
+.cotiza__form label{ display:grid; gap:6px; }
+.cotiza__form label span{
+  font-size:.74rem;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  font-weight:600;
+  color:var(--zinc);
+}
+.cotiza__form input,
+.cotiza__form select,
+.cotiza__form textarea{
+  width:100%;
+  padding:.72em .85em;
+  background:rgba(242,239,233,.05);
+  border:1px solid var(--borde);
+  border-radius:var(--radio);
+  color:var(--cal);
+  font-family:inherit;
+  font-size:1rem;
+  transition:border-color var(--t-rapida), background var(--t-rapida);
+}
+.cotiza__form textarea{ resize:vertical; min-height:96px; }
+.cotiza__form input:focus,
+.cotiza__form select:focus,
+.cotiza__form textarea:focus{
+  outline:none;
+  border-color:var(--ambar);
+  background:rgba(242,239,233,.09);
+}
+.cotiza__form input::placeholder,
+.cotiza__form textarea::placeholder{ color:rgba(185,194,198,.5); }
+.cotiza__form select option{ background:#12232A; color:var(--cal); }
+
+.cotiza__nota{
+  margin:0;
+  font-size:.8rem;
+  color:var(--zinc);
+  text-align:center;
+}
+
+
+/* ============================================================
+   CONTACTO
+   ============================================================ */
+
+.contacto__grid{ display:grid; gap:32px; }
+
+.datos{ margin:1.6em 0 0; display:grid; gap:20px; }
+.datos div{ border-left:2px solid rgba(200,85,30,.5); padding-left:14px; }
+.datos dt{
+  font-size:.72rem;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  font-weight:600;
+  color:var(--oxido);
+  margin-bottom:.25em;
+}
+.datos dd{ margin:0; font-size:1.02rem; }
+.datos dd a{ color:var(--cal); text-decoration:none; border-bottom:1px solid rgba(232,163,61,.45); }
+.datos dd a:hover{ color:var(--ambar); }
+
+.contacto__mapa{
+  border:1px solid var(--borde);
+  border-radius:var(--radio);
+  overflow:hidden;
+  min-height:300px;
+  background:#0C171C;
+}
+.contacto__mapa iframe{
+  width:100%; height:100%; min-height:300px;
+  border:0; display:block;
+  filter:grayscale(.35) contrast(1.05) brightness(.9);
+}
+
+
+/* ============================================================
+   PIE
+   ============================================================ */
+
+.pie{
+  border-top:1px solid var(--borde);
+  padding-block:44px 26px;
+  background:rgba(12,23,28,.6);
+}
+.pie__grid{ display:grid; gap:24px; }
+.pie__marca{
+  font-family:"Anton",sans-serif;
+  font-size:1.3rem;
+  text-transform:uppercase;
+  letter-spacing:.02em;
+  margin:0 0 .3em;
+}
+.pie__sub{ margin:0; color:var(--zinc); font-size:.9rem; }
+.pie__nav{ display:flex; flex-wrap:wrap; gap:10px 22px; }
+.pie__nav a{
+  text-decoration:none; color:var(--zinc); font-size:.9rem;
+  letter-spacing:.06em;
+}
+.pie__nav a:hover{ color:var(--ambar); }
+.pie__firma{
+  max-width:var(--ancho);
+  margin:30px auto 0;
+  padding:16px 20px 0;
+  border-top:1px solid var(--borde);
+  font-size:.8rem;
+  color:rgba(185,194,198,.7);
+  text-align:center;
+}
+.pie__firma a{ color:var(--zinc); }
+
+
+/* ============================================================
+   BOTÓN FLOTANTE DE WHATSAPP
+   ============================================================ */
+
+.flotante{
+  position:fixed;
+  right:16px; bottom:16px;
+  z-index:70;
+  display:inline-flex; align-items:center; gap:0;
+  padding:14px;
+  background:#1FAF54;
+  color:#fff;
+  border-radius:50px;
+  text-decoration:none;
+  box-shadow:0 10px 26px rgba(0,0,0,.42);
+  transition:transform var(--t-rapida), box-shadow var(--t-rapida), gap var(--t-rapida), padding var(--t-rapida);
+}
+.flotante span{
+  max-width:0; overflow:hidden; white-space:nowrap;
+  font-weight:600; font-size:.92rem;
+  transition:max-width var(--t-rapida);
+}
+.flotante:hover{
+  gap:9px;
+  padding-inline:16px 20px;
+  transform:translateY(-3px);
+  box-shadow:0 14px 32px rgba(31,175,84,.4);
+}
+.flotante:hover span{ max-width:110px; }
+
+
+/* ============================================================
+   VISOR DE IMÁGENES
+   ============================================================ */
+
+.visor{
+  position:fixed; inset:0;
+  z-index:90;
+  display:flex; align-items:center; justify-content:center;
+  background:rgba(6,12,15,.94);
+  backdrop-filter:blur(6px);
+  -webkit-backdrop-filter:blur(6px);
+  padding:56px 14px;
+  opacity:0;
+  transition:opacity var(--t-rapida);
+}
+.visor.abierto{ opacity:1; }
+
+.visor__marco{ margin:0; max-width:1100px; width:100%; text-align:center; }
+.visor__marco img{
+  max-width:100%; max-height:76svh;
+  margin-inline:auto;
+  border-radius:var(--radio);
+  box-shadow:var(--sombra);
+}
+.visor__marco figcaption{
+  margin-top:14px;
+  font-size:.82rem;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:var(--zinc);
+  font-weight:600;
+}
+
+.visor__cerrar,
+.visor__nav{
+  position:absolute;
+  background:rgba(242,239,233,.08);
+  border:1px solid var(--borde);
+  color:var(--cal);
+  cursor:pointer;
+  border-radius:50%;
+  transition:background var(--t-rapida), border-color var(--t-rapida);
+  line-height:1;
+}
+.visor__cerrar:hover,
+.visor__nav:hover{ background:rgba(200,85,30,.35); border-color:var(--ambar); }
+
+.visor__cerrar{
+  top:14px; right:14px;
+  width:44px; height:44px;
+  font-size:1.8rem;
+}
+.visor__nav{
+  top:50%; transform:translateY(-50%);
+  width:44px; height:44px;
+  font-size:2rem;
+  display:flex; align-items:center; justify-content:center;
+  padding-bottom:4px;
+}
+.visor__nav--ant{ left:10px; }
+.visor__nav--sig{ right:10px; }
+
+
+/* ============================================================
+   ANIMACIÓN DE ENTRADA
+   Los estados ocultos SOLO existen si el JS arrancó (clase .js en <html>).
+   Si el script falla, no hay nada oculto y la página se lee igual.
+   ============================================================ */
+
+.js .rev{
+  opacity:0;
+  transform:translateY(26px);
+  filter:blur(7px);
+  transition:opacity var(--t-suave), transform var(--t-suave), filter var(--t-suave);
+}
+.js .rev.visto{
+  opacity:1;
+  transform:none;
+  filter:blur(0);
+}
+
+/* Escalonado: dentro de una misma fila las piezas entran una tras otra.
+   Solo con CSS, sin calcular nada en JavaScript. */
+.js .tarjeta:nth-child(2),
+.js .razon:nth-child(2),
+.js .galeria__item:nth-child(2){ transition-delay:.08s; }
+.js .tarjeta:nth-child(3),
+.js .razon:nth-child(3),
+.js .galeria__item:nth-child(3){ transition-delay:.16s; }
+.js .tarjeta:nth-child(4),
+.js .razon:nth-child(4){ transition-delay:.24s; }
+
+
+/* ============================================================
+   PANTALLAS MEDIANAS Y GRANDES
+   ============================================================ */
+
+@media (min-width:640px){
+  .tarjetas{ grid-template-columns:repeat(2,1fr); }
+  .galeria{ grid-template-columns:repeat(2,1fr); gap:12px; }
+  .razones{ grid-template-columns:repeat(2,1fr); gap:30px 34px; }
+  .cotiza__form{ padding:30px 28px; }
+  .datos{ grid-template-columns:repeat(2,1fr); gap:22px 26px; }
+  .portada__baja{ display:block; }
+}
+
+@media (min-width:900px){
+  body{ font-size:17.5px; }
+
+  .barra{ padding:16px 34px; }
+  .hamburguesa{ display:none; }
+  .nav-movil{ display:none; }
+
+  .nav{
+    display:flex; gap:30px;
+    font-size:.9rem; font-weight:500;
+    letter-spacing:.05em;
+  }
+  .nav a{
+    text-decoration:none;
+    position:relative;
+    padding-block:4px;
+    color:#DCE3E5;
+    transition:color var(--t-rapida);
+  }
+  .nav a::after{
+    content:"";
+    position:absolute; left:0; right:0; bottom:0;
+    height:2px; background:var(--oxido);
+    transform:scaleX(0); transform-origin:right;
+    transition:transform var(--t-rapida);
+  }
+  .nav a:hover{ color:var(--cal); }
+  .nav a:hover::after{ transform:scaleX(1); transform-origin:left; }
+
+  .barra__cta{ display:inline-flex; padding:.6em 1.2em; font-size:.88rem; }
+
+  .portada{ padding:130px 34px 92px; }
+  .portada__video{ filter:blur(13px) saturate(.85) brightness(.5); }
+
+  .contenedor{ padding-inline:34px; }
+  .galeria{ grid-template-columns:repeat(3,1fr); padding-inline:34px; }
+
+  .oficio__grid{
+    grid-template-columns:1.05fr .95fr;
+    gap:64px; align-items:center;
+  }
+  .oficio__foto img{ aspect-ratio:3/4; }
+
+  .tarjetas{ grid-template-columns:repeat(4,1fr); }
+
+  .razones{ grid-template-columns:repeat(4,1fr); gap:34px 26px; }
+
+  .cotiza__grid{ grid-template-columns:.95fr 1.05fr; gap:56px; align-items:start; }
+
+  .contacto__grid{ grid-template-columns:.9fr 1.1fr; gap:52px; align-items:stretch; }
+  .contacto__mapa{ min-height:100%; }
+
+  .pie__grid{ grid-template-columns:1fr auto; align-items:end; }
+
+  .flotante{ right:24px; bottom:24px; }
+}
+
+@media (min-width:1200px){
+  .galeria{ gap:14px; }
+}
+
+
+/* ============================================================
+   MENOS MOVIMIENTO
+   Windows trae esta preferencia activada de fábrica en muchos equipos.
+   Apagamos solo lo intrusivo (video en bucle y manchas a la deriva);
+   los fundidos y los hovers se quedan, si no el sitio se ve muerto.
+   ============================================================ */
+
+@media (prefers-reduced-motion: reduce){
+  html{ scroll-behavior:auto; }
+
+  .brasa{ animation:none; }
+  .portada__baja span{ animation:none; }
+
+  .galeria__item img{ transition:filter var(--t-rapida); }
+  .galeria__item:hover img{ transform:none; }
+}

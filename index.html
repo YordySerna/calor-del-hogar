@@ -1,0 +1,524 @@
+<!doctype html>
+<html lang="es-CL">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hojalatería Calor de Hogar — Loncoche | Cañones, canaletas y trabajos a medida</title>
+<meta name="description" content="Hojalatería y fábrica de cocinas en Loncoche. Cañones de chimenea, codos, sombreretes, canaletas, campanas y trabajos en plancha a medida. Lord Cochrane 121.">
+<meta name="theme-color" content="#12232A">
+
+<!-- Open Graph / vista previa al compartir por WhatsApp -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="Hojalatería Calor de Hogar — Loncoche">
+<meta property="og:description" content="Fábrica de cocinas y hojalatería en general. Trabajo de plancha hecho a mano en Loncoche.">
+<meta property="og:image" content="images/taller-banco-trabajo.jpg">
+<meta property="og:locale" content="es_CL">
+
+<!-- Favicon dibujado a mano en SVG: la casita con llama del cartel del local.
+     Va incrustado para no depender de ningún archivo extra. -->
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%2312232A'/%3E%3Cpath d='M16 4 29 14v14H3V14z' fill='%23C8551E'/%3E%3Cpath d='M16 15c2.5 2 3.5 3.4 3.5 5.2 0 2-1.6 3.6-3.5 3.6s-3.5-1.6-3.5-3.6c0-1.8 1-3.2 3.5-5.2z' fill='%23E8A33D'/%3E%3C/svg%3E">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Barlow:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="css/estilo.css">
+
+<!-- Ficha de negocio local para Google. Es lo que hace que el local pueda
+     salir en el mapa y en las búsquedas de "hojalatería Loncoche".
+     EJEMPLO — reemplazar: telephone, email y openingHours con los datos reales.
+     El resto está verificado (cartel del local y patente municipal). -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "HardwareStore",
+  "name": "Hojalatería Calor de Hogar",
+  "description": "Fábrica de cocinas y hojalatería en general. Cañones de chimenea, codos, sombreretes, canaletas, campanas y trabajos en plancha a medida.",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Lord Cochrane 121",
+    "addressLocality": "Loncoche",
+    "addressRegion": "Región de La Araucanía",
+    "addressCountry": "CL"
+  },
+  "telephone": "+56900000000",
+  "email": "correo@ejemplo.cl",
+  "areaServed": "Loncoche y alrededores",
+  "paymentAccepted": "Efectivo, tarjeta de débito, tarjeta de crédito",
+  "openingHours": "Mo-Fr 00:00-00:00",
+  "image": "images/local-fachada.jpg"
+}
+</script>
+</head>
+
+<body>
+
+<!-- ============================================================
+     BARRA SUPERIOR
+     ============================================================ -->
+<header class="barra" id="barra">
+  <a class="marca" href="#inicio">
+    <span class="marca__llama" aria-hidden="true"></span>
+    <span class="marca__txt">Calor de Hogar<small>Hojalatería · Loncoche</small></span>
+  </a>
+
+  <nav class="nav" aria-label="Principal">
+    <a href="#oficio">El oficio</a>
+    <a href="#servicios">Servicios</a>
+    <a href="#trabajos">Trabajos</a>
+    <a href="#contacto">Contacto</a>
+  </nav>
+
+  <!-- EJEMPLO — reemplazar: el número de WhatsApp real va acá y en TODOS los href wa.me de este archivo -->
+  <a class="btn btn--sol barra__cta" href="https://wa.me/56900000000" target="_blank" rel="noopener">Cotizar</a>
+
+  <button class="hamburguesa" id="hamburguesa" aria-label="Abrir menú" aria-expanded="false" aria-controls="nav-movil">
+    <span></span><span></span><span></span>
+  </button>
+</header>
+
+<!-- menú desplegable en móvil -->
+<nav class="nav-movil" id="nav-movil" aria-label="Principal móvil">
+  <a href="#oficio">El oficio</a>
+  <a href="#servicios">Servicios</a>
+  <a href="#trabajos">Trabajos</a>
+  <a href="#porque">Por qué nosotros</a>
+  <a href="#contacto">Contacto</a>
+</nav>
+
+
+<!-- ============================================================
+     PORTADA — video del taller desenfocado + manchas cálidas
+     ============================================================ -->
+<section class="portada" id="inicio">
+
+  <!-- Fondo de video. Si el navegador no lo carga o el usuario pidió menos
+       movimiento, queda la foto de respaldo (poster) y la página se ve igual. -->
+  <div class="portada__fondo">
+    <video class="portada__video" id="video-taller"
+           poster="images/taller-banco-trabajo.jpg"
+           muted playsinline preload="metadata" aria-hidden="true">
+      <source src="images/taller-loop.mp4" type="video/mp4">
+    </video>
+    <div class="portada__velo" aria-hidden="true"></div>
+  </div>
+
+  <div class="portada__cuerpo">
+    <p class="ojo rev">Lord Cochrane 121 · Loncoche, La Araucanía</p>
+
+    <h1 class="portada__titulo rev">
+      <span class="l1">Calor</span>
+      <span class="l2">de Hogar</span>
+    </h1>
+
+    <p class="portada__bajada rev">
+      Hojalatería y fábrica de cocinas. Cañones, canaletas, campanas y trabajos
+      en plancha <strong>hechos a mano en el taller</strong>, no traídos de otra parte.
+    </p>
+
+    <div class="portada__botones rev">
+      <!-- EJEMPLO — reemplazar: número de WhatsApp real -->
+      <a class="btn btn--sol" href="https://wa.me/56900000000" target="_blank" rel="noopener">
+        Pedir cotización por WhatsApp
+      </a>
+      <a class="btn btn--linea" href="#servicios">Ver qué hacemos</a>
+    </div>
+
+    <ul class="portada__sellos rev">
+      <li>Fabricación propia</li>
+      <li>Trabajos a medida</li>
+      <li>Se paga con tarjeta</li>
+    </ul>
+  </div>
+
+  <a class="portada__baja" href="#oficio" aria-label="Bajar">
+    <span aria-hidden="true"></span>
+  </a>
+</section>
+
+
+<!-- ============================================================
+     EL OFICIO
+     ============================================================ -->
+<section class="seccion oficio" id="oficio">
+  <div class="contenedor oficio__grid">
+
+    <div class="oficio__texto">
+      <p class="etiqueta rev">El oficio</p>
+      <h2 class="titulo rev">Acá la plancha<br>se trabaja a mano</h2>
+
+      <p class="rev">
+        En el taller de Lord Cochrane las plantillas están colgadas en la pared, una al
+        lado de la otra. Cada cañón, cada codo y cada campana empieza como una plancha
+        plana que se marca con esa plantilla, se corta, se dobla y se remacha en el banco.
+      </p>
+      <p class="rev">
+        Es un oficio que no se aprende rápido y que cada vez queda en menos manos.
+        <!-- EJEMPLO — reemplazar: confirmar con Miguel los años exactos de funcionamiento.
+             Dato verificado: figura en el Rol de Patentes de la Municipalidad de Loncoche
+             al menos desde 2015, giro "venta de cocinas, hojalatería y montajes". -->
+        En Loncoche lo venimos haciendo desde <strong>2015 o antes</strong>, atendiendo
+        directo, sin intermediarios y sin apuro.
+      </p>
+
+      <p class="firma rev">
+        <span>Miguel Bustamante</span>
+        <small>Maestro hojalatero · Calor de Hogar</small>
+      </p>
+    </div>
+
+    <!-- Observamos el contenedor, no la imagen recortada: un elemento con la
+         máscara cerrada nunca dispararía el IntersectionObserver. -->
+    <div class="oficio__foto rev">
+      <img src="images/taller-herramientas.jpg" width="1500" height="1125" loading="lazy"
+           alt="Herramientas y plantillas de zinc colgadas en la pared del taller">
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ============================================================
+     SERVICIOS
+     ============================================================ -->
+<section class="seccion servicios" id="servicios">
+  <div class="contenedor">
+
+    <p class="etiqueta rev">Servicios</p>
+    <h2 class="titulo rev">Qué hacemos</h2>
+    <p class="entrada rev">
+      Trabajo de hojalatería para casas, cocinas y techumbres. Si no está en la lista,
+      igual conviene preguntar: gran parte de lo que sale del taller es a pedido.
+    </p>
+
+    <!-- EJEMPLO — reemplazar: lista deducida de las fotos del local y del cartel
+         ("Fábrica de cocinas y hojalatería en general"). Confirmar con Miguel qué
+         sacar, qué agregar y si sigue fabricando cocinas a leña. -->
+    <ul class="tarjetas">
+      <li class="tarjeta rev">
+        <h3>Cañones de chimenea</h3>
+        <p>Tubos en plancha galvanizada y negra, en las medidas que use la cocina o la estufa.</p>
+      </li>
+      <li class="tarjeta rev">
+        <h3>Codos, uniones y reducciones</h3>
+        <p>Las piezas para armar el recorrido completo del cañón, incluidas las medidas raras.</p>
+      </li>
+      <li class="tarjeta rev">
+        <h3>Sombreretes y capuchones</h3>
+        <p>Para que el tiro funcione y no entre agua ni viento por la salida del techo.</p>
+      </li>
+      <li class="tarjeta rev">
+        <h3>Canaletas y bajadas de agua</h3>
+        <p>Canales para techumbre y bajadas, cortadas y dobladas al largo que se necesite.</p>
+      </li>
+      <li class="tarjeta rev">
+        <h3>Campanas de cocina</h3>
+        <p>Campanas y ductos de extracción para cocinas de casa y de local.</p>
+      </li>
+      <li class="tarjeta rev">
+        <h3>Ductos y ventilación</h3>
+        <p>Conductos rectos, curvas y terminaciones para ventilación y extracción.</p>
+      </li>
+      <li class="tarjeta rev">
+        <h3>Cocinas a leña</h3>
+        <p>Fabricación de cocinas, según el cartel del taller: <em>fábrica de cocinas y hojalatería en general</em>.</p>
+      </li>
+      <li class="tarjeta rev">
+        <h3>Trabajos a medida</h3>
+        <p>Cualquier pieza en plancha: llegas con la medida o con el modelo y se hace.</p>
+      </li>
+    </ul>
+
+  </div>
+</section>
+
+
+<!-- ============================================================
+     TRABAJOS / GALERÍA — fotos reales del local y del taller
+     ============================================================ -->
+<section class="seccion trabajos" id="trabajos">
+  <div class="contenedor">
+    <p class="etiqueta rev">Trabajos</p>
+    <h2 class="titulo rev">El taller por dentro</h2>
+    <p class="entrada rev">
+      Fotos del local y de las piezas listas. Toca cualquiera para verla más grande.
+    </p>
+  </div>
+
+  <div class="galeria" id="galeria">
+    <figure class="galeria__item rev">
+      <img src="images/taller-banco-trabajo.jpg" width="1500" height="1125" loading="lazy"
+           alt="Maestro trabajando una plancha en el banco del taller">
+      <figcaption>El banco de trabajo</figcaption>
+    </figure>
+    <figure class="galeria__item rev">
+      <img src="images/producto-sombreretes.jpg" width="1500" height="1125" loading="lazy"
+           alt="Sombreretes y capuchones de zinc en estantería">
+      <figcaption>Sombreretes y capuchones</figcaption>
+    </figure>
+    <figure class="galeria__item rev">
+      <img src="images/producto-codos-galvanizados.jpg" width="1500" height="1125" loading="lazy"
+           alt="Codos de plancha galvanizada apilados">
+      <figcaption>Codos galvanizados</figcaption>
+    </figure>
+    <figure class="galeria__item rev">
+      <img src="images/producto-canones-negros.jpg" width="1500" height="1125" loading="lazy"
+           alt="Cañones de chimenea en plancha negra">
+      <figcaption>Cañones en plancha negra</figcaption>
+    </figure>
+    <figure class="galeria__item rev">
+      <img src="images/producto-campanas.jpg" width="1500" height="1125" loading="lazy"
+           alt="Campanas de cocina y palas de zinc">
+      <figcaption>Campanas de cocina</figcaption>
+    </figure>
+    <figure class="galeria__item rev">
+      <img src="images/taller-piezas-terminadas.jpg" width="1500" height="1125" loading="lazy"
+           alt="Piezas de hojalatería terminadas sobre el mesón">
+      <figcaption>Piezas listas</figcaption>
+    </figure>
+    <figure class="galeria__item rev">
+      <img src="images/producto-tambores-colores.jpg" width="1500" height="1125" loading="lazy"
+           alt="Tambores metálicos pintados de colores">
+      <figcaption>Tambores y tarros</figcaption>
+    </figure>
+    <figure class="galeria__item rev">
+      <img src="images/producto-ductos.jpg" width="1500" height="1125" loading="lazy"
+           alt="Ductos y tubos de ventilación en la estantería">
+      <figcaption>Ductos y ventilación</figcaption>
+    </figure>
+    <figure class="galeria__item rev">
+      <img src="images/producto-pieza-a-medida.jpg" width="1500" height="1125" loading="lazy"
+           alt="Pieza de plancha doblada a medida">
+      <figcaption>Trabajo a medida</figcaption>
+    </figure>
+    <figure class="galeria__item rev">
+      <img src="images/local-exhibicion.jpg" width="1500" height="1125" loading="lazy"
+           alt="Estanterías del local con productos de hojalatería">
+      <figcaption>El local</figcaption>
+    </figure>
+    <figure class="galeria__item rev">
+      <img src="images/producto-palas.jpg" width="1500" height="1125" loading="lazy"
+           alt="Palas de zinc para ceniza colgadas">
+      <figcaption>Palas para ceniza</figcaption>
+    </figure>
+    <figure class="galeria__item rev">
+      <img src="images/local-fachada.jpg" width="1500" height="1125" loading="lazy"
+           alt="Fachada del local de Hojalatería Calor de Hogar en Loncoche">
+      <figcaption>Lord Cochrane 121</figcaption>
+    </figure>
+  </div>
+</section>
+
+
+<!-- ============================================================
+     POR QUÉ NOSOTROS
+     ============================================================ -->
+<section class="seccion porque" id="porque">
+  <div class="contenedor">
+    <p class="etiqueta rev">Por qué nosotros</p>
+    <h2 class="titulo rev">Cuatro razones concretas</h2>
+
+    <ul class="razones">
+      <li class="razon rev">
+        <span class="razon__num">01</span>
+        <h3>Se fabrica acá</h3>
+        <p>No es reventa. La pieza se corta y se dobla en el taller, así que la medida
+           se ajusta a lo que necesitas y no al revés.</p>
+      </li>
+      <li class="razon rev">
+        <span class="razon__num">02</span>
+        <h3>Atiende el maestro</h3>
+        <p>Explicas el problema directo a quien va a hacer el trabajo. Sin vendedor
+           en el medio traduciendo mal la medida.</p>
+      </li>
+      <li class="razon rev">
+        <span class="razon__num">03</span>
+        <h3>Años en Loncoche</h3>
+        <!-- EJEMPLO — reemplazar: confirmar antigüedad exacta con Miguel -->
+        <p>El local lleva más de una década funcionando en el mismo lugar, con patente
+           municipal al día. Sabes dónde encontrarnos si algo falla.</p>
+      </li>
+      <li class="razon rev">
+        <span class="razon__num">04</span>
+        <h3>Pago con tarjeta</h3>
+        <p>Aceptamos débito y crédito por Transbank, y hay Caja Vecina en el local.</p>
+      </li>
+    </ul>
+  </div>
+</section>
+
+
+<!-- ============================================================
+     COTIZACIÓN — arma el mensaje de WhatsApp, sin backend
+     ============================================================ -->
+<section class="seccion cotiza" id="cotiza">
+  <div class="contenedor cotiza__grid">
+
+    <div class="cotiza__intro">
+      <p class="etiqueta rev">Cotizar</p>
+      <h2 class="titulo rev">Cuéntanos qué<br>necesitas</h2>
+      <p class="rev">
+        Rellena esto y se abre WhatsApp con el mensaje ya escrito. No se envía nada
+        desde la página: revisas el texto antes de mandarlo.
+      </p>
+      <p class="rev cotiza__tip">
+        Si tienes la medida (diámetro del cañón, largo de la canaleta, metros de techo),
+        ponla en el detalle. Con eso la respuesta llega mucho más rápido.
+      </p>
+    </div>
+
+    <form class="cotiza__form rev" id="form-cotiza" novalidate>
+      <label>
+        <span>Tu nombre</span>
+        <input type="text" name="nombre" id="c-nombre" autocomplete="name" placeholder="Ej: Juan Pérez">
+      </label>
+
+      <label>
+        <span>Desde dónde escribes</span>
+        <input type="text" name="comuna" id="c-comuna" placeholder="Ej: Loncoche">
+      </label>
+
+      <label>
+        <span>Qué necesitas</span>
+        <select name="trabajo" id="c-trabajo">
+          <option>Cañón de chimenea</option>
+          <option>Codos, uniones o reducciones</option>
+          <option>Sombrerete o capuchón</option>
+          <option>Canaletas y bajadas de agua</option>
+          <option>Campana de cocina</option>
+          <option>Ductos o ventilación</option>
+          <option>Cocina a leña</option>
+          <option>Trabajo a medida</option>
+          <option>Otra cosa</option>
+        </select>
+      </label>
+
+      <label>
+        <span>Detalle y medidas</span>
+        <textarea name="detalle" id="c-detalle" rows="4"
+          placeholder="Ej: necesito 3 metros de cañón de 6 pulgadas y dos codos"></textarea>
+      </label>
+
+      <!-- El href real está escrito acá para que el botón funcione aunque el JS
+           falle. El script solo le agrega el mensaje armado. -->
+      <!-- EJEMPLO — reemplazar: número de WhatsApp real -->
+      <a class="btn btn--sol btn--ancho" id="btn-cotiza"
+         href="https://wa.me/56900000000" target="_blank" rel="noopener">
+        Abrir WhatsApp con mi consulta
+      </a>
+
+      <p class="cotiza__nota">Se abre tu WhatsApp. Alcanzas a revisar el mensaje antes de enviarlo.</p>
+    </form>
+
+  </div>
+</section>
+
+
+<!-- ============================================================
+     CONTACTO
+     ============================================================ -->
+<section class="seccion contacto" id="contacto">
+  <div class="contenedor contacto__grid">
+
+    <div class="contacto__datos">
+      <p class="etiqueta rev">Contacto</p>
+      <h2 class="titulo rev">Dónde estamos</h2>
+
+      <dl class="datos rev">
+        <div>
+          <dt>Dirección</dt>
+          <dd>Lord Cochrane 121<br>Loncoche, Región de La Araucanía</dd>
+        </div>
+
+        <div>
+          <dt>WhatsApp</dt>
+          <!-- EJEMPLO — reemplazar: número real, tanto en el texto como en el href -->
+          <dd><a href="https://wa.me/56900000000" target="_blank" rel="noopener">+56 9 0000 0000</a></dd>
+        </div>
+
+        <div>
+          <dt>Teléfono</dt>
+          <!-- EJEMPLO — reemplazar: el cartel del local tiene dos números, ninguno legible en la foto -->
+          <dd><a href="tel:+56900000000">+56 9 0000 0000</a></dd>
+        </div>
+
+        <div>
+          <dt>Correo</dt>
+          <!-- EJEMPLO — reemplazar: en el cartel se alcanza a ver un gmail, ilegible en la foto -->
+          <dd><a href="mailto:correo@ejemplo.cl">correo@ejemplo.cl</a></dd>
+        </div>
+
+        <div>
+          <dt>Horario</dt>
+          <!-- EJEMPLO — reemplazar: horario real de atención -->
+          <dd>Lunes a viernes 00:00 a 00:00<br>Sábado 00:00 a 00:00</dd>
+        </div>
+
+        <div>
+          <dt>Medios de pago</dt>
+          <dd>Efectivo, débito y crédito (Transbank). Hay Caja Vecina en el local.</dd>
+        </div>
+      </dl>
+    </div>
+
+    <div class="contacto__mapa rev">
+      <iframe
+        title="Mapa de Lord Cochrane 121, Loncoche"
+        src="https://www.google.com/maps?q=Lord+Cochrane+121,+Loncoche,+Chile&hl=es&z=16&output=embed"
+        loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ============================================================
+     PIE
+     ============================================================ -->
+<footer class="pie">
+  <div class="contenedor pie__grid">
+    <div>
+      <p class="pie__marca">Hojalatería Calor de Hogar</p>
+      <p class="pie__sub">Fábrica de cocinas y hojalatería en general</p>
+      <p class="pie__sub">Lord Cochrane 121 · Loncoche · La Araucanía</p>
+    </div>
+
+    <nav class="pie__nav" aria-label="Pie">
+      <a href="#oficio">El oficio</a>
+      <a href="#servicios">Servicios</a>
+      <a href="#trabajos">Trabajos</a>
+      <a href="#contacto">Contacto</a>
+    </nav>
+  </div>
+
+  <p class="pie__firma">
+    Sitio hecho por <a href="https://yordyserna.github.io" target="_blank" rel="noopener">Yordy Serna</a>
+  </p>
+</footer>
+
+
+<!-- Botón flotante de WhatsApp -->
+<!-- EJEMPLO — reemplazar: número de WhatsApp real -->
+<a class="flotante" href="https://wa.me/56900000000" target="_blank" rel="noopener"
+   aria-label="Escribir por WhatsApp">
+  <svg viewBox="0 0 24 24" width="26" height="26" aria-hidden="true" fill="currentColor">
+    <path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38a9.87 9.87 0 004.79 1.22h.01c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0012.04 2zm0 18.15h-.01a8.2 8.2 0 01-4.19-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.19 8.19 0 01-1.26-4.38c0-4.54 3.7-8.23 8.25-8.23a8.2 8.2 0 018.24 8.24c0 4.54-3.7 8.23-8.24 8.23zm4.52-6.16c-.25-.12-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.13-.16.24-.64.8-.78.97-.15.16-.29.18-.54.06-.25-.13-1.05-.39-1.99-1.23-.74-.66-1.23-1.47-1.38-1.72-.14-.25-.01-.38.11-.5.11-.11.25-.29.37-.43.13-.15.17-.25.25-.41.08-.17.04-.31-.02-.43-.06-.12-.56-1.34-.76-1.84-.2-.48-.41-.42-.56-.42-.14-.01-.31-.01-.47-.01-.17 0-.43.06-.66.31-.23.25-.86.85-.86 2.06s.89 2.39 1.01 2.56c.12.16 1.74 2.67 4.22 3.74.59.25 1.05.41 1.41.52.59.19 1.13.16 1.56.1.47-.07 1.47-.6 1.67-1.18.21-.58.21-1.07.15-1.18-.06-.11-.23-.17-.48-.29z"/>
+  </svg>
+  <span>WhatsApp</span>
+</a>
+
+
+<!-- Visor de imágenes de la galería -->
+<div class="visor" id="visor" hidden>
+  <button class="visor__cerrar" id="visor-cerrar" aria-label="Cerrar">&times;</button>
+  <button class="visor__nav visor__nav--ant" id="visor-ant" aria-label="Anterior">&#8249;</button>
+  <figure class="visor__marco">
+    <img id="visor-img" src="" alt="">
+    <figcaption id="visor-pie"></figcaption>
+  </figure>
+  <button class="visor__nav visor__nav--sig" id="visor-sig" aria-label="Siguiente">&#8250;</button>
+</div>
+
+<script src="js/main.js"></script>
+</body>
+</html>

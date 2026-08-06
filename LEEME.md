@@ -108,8 +108,22 @@ Los `<video>` del cuerpo de la página **no tienen `src`**. Llevan la ruta en
 alguien toca play. Un visitante con datos móviles que baja de largo no gasta
 un solo KB de video: solo ve el poster, que pesa unos 110 KB.
 
-El único que arranca solo es el de la portada, y va mudo, desenfocado y se
-pausa cuando la portada sale de pantalla.
+El único que arranca solo es el de la portada, y va **mudo** a la fuerza,
+desenfocado, y se pausa cuando la portada sale de pantalla.
+
+### Sonido y pantalla completa
+
+Los clips del cuerpo **conservan el audio del taller** (AAC 96 kbps, unos
+120 KB por clip). Se pueden dejar con sonido justamente porque ninguno se
+reproduce solo: suenan cuando alguien decide tocarlos.
+
+Al tocar play, `main.js` activa `video.controls`. Los controles nativos del
+navegador traen barra de avance, volumen y **pantalla completa**, funcionan con
+teclado y se ven correctos en cada sistema. Un reproductor hecho a mano sería
+peor y además habría que mantenerlo.
+
+Los clips del cuerpo **no van en bucle**: con sonido, repetirse diez segundos
+sin parar cansa. Al terminar vuelven al poster con el botón de play.
 
 ### ¿Hace falta pagar hosting?
 

@@ -761,22 +761,12 @@ p{ margin:0 0 1.1em; }
   text-shadow:0 2px 10px rgba(0,0,0,.7);
 }
 
-/* al reproducir, el botón se va pero el elemento sigue ahí para
-   poder pausar tocando de nuevo */
+/* Al reproducir, la capa de play desaparece del todo: si quedara
+   capturando clics taparía los controles nativos del video, que son
+   los que traen el volumen y la pantalla completa. */
 .video.andando .video__play{
   opacity:0;
-  background:transparent;
-  pointer-events:auto;
-}
-.video.andando .video__play:hover{ opacity:1; background:rgba(12,23,28,.35); }
-.video.andando .video__icono{ background:rgba(18,35,42,.85); }
-/* con el video andando el botón pasa a ser "pausa": dos barras */
-.video.andando .video__icono::after{
-  border:0;
-  width:14px; height:16px;
-  background:
-    linear-gradient(to right, #fff 0 5px, transparent 5px 9px, #fff 9px 14px);
-  left:50%;
+  pointer-events:none;
 }
 
 .video figcaption{
@@ -802,6 +792,12 @@ p{ margin:0 0 1.1em; }
   margin:2.8em 0 1em;
   color:var(--zinc);
 }
+.videos__nota{
+  color:var(--zinc);
+  font-size:.92rem;
+  margin:-.6em 0 1.4em;
+}
+
 .videos{ display:grid; gap:12px; }
 /* En las tarjetas chicas el rótulo choca con el epígrafe y el triángulo ya
    dice lo mismo. El texto sigue existiendo en el aria-label del botón. */

@@ -452,6 +452,11 @@
         boton.addEventListener("click", function () {
           if (!cargado) {
             v.src = fuente;
+            // Los controles nativos aparecen recién ahora, no antes: sobre el
+            // poster estorbaban. Traen barra, volumen y pantalla completa, y
+            // funcionan con teclado en todos los navegadores. Cualquier control
+            // hecho a mano sería peor y además habría que mantenerlo.
+            v.controls = true;
             cargado = true;
           }
           if (v.paused) {
@@ -468,6 +473,14 @@
 
         v.addEventListener("play",  function () { caja.classList.add("andando");    describir(); });
         v.addEventListener("pause", function () { caja.classList.remove("andando"); describir(); });
+
+        // Al terminar vuelve al poster con el botón grande. Estos clips ya no
+        // van en bucle: con sonido, repetirse diez segundos sin parar cansa.
+        v.addEventListener("ended", function () {
+          v.currentTime = 0;
+          caja.classList.remove("andando");
+          describir();
+        });
 
         // Si el clip se va de pantalla mientras corre, se pausa: no tiene
         // sentido gastar batería y CPU en algo que no se está mirando.

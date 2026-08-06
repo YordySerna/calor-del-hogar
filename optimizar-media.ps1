@@ -61,12 +61,17 @@ foreach ($c in $clips) {
   #   scale   : baja a 720 de alto manteniendo proporción; -2 deja el ancho par
   #   fps=30  : la mitad de los 60 originales. No se nota y pesa bastante menos
   #   crf     : calidad; 28 es buen punto para material de taller
-  #   -an     : sin audio. Son loops mudos; el audio del teléfono no aporta nada
   #   faststart: mueve el índice al principio para que empiece antes de bajar todo
+  #
+  # AUDIO: se conserva el del taller (96 kbps AAC, unos 120 KB por clip).
+  # Los clips arrancan solo cuando alguien toca play, así que el sonido
+  # nunca sorprende a nadie. El único que se reproduce solo es el de la
+  # portada, y ese va mudo a la fuerza desde el HTML.
   & $ffmpeg -y -loglevel error -i $entrada `
       -vf "scale=-2:$Alto,fps=30" `
       -c:v libx264 -preset slow -crf $Calidad -pix_fmt yuv420p `
-      -an -movflags +faststart `
+      -c:a aac -b:a 96k -ac 2 `
+      -movflags +faststart `
       $salidaMp4
 
   # POSTER

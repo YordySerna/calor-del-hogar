@@ -46,7 +46,42 @@ $clips = @(
   @{ src = "VID_20260805_102812.mp4"; out = "local-entrada-video"; segundo = 3.0 }
 )
 
+# Videos largos: la entrevista de la Municipalidad. Van aparte porque a casi
+# cinco minutos el CRF que sirve para un clip de diez segundos dispara el peso.
+# Este llega original en VP9, que Safari no reproduce, así que hay que pasarlo
+# a H.264 sí o sí.
+$largos = @(
+  @{ src = "entrevista-municipalidad.mp4"; out = "entrevista-municipalidad"; segundo = 13.0; crf = 28 }
+)
+
 Write-Host "ffmpeg: $ffmpeg`n"
+
+foreach ($c in $largos) {
+  $entrada = Join-Path $Origen $c.src
+  if (-not (Test-Path $entrada)) { Write-Host "  falta $($c.src), se salta"; continue }
+
+  $salidaMp4 = Join-Path $Destino "$($c.out).mp4"
+  $salidaJpg = Join-Path $Destino "$($c.out)-poster.jpg"
+
+  Write-Host "-> $($c.out)  (video largo)"
+
+  & $ffmpeg -y -loglevel error -i $entrada `
+      -vf "scale=-2:$Alto" `
+      -c:v libx264 -preset slow -crf $c.crf -pix_fmt yuv420p `
+      -c:a aac -b:a 96k -ac 2 `
+      -movflags +faststart `
+      $salidaMp4
+
+  & $ffmpeg -y -loglevel error -ss $c.segundo -i $entrada `
+      -frames:v 1 -update 1 -vf "scale=-2:$Alto" -q:v 4 `
+      $salidaJpg
+
+  if (Test-Path $salidaMp4) {
+    $antes   = (Get-Item $entrada).Length / 1MB
+    $despues = (Get-Item $salidaMp4).Length / 1MB
+    "   {0,6:N1} MB -> {1,5:N2} MB   ({2,4:N0}x mas liviano)" -f $antes, $despues, ($antes / $despues)
+  }
+}
 
 foreach ($c in $clips) {
   $entrada = Join-Path $Origen $c.src
@@ -76,7 +111,7 @@ foreach ($c in $clips) {
 
   # POSTER
   & $ffmpeg -y -loglevel error -ss $c.segundo -i $entrada `
-      -frames:v 1 -vf "scale=-2:$Alto" -q:v 4 `
+      -frames:v 1 -update 1 -vf "scale=-2:$Alto" -q:v 4 `
       $salidaJpg
 
   if (Test-Path $salidaMp4) {

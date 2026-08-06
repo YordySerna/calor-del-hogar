@@ -792,6 +792,28 @@ p{ margin:0 0 1.1em; }
   margin:2.8em 0 1em;
   color:var(--zinc);
 }
+/* ============================================================
+   ENTREVISTA
+   Un solo video grande y centrado. Es la única prueba social real
+   que tiene el sitio, así que se le da el espacio de una sección
+   entera en vez de meterlo en la tira de clips.
+   ============================================================ */
+
+.entrevista{
+  background:linear-gradient(to bottom, transparent, rgba(27,59,66,.5) 16%, rgba(27,59,66,.5) 84%, transparent);
+}
+
+.entrevista__video{
+  margin-top:2.4em;
+  max-width:900px;
+  box-shadow:var(--sombra);
+}
+/* el botón de esta va con más peso: la invitación es más larga */
+.entrevista__video .video__icono{ width:66px; height:66px; }
+.entrevista__video .video__icono::after{ border-width:13px 0 13px 21px; }
+.entrevista__video .video__txt{ font-size:.86rem; }
+
+
 .videos__nota{
   color:var(--zinc);
   font-size:.92rem;

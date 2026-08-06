@@ -135,6 +135,26 @@ subirlo a YouTube y embeberlo. No por el peso, sino porque YouTube entrega
 calidad adaptable según la conexión de cada quien, y un canal con el nombre del
 negocio suma para el SEO local igual que la ficha de Google.
 
+### La entrevista de la Municipalidad
+
+`entrevista-municipalidad.mp4` son 4:45 grabados por la Municipalidad de
+Loncoche dentro del taller. Llegó en 1080p VP9 de 91,5 MB; queda en 720p
+H.264 de 30,5 MB. Se convirtió sí o sí porque **Safari no reproduce VP9**.
+
+Es la única prueba social real que tiene el sitio: no es el negocio hablando
+de sí mismo, es un tercero que fue hasta el taller. Por eso ocupa una sección
+entera, entre "por qué nosotros" y las preguntas.
+
+Dos pendientes con ella:
+
+- **El texto de la sección describe solo lo que se ve** (dónde se grabó y
+  cuánto dura), porque nadie transcribió todavía lo que dicen. Cuando alguien
+  la vea completa, conviene reescribirlo con los años reales del taller, cómo
+  aprendieron el oficio y alguna frase textual suya. Eso vale más que
+  cualquier cosa que escribamos nosotros.
+- **El video es de la Municipalidad, no del negocio.** Guardar por escrito el
+  permiso para publicarlo, aunque sea un WhatsApp.
+
 ### Pendiente: permiso para publicar la cara de Miguel
 
 En `taller-maestro.mp4` (y en su poster) **se ve la cara del maestro con toda

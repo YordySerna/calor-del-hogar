@@ -31,6 +31,19 @@
 /* el atributo hidden tiene que ganarle a cualquier display de más abajo */
 [hidden]{ display:none !important; }
 
+/* Texto que existe para Google y para los lectores de pantalla, pero que no
+   se dibuja. No se usa display:none porque eso lo escondería también del
+   lector, que es justamente a quien va dirigido. */
+.solo-lectores{
+  position:absolute;
+  width:1px; height:1px;
+  padding:0; margin:-1px;
+  overflow:hidden;
+  clip-path:inset(50%);
+  white-space:nowrap;
+  border:0;
+}
+
 html{ scroll-behavior:smooth; -webkit-text-size-adjust:100%; }
 
 body{
@@ -203,6 +216,34 @@ p{ margin:0 0 1.1em; }
 }
 .btn--ancho{ width:100%; }
 
+/* Enlace chico de "seguir hacia WhatsApp" que cierra varias secciones.
+   No es un botón: no compite con el naranja, pero deja siempre una salida
+   a mano para el que ya se convenció a mitad de página. */
+.micro{ margin:1.6em 0 0; }
+.micro--centro{ text-align:center; margin-top:2.2em; }
+
+.micro__link{
+  display:inline-flex; align-items:center; gap:.5em;
+  font-weight:600;
+  font-size:.94rem;
+  letter-spacing:.02em;
+  color:var(--ambar);
+  text-decoration:none;
+  border-bottom:1px solid rgba(232,163,61,.35);
+  padding-bottom:2px;
+  transition:color var(--t-rapida), border-color var(--t-rapida), gap var(--t-rapida);
+}
+.micro__link:hover{
+  color:var(--cal);
+  border-bottom-color:var(--cal);
+  gap:.8em;
+}
+.micro__link:focus-visible{
+  outline:2px solid var(--ambar);
+  outline-offset:4px;
+  border-radius:2px;
+}
+
 
 /* ============================================================
    BARRA SUPERIOR
@@ -264,7 +305,16 @@ p{ margin:0 0 1.1em; }
 }
 
 .nav{ display:none; }
-.barra__cta{ display:none; }
+
+/* El botón de cotizar se ve SIEMPRE, también en móvil. Antes vivía escondido
+   dentro del menú hamburguesa: es la acción principal del sitio y esconderla
+   detrás de dos toques es regalar consultas. */
+.barra__cta{
+  display:inline-flex;
+  padding:.58em 1.05em;
+  font-size:.85rem;
+  flex:none;
+}
 
 .hamburguesa{
   width:42px; height:38px;
@@ -435,6 +485,44 @@ p{ margin:0 0 1.1em; }
 
 
 /* ============================================================
+   FRANJA DE CONFIANZA
+   Cinta angosta justo debajo de la portada. Va sobre el verde del
+   local para que se lea como una placa atornillada, no como otra
+   sección más de la página.
+   ============================================================ */
+
+.franja{
+  background:var(--taller);
+  border-block:1px solid var(--borde);
+  padding-block:26px;
+}
+
+.franja__lista{
+  list-style:none; margin:0; padding-block:0;
+  display:grid; gap:18px 34px;
+  grid-template-columns:repeat(2,1fr);
+}
+.franja__lista li{
+  display:flex; flex-direction:column; gap:2px;
+  padding-left:14px;
+  border-left:2px solid rgba(232,163,61,.55);
+}
+.franja__lista strong{
+  font-family:"Anton",sans-serif;
+  font-weight:400;
+  font-size:1.02rem;
+  text-transform:uppercase;
+  letter-spacing:.02em;
+  line-height:1.15;
+}
+.franja__lista span{
+  color:var(--zinc);
+  font-size:.84rem;
+  line-height:1.4;
+}
+
+
+/* ============================================================
    EL OFICIO
    ============================================================ */
 
@@ -548,6 +636,179 @@ p{ margin:0 0 1.1em; }
 .tarjeta p{ margin:0; color:var(--zinc); font-size:.95rem; line-height:1.6; }
 .tarjeta em{ color:var(--ambar); font-style:italic; }
 
+/* La última tarjeta no es un servicio: es la salida hacia WhatsApp para
+   quien no encontró lo suyo. Se distingue por el borde, sin gritar. */
+.tarjeta--cta{
+  background:rgba(200,85,30,.07);
+  border-color:rgba(232,163,61,.38);
+  border-style:dashed;
+  display:flex; flex-direction:column;
+}
+.tarjeta--cta::before{ display:none; }
+.tarjeta--cta p{ margin-bottom:1.1em; }
+.tarjeta--cta .micro__link{ margin-top:auto; align-self:flex-start; font-size:.9rem; }
+
+
+/* ============================================================
+   CÓMO FUNCIONA
+   ============================================================ */
+
+.proceso__grid{ display:grid; gap:38px; }
+
+.pasos{
+  list-style:none; margin:2.4em 0 2.4em; padding:0;
+  display:grid; gap:22px;
+  counter-reset:paso;
+}
+
+.paso{
+  position:relative;
+  padding-left:56px;
+}
+/* La línea vertical une los cuatro pasos: se lee como un recorrido y no
+   como cuatro avisos sueltos. El último no la lleva. */
+.paso::after{
+  content:"";
+  position:absolute; left:19px; top:44px; bottom:-22px;
+  width:1px;
+  background:linear-gradient(to bottom, rgba(200,85,30,.5), rgba(200,85,30,0));
+}
+.paso:last-child::after{ display:none; }
+
+.paso__num{
+  position:absolute; left:0; top:0;
+  width:38px; height:38px;
+  display:flex; align-items:center; justify-content:center;
+  font-family:"Anton",sans-serif;
+  font-size:1.1rem;
+  color:var(--ambar);
+  background:rgba(200,85,30,.14);
+  border:1px solid rgba(232,163,61,.45);
+  border-radius:50%;
+}
+.paso h3{
+  font-family:"Anton",sans-serif;
+  font-weight:400;
+  font-size:1.14rem;
+  text-transform:uppercase;
+  letter-spacing:.02em;
+  margin:.35em 0 .4em;
+}
+.paso p{ margin:0; color:var(--zinc); font-size:.95rem; }
+
+/* ============================================================
+   VIDEO
+   Componente compartido: la sección "cómo funciona" y la tira de
+   clips de "trabajos" usan el mismo. Arranca como una foto con un
+   botón encima; el .mp4 recién se pide al tocar play.
+   ============================================================ */
+
+.video{
+  position:relative;
+  margin:0;
+  border-radius:var(--radio);
+  overflow:hidden;
+  border:1px solid var(--borde);
+  background:#0C171C;
+}
+.video video{
+  width:100%;
+  aspect-ratio:16/9;
+  object-fit:cover;
+  display:block;
+  filter:saturate(.9) contrast(1.04) brightness(.98);
+}
+
+/* Botón de play: tapa todo el cuadro, así en móvil se puede tocar
+   en cualquier parte y no hay que apuntarle a un círculo chico. */
+.video__play{
+  position:absolute; inset:0;
+  display:flex; flex-direction:column; align-items:center; justify-content:center;
+  gap:12px;
+  background:linear-gradient(to top, rgba(12,23,28,.55), rgba(12,23,28,.15));
+  border:0;
+  color:var(--cal);
+  cursor:pointer;
+  font-family:inherit;
+  transition:opacity var(--t-rapida), background var(--t-rapida);
+}
+.video__icono{
+  width:56px; height:56px;
+  border-radius:50%;
+  background:var(--oxido);
+  box-shadow:0 8px 22px rgba(0,0,0,.4);
+  position:relative;
+  transition:transform var(--t-rapida), background var(--t-rapida);
+}
+/* triángulo de play dibujado con bordes, sin imagen ni icono externo */
+.video__icono::after{
+  content:"";
+  position:absolute; top:50%; left:52%;
+  transform:translate(-50%,-50%);
+  border-style:solid;
+  border-width:11px 0 11px 18px;
+  border-color:transparent transparent transparent #fff;
+}
+.video__play:hover .video__icono{ background:var(--ambar); transform:scale(1.08); }
+.video__play:hover .video__icono::after{ border-left-color:#20140A; }
+.video__play:focus-visible{ outline:2px solid var(--ambar); outline-offset:-4px; }
+
+.video__txt{
+  font-size:.8rem;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  font-weight:600;
+  text-shadow:0 2px 10px rgba(0,0,0,.7);
+}
+
+/* al reproducir, el botón se va pero el elemento sigue ahí para
+   poder pausar tocando de nuevo */
+.video.andando .video__play{
+  opacity:0;
+  background:transparent;
+  pointer-events:auto;
+}
+.video.andando .video__play:hover{ opacity:1; background:rgba(12,23,28,.35); }
+.video.andando .video__icono{ background:rgba(18,35,42,.85); }
+/* con el video andando el botón pasa a ser "pausa": dos barras */
+.video.andando .video__icono::after{
+  border:0;
+  width:14px; height:16px;
+  background:
+    linear-gradient(to right, #fff 0 5px, transparent 5px 9px, #fff 9px 14px);
+  left:50%;
+}
+
+.video figcaption{
+  position:absolute; left:0; right:0; bottom:0;
+  padding:34px 16px 13px;
+  font-size:.78rem;
+  letter-spacing:.13em;
+  text-transform:uppercase;
+  font-weight:600;
+  background:linear-gradient(to top, rgba(12,23,28,.92), transparent);
+  pointer-events:none;
+  transition:opacity var(--t-rapida);
+}
+.video.andando figcaption{ opacity:0; }
+
+/* tira de clips en la sección Trabajos */
+.videos__titulo{
+  font-family:"Anton",sans-serif;
+  font-weight:400;
+  font-size:1.15rem;
+  text-transform:uppercase;
+  letter-spacing:.02em;
+  margin:2.8em 0 1em;
+  color:var(--zinc);
+}
+.videos{ display:grid; gap:12px; }
+/* En las tarjetas chicas el rótulo choca con el epígrafe y el triángulo ya
+   dice lo mismo. El texto sigue existiendo en el aria-label del botón. */
+.videos .video__txt{ display:none; }
+.videos .video__icono{ width:48px; height:48px; }
+.videos .video__icono::after{ border-width:9px 0 9px 15px; }
+
 
 /* ============================================================
    GALERÍA
@@ -640,6 +901,67 @@ p{ margin:0 0 1.1em; }
 
 
 /* ============================================================
+   PREGUNTAS FRECUENTES
+   Sobre <details> nativo. El triángulo por defecto se saca y se
+   dibuja un "+" que gira: así el control se ve igual en todos los
+   navegadores sin tocar una línea de JavaScript.
+   ============================================================ */
+
+.faq__grid{ display:grid; gap:34px; }
+
+.faq__lista{ display:grid; gap:0; }
+
+.faq__item{
+  border-top:1px solid var(--borde);
+  padding-block:4px;
+}
+.faq__item:last-child{ border-bottom:1px solid var(--borde); }
+
+.faq__item summary{
+  list-style:none;
+  cursor:pointer;
+  padding:17px 42px 17px 0;
+  position:relative;
+  font-weight:600;
+  font-size:1.02rem;
+  line-height:1.4;
+  transition:color var(--t-rapida);
+}
+.faq__item summary::-webkit-details-marker{ display:none; }
+.faq__item summary:hover{ color:var(--ambar); }
+.faq__item summary:focus-visible{
+  outline:2px solid var(--ambar);
+  outline-offset:3px;
+  border-radius:2px;
+}
+
+/* el "+" que se convierte en "−" al abrir */
+.faq__item summary::before,
+.faq__item summary::after{
+  content:"";
+  position:absolute; right:8px; top:50%;
+  width:15px; height:2px;
+  background:var(--oxido);
+  transition:transform var(--t-rapida), background var(--t-rapida);
+}
+.faq__item summary::before{ transform:translateY(-50%); }
+.faq__item summary::after{ transform:translateY(-50%) rotate(90deg); }
+.faq__item[open] summary::after{ transform:translateY(-50%) rotate(0deg); }
+.faq__item[open] summary{ color:var(--ambar); }
+.faq__item[open] summary::before,
+.faq__item[open] summary::after{ background:var(--ambar); }
+
+.faq__item p{
+  margin:0 0 18px;
+  padding-right:42px;
+  color:var(--zinc);
+  font-size:.97rem;
+  max-width:62ch;
+}
+.faq__item em{ color:var(--ambar); font-style:italic; }
+
+
+/* ============================================================
    COTIZACIÓN
    ============================================================ */
 
@@ -695,6 +1017,34 @@ p{ margin:0 0 1.1em; }
   font-size:.8rem;
   color:var(--zinc);
   text-align:center;
+}
+
+
+/* ============================================================
+   LLAMADO FINAL
+   Franja a sangre, sin foto y sin adornos: en este punto de la
+   página lo único que falta es el botón.
+   ============================================================ */
+
+.llamado{
+  background:
+    linear-gradient(to bottom, rgba(138,46,18,.28), rgba(138,46,18,.12)),
+    var(--carbon);
+  border-block:1px solid var(--borde);
+  padding-block:clamp(54px,9vw,86px);
+  text-align:center;
+}
+.llamado__cuerpo .titulo{ margin-bottom:.32em; }
+.llamado__cuerpo p{
+  max-width:52ch;
+  margin-inline:auto;
+  margin-bottom:1.8em;
+  color:#DCE3E5;
+  font-size:1.04rem;
+}
+.llamado__botones{
+  display:flex; flex-wrap:wrap; gap:12px;
+  justify-content:center;
 }
 
 
@@ -774,16 +1124,29 @@ p{ margin:0 0 1.1em; }
 
 .flotante{
   position:fixed;
-  right:16px; bottom:16px;
+  right:16px;
+  /* el inset evita que quede debajo de la barra de gestos del iPhone */
+  bottom:calc(16px + env(safe-area-inset-bottom, 0px));
   z-index:70;
   display:inline-flex; align-items:center; gap:0;
-  padding:14px;
+  padding:15px;                      /* 15 + 26 del icono = 56px de zona táctil */
   background:#1FAF54;
   color:#fff;
   border-radius:50px;
   text-decoration:none;
   box-shadow:0 10px 26px rgba(0,0,0,.42);
-  transition:transform var(--t-rapida), box-shadow var(--t-rapida), gap var(--t-rapida), padding var(--t-rapida);
+  transition:transform var(--t-rapida), box-shadow var(--t-rapida), gap var(--t-rapida),
+             padding var(--t-rapida), opacity var(--t-rapida), visibility var(--t-rapida);
+}
+
+/* Se esconde en dos casos: mientras se está mirando la portada (ahí el
+   botón grande ya está a la vista) y sobre el formulario de cotización,
+   donde taparía el botón que hace exactamente lo mismo. */
+.flotante.oculto{
+  opacity:0;
+  visibility:hidden;
+  transform:translateY(14px) scale(.9);
+  pointer-events:none;
 }
 .flotante span{
   max-width:0; overflow:hidden; white-space:nowrap;
@@ -884,12 +1247,18 @@ p{ margin:0 0 1.1em; }
    Solo con CSS, sin calcular nada en JavaScript. */
 .js .tarjeta:nth-child(2),
 .js .razon:nth-child(2),
+.js .paso:nth-child(2),
+.js .franja__lista li:nth-child(2),
 .js .galeria__item:nth-child(2){ transition-delay:.08s; }
 .js .tarjeta:nth-child(3),
 .js .razon:nth-child(3),
+.js .paso:nth-child(3),
+.js .franja__lista li:nth-child(3),
 .js .galeria__item:nth-child(3){ transition-delay:.16s; }
 .js .tarjeta:nth-child(4),
-.js .razon:nth-child(4){ transition-delay:.24s; }
+.js .razon:nth-child(4),
+.js .paso:nth-child(4),
+.js .franja__lista li:nth-child(4){ transition-delay:.24s; }
 /* La segunda fila de servicios entra igual que la primera: el retardo se
    cuenta dentro de la fila, no acumulado sobre las ocho tarjetas. */
 .js .tarjeta:nth-child(6){ transition-delay:.08s; }
@@ -913,10 +1282,28 @@ p{ margin:0 0 1.1em; }
 @media (min-width:640px){
   .tarjetas{ grid-template-columns:repeat(2,1fr); }
   .galeria{ grid-template-columns:repeat(2,1fr); gap:12px; }
+  .videos{ grid-template-columns:repeat(3,1fr); }
   .razones{ grid-template-columns:repeat(2,1fr); gap:30px 34px; }
   .cotiza__form{ padding:30px 28px; }
   .datos{ grid-template-columns:repeat(2,1fr); gap:22px 26px; }
   .portada__baja{ display:block; }
+
+  /* Los pasos se ponen en dos columnas: la línea que los unía dejaría de
+     seguir el orden de lectura, así que desaparece. */
+  .pasos{ grid-template-columns:repeat(2,1fr); gap:26px 32px; }
+  .paso::after{ display:none; }
+
+  /* En cuanto hay más de una columna, la tarjeta de "¿no está lo tuyo?"
+     dejaría un hueco al final de la retícula. Ocupando la fila entera se
+     lee como el cierre de la sección y no como un servicio olvidado. */
+  .tarjeta--cta{
+    grid-column:1 / -1;
+    flex-direction:row; align-items:center; flex-wrap:wrap;
+    gap:8px 28px;
+  }
+  .tarjeta--cta h3{ margin:0; flex:none; }
+  .tarjeta--cta p{ margin:0; flex:1 1 280px; }
+  .tarjeta--cta .micro__link{ margin-top:0; align-self:center; }
 }
 
 @media (min-width:900px){
@@ -995,6 +1382,20 @@ p{ margin:0 0 1.1em; }
   .tarjetas{ grid-template-columns:repeat(4,1fr); }
 
   .razones{ grid-template-columns:repeat(4,1fr); gap:34px 26px; }
+
+  .franja{ padding-block:30px; }
+  .franja__lista{ grid-template-columns:repeat(4,1fr); gap:22px 30px; }
+  .franja__lista strong{ font-size:1.08rem; }
+
+  /* El texto manda y la foto acompaña: los pasos vuelven a una sola
+     columna dentro del panel izquierdo, con la línea que los une. */
+  .proceso__grid{ grid-template-columns:1.05fr .95fr; gap:56px; align-items:start; }
+  .pasos{ grid-template-columns:1fr; gap:24px; }
+  .paso::after{ display:block; }
+  /* el video acompaña la lectura de los cuatro pasos sin irse de pantalla */
+  .proceso__video{ position:sticky; top:96px; }
+
+  .faq__grid{ grid-template-columns:.78fr 1.22fr; gap:56px; align-items:start; }
 
   .cotiza__grid{ grid-template-columns:.95fr 1.05fr; gap:56px; align-items:start; }
 

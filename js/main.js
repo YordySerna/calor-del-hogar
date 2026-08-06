@@ -11,6 +11,36 @@
   var raiz = document.documentElement;
   var menosMovimiento = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
+  // Datos del negocio. Viven en js/datos.js para que haya un solo archivo
+  // que editar; si ese archivo no cargó, todo lo de abajo se salta solo.
+  var DATOS = window.CALOR_DE_HOGAR || {};
+
+
+  /* ----------------------------------------------------------
+     AYUDANTES DE WHATSAPP
+     ---------------------------------------------------------- */
+
+  // Deja el número como lo quiere wa.me: solo dígitos, con el 56 adelante.
+  function numeroWhatsapp() {
+    return String(DATOS.whatsapp || "").replace(/[^0-9]/g, "");
+  }
+
+  // Devuelve "" si todavía no hay número cargado. Quien llame decide qué
+  // hacer con eso; nunca se arma un wa.me a medias.
+  function enlaceWhatsapp(mensaje) {
+    var n = numeroWhatsapp();
+    if (!n) return "";
+    return "https://wa.me/" + n + (mensaje ? "?text=" + encodeURIComponent(mensaje) : "");
+  }
+
+  // 56961234567 -> +56 9 6123 4567, que es como se lee un celular en Chile.
+  function numeroLegible(n) {
+    if (n.length === 11 && n.slice(0, 3) === "569") {
+      return "+56 9 " + n.slice(3, 7) + " " + n.slice(7);
+    }
+    return "+" + n;
+  }
+
 
   /* ----------------------------------------------------------
      1. FONDO DE BRASAS
@@ -166,17 +196,132 @@
 
 
   /* ----------------------------------------------------------
-     6. COTIZACIÓN POR WHATSAPP
-     Arma el mensaje y lo mete en el enlace. El número no se
-     escribe acá: se lee del href que ya está en el HTML, así
-     hay un solo lugar donde cambiarlo.
+     6. DATOS DE CONTACTO
+     Reparte por la página lo que haya en js/datos.js. Lo que
+     todavía no existe, no se muestra: una fila vacía es mejor
+     que un teléfono de relleno, porque Google indexa el falso
+     y después cuesta mucho sacarlo.
+     ---------------------------------------------------------- */
+  (function contacto() {
+    var faltan = [];
+
+    function mostrarFila(nombre) {
+      var fila = document.querySelector('[data-fila="' + nombre + '"]');
+      if (fila) fila.hidden = false;
+    }
+
+    /* --- WhatsApp: todos los botones del sitio a la vez --- */
+    var numero = numeroWhatsapp();
+    if (numero) {
+      var botones = document.querySelectorAll("[data-wa]");
+      for (var i = 0; i < botones.length; i++) {
+        var b = botones[i];
+        b.setAttribute("href", enlaceWhatsapp(b.getAttribute("data-wa-msg") || ""));
+        b.setAttribute("target", "_blank");
+        b.setAttribute("rel", "noopener");
+        // el enlace de la ficha de contacto además muestra el número escrito
+        if (b.hasAttribute("data-wa-texto")) b.textContent = numeroLegible(numero);
+      }
+      mostrarFila("whatsapp");
+    } else {
+      faltan.push("whatsapp");
+      // sin número los botones se quedan con el href del HTML (#cotiza o
+      // #contacto), así que siguen llevando a alguna parte útil
+    }
+
+    /* --- Teléfono --- */
+    var tel = document.querySelector("[data-tel]");
+    if (DATOS.telefono && tel) {
+      tel.setAttribute("href", "tel:" + String(DATOS.telefono).replace(/\s/g, ""));
+      tel.textContent = DATOS.telefono;
+      mostrarFila("telefono");
+    } else if (!DATOS.telefono) {
+      faltan.push("telefono");
+    }
+
+    /* --- Correo --- */
+    var correo = document.querySelector("[data-correo]");
+    if (DATOS.correo && correo) {
+      correo.setAttribute("href", "mailto:" + DATOS.correo);
+      correo.textContent = DATOS.correo;
+      mostrarFila("correo");
+    } else if (!DATOS.correo) {
+      faltan.push("correo");
+    }
+
+    /* --- Horario --- */
+    var horario = document.querySelector("[data-horario]");
+    if (DATOS.horario && DATOS.horario.length && horario) {
+      horario.textContent = "";
+      for (var h = 0; h < DATOS.horario.length; h++) {
+        if (h) horario.appendChild(document.createElement("br"));
+        horario.appendChild(document.createTextNode(DATOS.horario[h]));
+      }
+      mostrarFila("horario");
+    } else if (!DATOS.horario || !DATOS.horario.length) {
+      faltan.push("horario");
+    }
+
+    /* --- Ficha de Google, si ya existe --- */
+    var mapa = document.querySelector("[data-mapa]");
+    if (DATOS.fichaGoogle && mapa) mapa.setAttribute("href", DATOS.fichaGoogle);
+
+    /* --- Ficha de negocio para el buscador ---
+       Se completa el JSON-LD con lo que haya. Cuando los datos ya sean
+       definitivos conviene escribirlos también a mano en el index.html:
+       el JSON-LD estático es el que Google lee más rápido. */
+    var ficha = document.getElementById("ficha-google");
+    if (ficha) {
+      try {
+        var j = JSON.parse(ficha.textContent);
+        if (DATOS.telefono) j.telephone = DATOS.telefono;
+        if (DATOS.correo)   j.email     = DATOS.correo;
+        if (DATOS.latitud && DATOS.longitud) {
+          j.geo = {
+            "@type": "GeoCoordinates",
+            "latitude": DATOS.latitud,
+            "longitude": DATOS.longitud
+          };
+        }
+        if (DATOS.fichaGoogle) {
+          j.hasMap = DATOS.fichaGoogle;
+          j.sameAs = [DATOS.fichaGoogle];
+        }
+        if (DATOS.horarioGoogle && DATOS.horarioGoogle.length) {
+          j.openingHoursSpecification = DATOS.horarioGoogle.map(function (t) {
+            return {
+              "@type": "OpeningHoursSpecification",
+              "dayOfWeek": t.dias,
+              "opens": t.abre,
+              "closes": t.cierra
+            };
+          });
+        }
+        ficha.textContent = JSON.stringify(j, null, 2);
+      } catch (e) {
+        /* si el JSON del HTML quedó mal escrito, se deja tal cual */
+      }
+    }
+
+    /* --- Aviso para quien esté editando el sitio --- */
+    if (faltan.length && window.console && console.warn) {
+      console.warn(
+        "Calor de Hogar — faltan datos reales en js/datos.js: " + faltan.join(", ") +
+        ". Mientras tanto la página los esconde en vez de inventarlos."
+      );
+    }
+  })();
+
+
+  /* ----------------------------------------------------------
+     7. COTIZACIÓN POR WHATSAPP
+     Arma el mensaje con lo que se escribió en el formulario.
+     No se envía nada desde la página: solo se abre WhatsApp con
+     el texto listo para que el cliente lo revise.
      ---------------------------------------------------------- */
   (function cotizar() {
     var boton = document.getElementById("btn-cotiza");
-    if (!boton) return;
-
-    var numero = (boton.getAttribute("href") || "").replace(/[^0-9]/g, "");
-    if (!numero) return;
+    if (!boton || !numeroWhatsapp()) return;
 
     var campos = {
       nombre:  document.getElementById("c-nombre"),
@@ -185,26 +330,29 @@
       detalle: document.getElementById("c-detalle")
     };
 
+    function valor(clave) {
+      return campos[clave] && campos[clave].value ? campos[clave].value.trim() : "";
+    }
+
     function armar() {
-      var l = ["Hola, quiero cotizar un trabajo de hojalatería."];
+      var nombre  = valor("nombre");
+      var comuna  = valor("comuna");
+      var trabajo = valor("trabajo");
+      var detalle = valor("detalle");
 
-      if (campos.nombre && campos.nombre.value.trim()) {
-        l.push("Soy " + campos.nombre.value.trim() + ".");
-      }
-      if (campos.trabajo && campos.trabajo.value) {
-        l.push("Necesito: " + campos.trabajo.value + ".");
-      }
-      if (campos.detalle && campos.detalle.value.trim()) {
-        l.push("Detalle: " + campos.detalle.value.trim());
-      }
-      if (campos.comuna && campos.comuna.value.trim()) {
-        l.push("Escribo desde " + campos.comuna.value.trim() + ".");
-      }
+      // El saludo se arma con lo que haya: si el cliente no llenó nada,
+      // igual sale un mensaje que se entiende.
+      var saludo = "Hola";
+      if (nombre) saludo += ", soy " + nombre;
+      if (comuna) saludo += (nombre ? " y escribo desde " : ", escribo desde ") + comuna;
+      saludo += ".";
 
-      boton.setAttribute(
-        "href",
-        "https://wa.me/" + numero + "?text=" + encodeURIComponent(l.join("\n"))
-      );
+      var l = [saludo];
+      if (trabajo) l.push("Quiero cotizar: " + trabajo + ".");
+      if (detalle) l.push("", "Detalle:", detalle);
+      l.push("", "(Escribo desde la página web.)");
+
+      boton.setAttribute("href", enlaceWhatsapp(l.join("\n")));
     }
 
     var claves = Object.keys(campos);
@@ -230,7 +378,113 @@
 
 
   /* ----------------------------------------------------------
-     7. VISOR DE LA GALERÍA
+     8. BOTÓN FLOTANTE DE WHATSAPP
+     Se esconde en la portada (donde ya hay un botón grande) y
+     sobre el formulario (donde taparía el que hace lo mismo).
+     Sin IntersectionObserver se queda visible siempre, que es
+     el comportamiento seguro.
+     ---------------------------------------------------------- */
+  (function flotante() {
+    var boton = document.getElementById("flotante");
+    if (!boton) return;
+
+    var enPortada = true;
+    var enCotiza  = false;
+
+    function refrescar() {
+      boton.classList.toggle("oculto", enPortada || enCotiza);
+    }
+
+    var ticking = false;
+    function revisar() {
+      enPortada = window.scrollY < 380;
+      refrescar();
+      ticking = false;
+    }
+    window.addEventListener("scroll", function () {
+      if (!ticking) { ticking = true; requestAnimationFrame(revisar); }
+    }, { passive: true });
+    revisar();
+
+    var cotiza = document.getElementById("cotiza");
+    if (cotiza && "IntersectionObserver" in window) {
+      new IntersectionObserver(function (e) {
+        enCotiza = e[0].isIntersecting;
+        refrescar();
+      }, { threshold: 0.3 }).observe(cotiza);
+    }
+  })();
+
+
+  /* ----------------------------------------------------------
+     9. VIDEOS A PEDIDO
+     Los <video> del cuerpo de la página vienen sin src: solo con
+     el poster y la ruta guardada en data-fuente. El .mp4 se pide
+     recién al tocar play. Así un visitante en datos móviles que
+     baja de largo no descarga ni un KB de video.
+     ---------------------------------------------------------- */
+  (function videos() {
+    var cajas = document.querySelectorAll(".video");
+
+    for (var i = 0; i < cajas.length; i++) {
+      (function (caja) {
+        var v      = caja.querySelector("video");
+        var boton  = caja.querySelector(".video__play");
+        var txt    = caja.querySelector(".video__txt");
+        if (!v || !boton) return;
+
+        var fuente = v.getAttribute("data-fuente");
+        if (!fuente) return;
+
+        var cargado = false;
+        // cada video trae su propia invitación escrita en el HTML
+        // ("Ver cómo se trabaja", "Reproducir"...): se respeta esa.
+        var textoInicial = txt ? txt.textContent : "";
+
+        function describir() {
+          // el botón cambia de significado según el estado, y el lector
+          // de pantalla tiene que enterarse
+          var etiqueta = v.getAttribute("aria-label") || "el video";
+          boton.setAttribute("aria-label", (v.paused ? "Reproducir: " : "Pausar: ") + etiqueta);
+          if (txt) txt.textContent = v.paused ? textoInicial : "Pausar";
+        }
+
+        boton.addEventListener("click", function () {
+          if (!cargado) {
+            v.src = fuente;
+            cargado = true;
+          }
+          if (v.paused) {
+            var intento = v.play();
+            if (intento && intento.catch) intento.catch(function () {
+              // si el navegador lo bloquea, se vuelve al poster
+              caja.classList.remove("andando");
+              describir();
+            });
+          } else {
+            v.pause();
+          }
+        });
+
+        v.addEventListener("play",  function () { caja.classList.add("andando");    describir(); });
+        v.addEventListener("pause", function () { caja.classList.remove("andando"); describir(); });
+
+        // Si el clip se va de pantalla mientras corre, se pausa: no tiene
+        // sentido gastar batería y CPU en algo que no se está mirando.
+        if ("IntersectionObserver" in window) {
+          new IntersectionObserver(function (e) {
+            if (!e[0].isIntersecting && !v.paused) v.pause();
+          }, { threshold: 0.15 }).observe(caja);
+        }
+
+        describir();
+      })(cajas[i]);
+    }
+  })();
+
+
+  /* ----------------------------------------------------------
+     10. VISOR DE LA GALERÍA
      ---------------------------------------------------------- */
   (function visor() {
     var galeria = document.getElementById("galeria");

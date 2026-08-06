@@ -1,0 +1,57 @@
+# ============================================================
+# Despliegue del sitio en GitHub Pages
+#
+# Antes esto lo hacía el constructor "legacy" de Pages, que se
+# corta a los 10 minutos. Con 52 MB de videos alcanzaba a copiar
+# los archivos pero moría en el paso final, y cada despliegue
+# quedaba marcado en rojo aunque el sitio funcionara.
+#
+# Este flujo empaqueta la carpeta tal cual y la publica. No hay
+# build ni dependencias que instalar: el sitio es HTML, CSS y JS
+# escritos a mano, y se sube igual que como se ve en local.
+# ============================================================
+
+name: Desplegar en GitHub Pages
+
+on:
+  # cada push a master publica
+  push:
+    branches: [master]
+  # y además se puede lanzar a mano desde la pestaña Actions
+  workflow_dispatch:
+
+# Permisos mínimos para que el despliegue pueda firmar y publicar
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Si se pushea dos veces seguidas, no se pisan entre ellos.
+# cancel-in-progress en false para no dejar el sitio a medias.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  desplegar:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.despliegue.outputs.page_url }}
+
+    steps:
+      - name: Bajar el repositorio
+        uses: actions/checkout@v4
+
+      - name: Preparar Pages
+        uses: actions/configure-pages@v5
+
+      - name: Empaquetar el sitio
+        uses: actions/upload-pages-artifact@v3
+        with:
+          # la raíz completa: index.html, css/, js/, images/
+          path: .
+
+      - name: Publicar
+        id: despliegue
+        uses: actions/deploy-pages@v4

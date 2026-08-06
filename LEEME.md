@@ -128,7 +128,8 @@ sin parar cansa. Al terminar vuelven al poster con el botón de play.
 ### ¿Hace falta pagar hosting?
 
 No. Los límites de GitHub Pages son **1 GB de sitio** y **100 GB/mes de ancho
-de banda** (blando). El sitio completo con los ocho videos pesa ~21 MB.
+de banda** (blando). El sitio completo pesa **~52 MB**, y 30,5 de esos son la
+entrevista de la Municipalidad: ella sola es el 59% del peso total.
 
 Para un **video de presentación** largo (2-4 minutos) la recomendación cambia:
 subirlo a YouTube y embeberlo. No por el peso, sino porque YouTube entrega
@@ -200,5 +201,22 @@ pueden además escribir a mano en el HTML.
 
 ## Publicar
 
-Antes de subir, borrar o excluir `images/originales/` (pesa ~700 MB).
-El sitio completo sin esa carpeta pesa alrededor de **10 MB**.
+Con hacer `git push` a `master` basta: `.github/workflows/pages.yml` empaqueta
+la carpeta y la publica en GitHub Pages. No hay build ni dependencias que
+instalar. El avance se ve en la pestaña **Actions** del repositorio.
+
+`images/originales/` está en `.gitignore` (pesa ~700 MB), así que nunca sube.
+Lo que se publica son unos **52 MB**.
+
+### Por qué el despliegue va por Actions y no por el modo normal
+
+Hasta el 6 de agosto de 2026 el sitio usaba el constructor "legacy" de Pages,
+el que se activa solo al elegir una rama. Ese constructor **se corta a los 10
+minutos**, y con 52 MB de video alcanzaba a copiar los archivos pero moría en
+el paso final: cuatro despliegues seguidos quedaron marcados como `failure`
+aunque el sitio sí terminaba actualizado.
+
+Era frágil — un push podía quedar a medias sin que se notara — así que se pasó
+a `build_type: workflow`. Si algún día se rehace el repositorio desde cero, hay
+que acordarse de dejarlo en **Settings → Pages → Source: GitHub Actions**, no
+en "Deploy from a branch".

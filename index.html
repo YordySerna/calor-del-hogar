@@ -76,8 +76,11 @@
      BARRA SUPERIOR
      ============================================================ -->
 <header class="barra" id="barra">
+  <!-- El isotipo real del negocio, recortado del logo que usa Miguel.
+       El nombre va en texto y no dentro de la imagen: así lo lee Google,
+       escala solo y se puede seleccionar. -->
   <a class="marca" href="#inicio">
-    <span class="marca__llama" aria-hidden="true"></span>
+    <img class="marca__logo" src="images/logo-icono.png" width="300" height="231" alt="">
     <span class="marca__txt">Calor de Hogar<small>Hojalatería · Loncoche</small></span>
   </a>
 
@@ -305,6 +308,46 @@
 
 
 <!-- ============================================================
+     PANEL — CAMPANAS A MEDIDA
+     Foto de un trabajo TERMINADO Y PUESTO, que es lo que convence:
+     el resto del sitio muestra producto en estantería. La foto ocupa
+     el panel izquierdo y se disuelve hacia el texto.
+     ============================================================ -->
+<section class="seccion panel panel--izq" id="campanas">
+  <div class="contenedor panel__grid">
+    <div class="panel__texto">
+      <p class="etiqueta rev">Campanas a medida</p>
+      <h2 class="titulo rev">Una campana<br>para un solo quincho</h2>
+
+      <p class="rev">
+        Esta no salió de un catálogo. Se midió el asador, se cortó la plancha y se
+        martilló a mano una por una hasta darle la textura. La banda de madera y las
+        herraduras van montadas después, sobre la pieza ya armada.
+      </p>
+      <p class="rev">
+        Por eso ninguna campana se parece a la anterior: <strong>cada una se hace para
+        el lugar donde va a quedar</strong>, con el tiro que necesita ese quincho y no
+        el que traía la caja.
+      </p>
+
+      <p class="rev micro">
+        <a class="micro__link" href="#cotiza"
+           data-wa data-wa-msg="Hola, me interesa una campana a medida para mi quincho. Les cuento las medidas:">
+          Pedir una campana a medida
+          <span aria-hidden="true">→</span>
+        </a>
+      </p>
+    </div>
+
+    <div class="panel__foto rev">
+      <img src="images/trabajo-campana-quincho.jpg" width="1200" height="1600" loading="lazy"
+           alt="Campana de plancha martillada negra con banda de madera y herraduras, instalada sobre un asador de ladrillo en un quincho">
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================================
      CÓMO FUNCIONA
      El cliente que llega de Google no sabe cómo se pide una pieza a
      medida. Estos cuatro pasos son toda la sección: quitan la duda de
@@ -508,6 +551,44 @@
 
 
 <!-- ============================================================
+     PANEL — ACERO INOXIDABLE
+     Foto a la derecha, para alternar con el panel de campanas.
+     ============================================================ -->
+<section class="seccion panel" id="inoxidable">
+  <div class="contenedor panel__grid">
+    <div class="panel__texto">
+      <p class="etiqueta rev">Acero inoxidable</p>
+      <h2 class="titulo rev">Cuando el brillo<br>también importa</h2>
+
+      <p class="rev">
+        No todo es plancha galvanizada. Para cocinas a la vista, campanas de local y
+        salidas que quedan al frente, el taller trabaja el <strong>acero inoxidable
+        pulido</strong>: tubos, codos, uniones en Y y reducciones, en la medida que
+        pida la instalación.
+      </p>
+      <p class="rev">
+        Es el mismo oficio y el mismo banco. Cambia el material, que perdona menos:
+        una marca de golpe mal dado en inoxidable no se disimula.
+      </p>
+
+      <p class="rev micro">
+        <a class="micro__link" href="#cotiza"
+           data-wa data-wa-msg="Hola, necesito una pieza en acero inoxidable. Les cuento la medida:">
+          Consultar por inoxidable
+          <span aria-hidden="true">→</span>
+        </a>
+      </p>
+    </div>
+
+    <div class="panel__foto rev">
+      <img src="images/trabajo-piezas-inoxidable.jpg" width="1200" height="1600" loading="lazy"
+           alt="Tubos, codos y una unión en Y de acero inoxidable pulido espejo, recién terminados en el piso del taller">
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================================
      POR QUÉ NOSOTROS
      ============================================================ -->
 <section class="seccion porque" id="porque">
@@ -561,6 +642,51 @@
      PENDIENTE: el video es de la Municipalidad de Loncoche. Guardar por
      escrito el permiso para publicarlo, aunque sea un WhatsApp.
      ============================================================ -->
+<!-- ============================================================
+     PANEL — MARTILLADO A MANO
+     Acá va el argumento más fuerte del negocio: es el único taller de
+     la zona que hace este tipo de trabajo. Dato entregado por el
+     cliente; si algún día aparece competencia, hay que matizarlo.
+     Foto a la izquierda, alternando con el panel anterior.
+     ============================================================ -->
+<section class="seccion panel panel--izq" id="martillado">
+  <div class="contenedor panel__grid">
+    <div class="panel__texto">
+      <p class="etiqueta rev">Martillado a mano</p>
+      <h2 class="titulo rev">Golpe<br>por golpe</h2>
+
+      <p class="rev">
+        Esa textura de la campana no es una plancha comprada así: es el maestro
+        marcando la superficie golpe por golpe, con el martillo, hasta que toda la
+        cara queda pareja. No hay máquina que lo haga en el taller.
+      </p>
+      <p class="rev">
+        Es la parte más lenta del trabajo y la que más se nota cuando la pieza queda
+        instalada, porque el martillado atrapa la luz de otra manera que la plancha lisa.
+      </p>
+
+      <p class="panel__dato rev">
+        <strong>El único taller de la zona que lo hace</strong>
+        <span>Si quieres una pieza martillada por acá cerca, no hay dónde más pedirla.</span>
+      </p>
+
+      <p class="rev micro">
+        <a class="micro__link" href="#cotiza"
+           data-wa data-wa-msg="Hola, vi las campanas martilladas y quiero cotizar una. Les cuento:">
+          Cotizar una pieza martillada
+          <span aria-hidden="true">→</span>
+        </a>
+      </p>
+    </div>
+
+    <div class="panel__foto rev">
+      <img src="images/trabajo-campana-martillada.jpg" width="1200" height="1600" loading="lazy"
+           alt="Campana negra de plancha martillada a mano con banda de madera barnizada, terminada sobre el mesón del taller">
+    </div>
+  </div>
+</section>
+
+
 <section class="seccion entrevista" id="entrevista">
   <div class="contenedor">
     <p class="etiqueta rev">Nos vinieron a ver</p>
@@ -808,8 +934,10 @@
 <footer class="pie">
   <div class="contenedor pie__grid">
     <div>
-      <p class="pie__marca">Hojalatería Calor de Hogar</p>
-      <p class="pie__sub">Fábrica de cocinas y hojalatería en general</p>
+      <!-- El logo completo del negocio, con el texto pasado a claro para
+           que se lea sobre el fondo oscuro. -->
+      <img class="pie__logo" src="images/logo-claro.png" width="680" height="285"
+           loading="lazy" alt="Calor de Hogar — Fábrica de cocinas y hojalatería">
       <p class="pie__sub">Lord Cochrane 121 · Loncoche · La Araucanía</p>
     </div>
 

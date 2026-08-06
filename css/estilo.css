@@ -271,21 +271,12 @@ p{ margin:0 0 1.1em; }
   text-decoration:none;
   margin-right:auto;
 }
-.marca__llama{
-  width:26px; height:30px;
+/* El isotipo del logo real. Alto fijo para que la barra no se mueva
+   mientras carga la imagen. */
+.marca__logo{
+  height:32px;
+  width:auto;
   flex:none;
-  background:var(--oxido);
-  /* silueta de casa con techo a dos aguas, como el logo del cartel */
-  clip-path:polygon(50% 0%, 100% 38%, 100% 100%, 0% 100%, 0% 38%);
-  position:relative;
-}
-.marca__llama::after{
-  content:"";
-  position:absolute; left:50%; top:52%;
-  transform:translate(-50%,-40%);
-  width:9px; height:13px;
-  background:var(--ambar);
-  border-radius:50% 50% 50% 50% / 60% 60% 40% 40%;
 }
 .marca__txt{
   font-family:"Anton",sans-serif;
@@ -526,7 +517,8 @@ p{ margin:0 0 1.1em; }
    EL OFICIO
    ============================================================ */
 
-.oficio__grid{ display:grid; gap:38px; }
+.oficio__grid,
+.panel__grid{ display:grid; gap:38px; }
 
 .firma{
   display:flex; flex-direction:column;
@@ -560,15 +552,18 @@ p{ margin:0 0 1.1em; }
    ------------------------------------------------------------ */
 /* En móvil la foto va a lo ancho, a sangre, y se disuelve hacia arriba:
    hacia el texto que viene justo encima. */
-.oficio{ position:relative; overflow:hidden; }
+.oficio,
+.panel{ position:relative; overflow:hidden; }
 
-.oficio__foto{
+.oficio__foto,
+.panel__foto{
   position:relative;
   margin-inline:-20px;                 /* rompe el padding del contenedor */
   -webkit-mask-image:linear-gradient(to bottom, transparent 0%, rgba(0,0,0,.45) 16%, #000 42%);
           mask-image:linear-gradient(to bottom, transparent 0%, rgba(0,0,0,.45) 16%, #000 42%);
 }
-.oficio__foto img{
+.oficio__foto img,
+.panel__foto img{
   width:100%;
   aspect-ratio:4/3;
   object-fit:cover;
@@ -578,7 +573,8 @@ p{ margin:0 0 1.1em; }
 }
 /* Tinte cálido que la amarra a la paleta, más el fundido contra el borde
    inferior de la sección. */
-.oficio__foto::after{
+.oficio__foto::after,
+.panel__foto::after{
   content:"";
   position:absolute; inset:0;
   pointer-events:none;
@@ -586,6 +582,38 @@ p{ margin:0 0 1.1em; }
     linear-gradient(to bottom, transparent 55%, rgba(18,35,42,.9) 100%),
     radial-gradient(120% 90% at 70% 40%, rgba(232,163,61,.13) 0%, rgba(18,35,42,.3) 70%, rgba(18,35,42,.55) 100%);
 }
+
+/* ------------------------------------------------------------
+   Las fotos de trabajos vienen verticales, del celular, y el panel
+   es apaisado: al recortarlas se pierde más de la mitad del alto.
+   Por eso cada una lleva su propio punto de encuadre, según dónde
+   esté la pieza dentro de la foto.
+   ------------------------------------------------------------ */
+.panel__foto img{ object-position:center 34%; }
+#campanas   .panel__foto img{ object-position:center 33%; }  /* la campana va arriba */
+#inoxidable .panel__foto img{ object-position:center 42%; }  /* las piezas, al medio */
+#martillado .panel__foto img{ object-position:55% 45%; }     /* la campana está a la derecha del cuadro */
+
+/* Estas fotos van al lado del texto, no debajo, así que pueden ir más
+   luminosas que la del oficio sin comerle contraste a la tipografía. */
+.panel__foto img{ filter:saturate(.9) contrast(1.05) brightness(1.08); }
+
+/* Dato suelto que acompaña al texto del panel */
+.panel__dato{
+  display:flex; flex-direction:column; gap:2px;
+  border-left:3px solid var(--oxido);
+  padding-left:16px;
+  margin-top:2em;
+}
+.panel__dato strong{
+  font-family:"Anton",sans-serif;
+  font-weight:400;
+  font-size:1.12rem;
+  text-transform:uppercase;
+  letter-spacing:.02em;
+  color:var(--ambar);
+}
+.panel__dato span{ color:var(--zinc); font-size:.92rem; }
 
 
 /* ============================================================
@@ -1110,12 +1138,12 @@ p{ margin:0 0 1.1em; }
   background:rgba(12,23,28,.6);
 }
 .pie__grid{ display:grid; gap:24px; }
-.pie__marca{
-  font-family:"Anton",sans-serif;
-  font-size:1.3rem;
-  text-transform:uppercase;
-  letter-spacing:.02em;
-  margin:0 0 .3em;
+/* El logo del negocio en el pie. La altura se deduce sola de la
+   proporción, y el ancho no pasa del 62% en pantallas chicas. */
+.pie__logo{
+  height:auto;
+  width:min(230px, 62vw);
+  margin-bottom:14px;
 }
 .pie__sub{ margin:0; color:var(--zinc); font-size:.9rem; }
 .pie__nav{ display:flex; flex-wrap:wrap; gap:10px 22px; }
@@ -1368,14 +1396,20 @@ p{ margin:0 0 1.1em; }
      izquierda justo donde empieza el texto.
      ---------------------------------------------------------- */
   .oficio{ min-height:620px; display:flex; align-items:center; }
+  /* Los paneles van más altos que el oficio: sus fotos son verticales y
+     necesitan alto para que la pieza no quede recortada. */
+  .panel{ min-height:700px; display:flex; align-items:center; }
 
-  .oficio__grid{
+  .oficio__grid,
+  .panel__grid{
     grid-template-columns:minmax(0, 520px);
     gap:0;
   }
-  .oficio__texto{ position:relative; z-index:2; }
+  .oficio__texto,
+  .panel__texto{ position:relative; z-index:2; }
 
-  .oficio__foto{
+  .oficio__foto,
+  .panel__foto{
     position:absolute;
     top:0; right:0; bottom:0;
     width:56%;
@@ -1385,16 +1419,47 @@ p{ margin:0 0 1.1em; }
     -webkit-mask-image:linear-gradient(to right, transparent 0%, rgba(0,0,0,.28) 22%, rgba(0,0,0,.8) 48%, #000 68%);
             mask-image:linear-gradient(to right, transparent 0%, rgba(0,0,0,.28) 22%, rgba(0,0,0,.8) 48%, #000 68%);
   }
-  .oficio__foto img{
+  .oficio__foto img,
+  .panel__foto img{
     width:100%; height:100%;
     aspect-ratio:auto;
     object-fit:cover;
   }
   /* vertical: funde contra las secciones de arriba y de abajo */
-  .oficio__foto::after{
+  .oficio__foto::after,
+  .panel__foto::after{
     background:
       linear-gradient(to bottom, var(--carbon) 0%, transparent 20%, transparent 78%, var(--carbon) 100%),
       radial-gradient(90% 100% at 85% 45%, rgba(232,163,61,.12) 0%, rgba(18,35,42,.22) 60%, rgba(18,35,42,.42) 100%);
+  }
+
+  /* ----------------------------------------------------------
+     Variante espejo: la foto ocupa el panel IZQUIERDO y se
+     disuelve hacia la derecha. Alternar lados a lo largo del
+     scroll evita que la página se sienta una sola columna
+     larga con fotos pegadas siempre en el mismo borde.
+     ---------------------------------------------------------- */
+  .panel--izq .panel__foto{
+    right:auto; left:0;
+    -webkit-mask-image:linear-gradient(to left, transparent 0%, rgba(0,0,0,.28) 22%, rgba(0,0,0,.8) 48%, #000 68%);
+            mask-image:linear-gradient(to left, transparent 0%, rgba(0,0,0,.28) 22%, rgba(0,0,0,.8) 48%, #000 68%);
+  }
+  .panel--izq .panel__foto::after{
+    background:
+      linear-gradient(to bottom, var(--carbon) 0%, transparent 20%, transparent 78%, var(--carbon) 100%),
+      radial-gradient(90% 100% at 15% 45%, rgba(232,163,61,.12) 0%, rgba(18,35,42,.22) 60%, rgba(18,35,42,.42) 100%);
+  }
+  /* el texto se va al otro lado del contenedor */
+  .panel--izq .panel__grid{ justify-content:end; }
+
+  /* La sección se llama "golpe por golpe": lo que tiene que verse es la
+     textura, no la campana entera. Un plano general de una foto vertical
+     metida en un panel apaisado deja media pieza fuera igual, así que
+     conviene cerrar el plano sobre la superficie martillada. */
+  #martillado .panel__foto{ overflow:hidden; }
+  #martillado .panel__foto img{
+    object-position:55% 50%;
+    transform:scale(1.55);
   }
 
   .tarjetas{ grid-template-columns:repeat(4,1fr); }

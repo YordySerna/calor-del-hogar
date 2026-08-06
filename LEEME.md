@@ -175,15 +175,45 @@ Ordenada para que alguien que llega de Google pase de "no los conozco" a
 2. **Franja de confianza** — cuatro datos duros, todos comprobables.
 3. **El oficio** — el proceso a mano y el maestro, con la foto de las plantillas.
 4. **Servicios** — ocho tarjetas + una novena que lleva a WhatsApp.
-5. **Cómo funciona** — los cuatro pasos para pedir. Saca la duda de "¿y qué le digo?".
-6. **Trabajos** — la galería, que es la prueba visual.
-7. **Por qué nosotros** — las razones, ya con el terreno preparado.
-8. **Preguntas** — resuelve lo que frena el mensaje.
-9. **Cotizar** — el formulario que arma el WhatsApp.
-10. **Llamado final** + **Contacto** con mapa.
+5. **Campanas a medida** — panel con foto de una campana ya instalada.
+6. **Cómo funciona** — los cuatro pasos para pedir. Saca la duda de "¿y qué le digo?".
+7. **Trabajos** — la galería, que es la prueba visual.
+8. **Acero inoxidable** — panel con las piezas pulidas.
+9. **Por qué nosotros** — las razones, ya con el terreno preparado.
+10. **Martillado a mano** — panel con el argumento más fuerte del negocio.
+11. **Preguntas** — resuelve lo que frena el mensaje.
+12. **Cotizar** — el formulario que arma el WhatsApp.
+13. **Llamado final** + **Contacto** con mapa.
 
 Cada sección larga termina en un enlace a WhatsApp: la idea es que el visitante
 nunca quede sin salida en el punto en que se decidió.
+
+### Los paneles de trabajos
+
+Los tres paneles (`#campanas`, `#inoxidable`, `#martillado`) usan la misma clase
+`.panel` que la sección del oficio: foto a sangre en un costado, disuelta con
+una máscara hacia el texto. **Alternan de lado** — oficio a la derecha, campanas
+a la izquierda, inoxidable a la derecha, martillado a la izquierda — para que la
+página no se sienta una columna larga con fotos siempre en el mismo borde. La
+variante espejo es `.panel--izq`.
+
+Las fotos vienen verticales, del celular, y el panel es apaisado: al recortarlas
+se pierde más de la mitad del alto. Por eso cada una lleva su propio
+`object-position` según dónde esté la pieza. El panel del martillado además va
+con `transform: scale(1.55)` **solo en escritorio**: la sección habla de la
+textura, así que muestra la superficie martillada de cerca en vez de una campana
+entera recortada por la mitad.
+
+Dos cosas de contenido que conviene tener presentes:
+
+- La frase **"el único taller de la zona que lo hace"** es un dato que entregó
+  el cliente, no algo verificado por fuera. Está marcada con un comentario en el
+  HTML. Si algún día aparece competencia en la zona, hay que matizarla.
+- El logo real del negocio llegó en PNG **con el damero de transparencia
+  pintado dentro de la imagen** y el texto en negro, ilegible sobre el fondo
+  oscuro del sitio. De ahí salen dos archivos: `logo-icono.png` (solo la casa,
+  para la barra) y `logo-claro.png` (completo, con el texto pasado a crema, para
+  el pie). Si alguna vez llega el logo vectorial original, conviene reemplazarlos.
 
 ## Si el JavaScript falla
 

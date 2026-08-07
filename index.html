@@ -34,7 +34,11 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Anton&family=Barlow:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
 
-<link rel="stylesheet" href="css/estilo.css">
+<!-- El ?v= es a propósito: GitHub sirve el CSS con caché de 10 minutos, pero
+     los navegadores lo guardan bastante más. Sin este número, quien ya visitó
+     el sitio sigue viendo los estilos viejos aunque se publique una versión
+     nueva. Al cambiar cualquier cosa del CSS, subir también esta fecha. -->
+<link rel="stylesheet" href="css/estilo.css?v=20260807">
 
 <!-- Ficha de negocio local para Google. Es lo que hace que el local pueda
      salir en el mapa y en las búsquedas de "hojalatería Loncoche".
@@ -981,7 +985,10 @@
   <button class="visor__nav visor__nav--sig" id="visor-sig" aria-label="Siguiente">&#8250;</button>
 </div>
 
-<script src="js/datos.js"></script>
-<script src="js/main.js"></script>
+<!-- Mismo motivo que el CSS: sin el ?v=, un visitante que ya entró seguiría
+     usando el datos.js viejo y no vería el número de WhatsApp cuando se cargue.
+     Al editar datos.js o main.js, subir esta fecha. -->
+<script src="js/datos.js?v=20260807"></script>
+<script src="js/main.js?v=20260807"></script>
 </body>
 </html>

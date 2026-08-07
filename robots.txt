@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://yordyserna.github.io/calor-del-hogar/sitemap.xml
+Sitemap: https://calordehogarloncoche.cl/sitemap.xml

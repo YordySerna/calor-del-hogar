@@ -153,7 +153,9 @@
      está con ahorro de datos. Si no arranca, queda el poster.
      ---------------------------------------------------------- */
   (function video() {
-    var v = document.getElementById("video-taller");
+    /* Se busca por clase y no por id para que sirva igual en la portada
+       y en el catálogo, que tienen cada uno su propio video de fondo. */
+    var v = document.querySelector(".portada__video");
     if (!v) return;
 
     var con = navigator.connection || navigator.mozConnection || navigator.webkitConnection;

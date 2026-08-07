@@ -5,6 +5,7 @@ Abre con doble clic en `index.html` o se sube tal cual a cualquier hosting.
 
 ```
 index.html          todo el contenido, escrito en el HTML
+catalogo.html       segunda página: sombreretes, cañones, uniones, accesorios
 css/estilo.css      estilos + fondo animado de brasas
 js/datos.js         ← LOS DATOS DEL NEGOCIO. Es el único archivo a editar.
 js/main.js          reveals, menú, video, visor, contacto y armado del WhatsApp
@@ -187,6 +188,30 @@ Ordenada para que alguien que llega de Google pase de "no los conozco" a
 
 Cada sección larga termina en un enlace a WhatsApp: la idea es que el visitante
 nunca quede sin salida en el punto en que se decidió.
+
+### El catálogo (`catalogo.html`)
+
+Segunda página, con la misma hoja de estilos y las mismas fuentes que la
+portada: lo propio del catálogo está al final de `css/estilo.css`. Se entra por
+el botón **"Conoce más de nuestro trabajo"**, que va después de la galería —
+ahí el visitante ya vio el trabajo y quiere ver qué más hacen.
+
+Cuatro secciones: sombreretes (copa, cónico, inoxidable, de láminas), cañones
+(galvanizado, esmaltado blanco, conjunto), uniones (T con registro, codos,
+pasamuros) y accesorios.
+
+**No lleva precios a propósito.** No los tenemos, y un precio desactualizado en
+una página es peor que ninguno. Arriba de todo hay un aviso de que las medidas
+se hacen a pedido: evita la pregunta "¿tienen la mía?" y es la verdad del
+negocio, que es un taller y no una tienda con stock fijo.
+
+Los nombres de las piezas salieron de mirar las fotos una por una. **Conviene
+que Miguel los revise**: si en el rubro les dicen de otra forma, hay que
+corregirlos — el cliente busca por el nombre que conoce.
+
+El video de portada del catálogo es la campana girando al sol. Viene de
+WhatsApp y es de baja resolución (392×848), así que va con más desenfoque que
+el de la portada principal; a ese tamaño el grano no se nota.
 
 ### Los paneles de trabajos
 

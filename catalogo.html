@@ -1,0 +1,400 @@
+<!doctype html>
+<html lang="es-CL">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Catálogo — Sombreretes, cañones y piezas | Hojalatería Calor de Hogar, Loncoche</title>
+<meta name="description" content="Sombreretes cónicos, de copa, de láminas e inoxidables. Cañones galvanizados y esmaltados, codos, tés con registro, pasamuros y escobillas. Todo a medida en Loncoche.">
+<meta name="theme-color" content="#12232A">
+
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://yordyserna.github.io/calor-del-hogar/catalogo.html">
+<meta property="og:title" content="Catálogo — Hojalatería Calor de Hogar, Loncoche">
+<meta property="og:description" content="Sombreretes, cañones, codos y piezas en plancha galvanizada, esmaltada e inoxidable. Cualquier medida, hecha en el taller.">
+<meta property="og:image" content="https://yordyserna.github.io/calor-del-hogar/images/cat-sombreretes-variedad.jpg">
+<meta property="og:locale" content="es_CL">
+
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%2312232A'/%3E%3Cpath d='M16 4 29 14v14H3V14z' fill='%23C8551E'/%3E%3Cpath d='M16 15c2.5 2 3.5 3.4 3.5 5.2 0 2-1.6 3.6-3.5 3.6s-3.5-1.6-3.5-3.6c0-1.8 1-3.2 3.5-5.2z' fill='%23E8A33D'/%3E%3C/svg%3E">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Barlow:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+
+<!-- Misma hoja de estilos que la portada: la paleta y las fuentes son las
+     mismas, y lo propio del catálogo va al final del archivo. -->
+<link rel="stylesheet" href="css/estilo.css?v=20260807">
+</head>
+
+<body>
+
+<!-- ============================================================
+     BARRA — igual que la portada, pero los enlaces vuelven a index
+     ============================================================ -->
+<header class="barra" id="barra">
+  <a class="marca" href="index.html">
+    <img class="marca__logo" src="images/logo-icono.png" width="300" height="231" alt="">
+    <span class="marca__txt">Calor de Hogar<small>Hojalatería · Loncoche</small></span>
+  </a>
+
+  <nav class="nav" aria-label="Principal">
+    <a href="index.html#oficio">El oficio</a>
+    <a href="index.html#servicios">Servicios</a>
+    <a href="#sombreretes">Sombreretes</a>
+    <a href="#canones">Cañones</a>
+    <a href="index.html#contacto">Contacto</a>
+  </nav>
+
+  <a class="btn btn--sol barra__cta" href="index.html#cotiza"
+     data-wa data-wa-msg="Hola, vi el catálogo y quiero consultar por una pieza.">Cotizar</a>
+
+  <button class="hamburguesa" id="hamburguesa" aria-label="Abrir menú" aria-expanded="false" aria-controls="nav-movil">
+    <span></span><span></span><span></span>
+  </button>
+</header>
+
+<nav class="nav-movil" id="nav-movil" aria-label="Principal móvil">
+  <a href="#sombreretes">Sombreretes</a>
+  <a href="#canones">Cañones y tubos</a>
+  <a href="#uniones">Uniones y piezas</a>
+  <a href="#accesorios">Accesorios</a>
+  <a href="index.html">Volver al inicio</a>
+  <a href="index.html#contacto">Contacto</a>
+</nav>
+
+
+<!-- ============================================================
+     PORTADA DEL CATÁLOGO
+     El video es una campana terminada girando al sol, grabada
+     afuera del taller. Va desenfocado, igual que en la portada.
+     ============================================================ -->
+<section class="portada portada--catalogo" id="inicio">
+
+  <div class="portada__fondo">
+    <video class="portada__video" id="video-catalogo"
+           poster="images/cat-sombreretes-variedad.jpg"
+           muted playsinline preload="metadata" aria-hidden="true">
+      <source src="images/catalogo-loop.mp4" type="video/mp4">
+    </video>
+    <div class="portada__velo" aria-hidden="true"></div>
+  </div>
+
+  <div class="portada__cuerpo">
+    <p class="ojo rev"><a class="volver" href="index.html">← Volver al inicio</a></p>
+
+    <h1 class="portada__titulo rev">
+      <span class="l1">Nuestro</span>
+      <span class="l2">trabajo</span>
+    </h1>
+
+    <p class="portada__bajada rev">
+      Sombreretes, cañones y piezas en plancha galvanizada, esmaltada y acero
+      inoxidable. <strong>Todo sale del taller de Lord Cochrane</strong>, en la
+      medida que necesite tu instalación.
+    </p>
+
+    <div class="portada__botones rev">
+      <a class="btn btn--sol" href="index.html#cotiza"
+         data-wa data-wa-msg="Hola, vi el catálogo y quiero consultar por una pieza. Les cuento qué necesito:">
+        Consultar por una pieza
+      </a>
+      <a class="btn btn--linea" href="#sombreretes">Ver el catálogo</a>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================================
+     AVISO DE MEDIDAS
+     Lo primero que hay que dejar claro: esto no es una tienda con
+     SKU fijos, es un taller. Evita la pregunta "¿tienen la mía?".
+     ============================================================ -->
+<section class="seccion aviso" id="aviso">
+  <div class="contenedor">
+    <div class="aviso__caja rev">
+      <p class="aviso__titulo">Las medidas se hacen a pedido</p>
+      <p>
+        Lo que ves acá son los tipos de pieza que fabricamos, no un listado cerrado.
+        Si tu cañón es de una medida rara, o necesitas una pieza que no aparece,
+        igual conviene preguntar: casi todo se puede hacer.
+        <!-- REEMPLAZAR con dato real: si Miguel confirma qué diámetros tiene
+             siempre en stock (4", 5", 6"...), conviene listarlos acá. -->
+      </p>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================================
+     SOMBRERETES
+     ============================================================ -->
+<section class="seccion catalogo" id="sombreretes">
+  <div class="contenedor">
+    <p class="etiqueta rev">01 — Sombreretes</p>
+    <h2 class="titulo rev">Los gorros<br>del cañón</h2>
+    <p class="entrada rev">
+      Van arriba de todo y hacen dos cosas: que el tiro funcione y que no entre
+      agua ni viento por la salida del techo. Cambian según el techo, el viento
+      del lugar y qué tanto se vea desde afuera.
+    </p>
+
+    <ul class="fichas">
+      <li class="ficha rev">
+        <figure class="ficha__foto">
+          <img src="images/cat-sombrerete-copa.jpg" width="900" height="1600" loading="lazy"
+               alt="Sombrerete de copa en plancha galvanizada, junto a una placa pasamuro y piezas de cañón">
+        </figure>
+        <div class="ficha__txt">
+          <h3>De copa</h3>
+          <p>El clásico galvanizado. Tapa la lluvia por arriba y deja salir el humo
+             por el contorno. Es el que más se pide.</p>
+        </div>
+      </li>
+
+      <li class="ficha rev">
+        <figure class="ficha__foto">
+          <img src="images/cat-sombrerete-conico.jpg" width="900" height="1600" loading="lazy"
+               alt="Sombrerete cónico galvanizado montado sobre un cañón, en la estantería del local">
+        </figure>
+        <div class="ficha__txt">
+          <h3>Cónico</h3>
+          <p>Techo en punta sobre patas. Bota mejor el agua en zonas de lluvia
+             fuerte, que es casi todo el año por acá.</p>
+        </div>
+      </li>
+
+      <li class="ficha rev">
+        <figure class="ficha__foto">
+          <img src="images/cat-inoxidable-sombrerete.jpg" width="900" height="1600" loading="lazy"
+               alt="Sombrerete de acero inoxidable pulido junto a cañones esmaltados blancos">
+        </figure>
+        <div class="ficha__txt">
+          <h3>Inoxidable</h3>
+          <p>Para el que queda a la vista y no se quiere repintar nunca más.
+             Aguanta la intemperie sin picarse.</p>
+        </div>
+      </li>
+
+      <li class="ficha rev">
+        <figure class="ficha__foto">
+          <img src="images/cat-sombreretes-variedad.jpg" width="900" height="1600" loading="lazy"
+               alt="Varios modelos de sombrerete y cañones exhibidos juntos en el local">
+        </figure>
+        <div class="ficha__txt">
+          <h3>De láminas</h3>
+          <p>El de las tapas escalonadas que se ve en el video de arriba. Corta el
+             viento sin ahogar el tiro. Se hace a pedido.</p>
+        </div>
+      </li>
+    </ul>
+  </div>
+</section>
+
+
+<!-- ============================================================
+     CAÑONES Y TUBOS
+     ============================================================ -->
+<section class="seccion catalogo catalogo--alt" id="canones">
+  <div class="contenedor">
+    <p class="etiqueta rev">02 — Cañones y tubos</p>
+    <h2 class="titulo rev">Tres materiales,<br>según dónde vaya</h2>
+    <p class="entrada rev">
+      El tubo que sube por dentro de la casa no tiene por qué ser el mismo que sale
+      al techo. Cambia el material según lo que se vea y cuánta intemperie aguante.
+    </p>
+
+    <ul class="fichas">
+      <li class="ficha rev">
+        <figure class="ficha__foto">
+          <img src="images/cat-galvanizado-conjunto.jpg" width="900" height="1600" loading="lazy"
+               alt="Cañones de plancha galvanizada de varios diámetros apoyados en el local">
+        </figure>
+        <div class="ficha__txt">
+          <h3>Galvanizado</h3>
+          <p>El de siempre. Resistente, económico y en cualquier diámetro. Es lo que
+             lleva la mayoría de las instalaciones.</p>
+        </div>
+      </li>
+
+      <li class="ficha rev">
+        <figure class="ficha__foto">
+          <img src="images/cat-esmaltado-canones.jpg" width="900" height="1600" loading="lazy"
+               alt="Cañones esmaltados blancos junto a un sombrerete cónico y una bolsa de aislante">
+        </figure>
+        <div class="ficha__txt">
+          <h3>Esmaltado blanco</h3>
+          <p>Para el tramo que queda dentro de la casa. Se ve limpio contra el cielo
+             raso y no pide pintarlo cada temporada.</p>
+        </div>
+      </li>
+
+      <li class="ficha rev">
+        <figure class="ficha__foto">
+          <img src="images/cat-esmaltado-conjunto.jpg" width="900" height="1600" loading="lazy"
+               alt="Conjunto de cañones esmaltados y galvanizados con sus sombreretes">
+        </figure>
+        <div class="ficha__txt">
+          <h3>Conjunto armado</h3>
+          <p>Cañón, codo, pasamuro y sombrerete de una sola vez, calzados entre sí.
+             Sale mejor que juntar piezas de distinta procedencia.</p>
+        </div>
+      </li>
+    </ul>
+  </div>
+</section>
+
+
+<!-- ============================================================
+     UNIONES Y PIEZAS
+     ============================================================ -->
+<section class="seccion catalogo" id="uniones">
+  <div class="contenedor">
+    <p class="etiqueta rev">03 — Uniones y piezas</p>
+    <h2 class="titulo rev">Lo que arma<br>el recorrido</h2>
+    <p class="entrada rev">
+      Un cañón casi nunca sube derecho. Estas son las piezas que le dan la vuelta,
+      lo dejan pasar por el muro y permiten limpiarlo después.
+    </p>
+
+    <ul class="fichas">
+      <li class="ficha rev">
+        <figure class="ficha__foto">
+          <img src="images/cat-galvanizado-te.jpg" width="900" height="1600" loading="lazy"
+               alt="Unión en T de plancha galvanizada con tapa de registro">
+        </figure>
+        <div class="ficha__txt">
+          <h3>T con registro</h3>
+          <p>La pieza en T con tapa: por ahí se limpia el hollín sin tener que
+             desarmar toda la instalación.</p>
+        </div>
+      </li>
+
+      <li class="ficha rev">
+        <figure class="ficha__foto">
+          <img src="images/cat-galvanizado-codo.jpg" width="900" height="1600" loading="lazy"
+               alt="Codo galvanizado y cañones apoyados afuera del local">
+        </figure>
+        <div class="ficha__txt">
+          <h3>Codos y reducciones</h3>
+          <p>Para esquivar una viga o pasar de un diámetro a otro cuando la estufa
+             y el cañón existente no coinciden.</p>
+        </div>
+      </li>
+
+      <li class="ficha rev">
+        <figure class="ficha__foto">
+          <img src="images/cat-esmaltado-pasamuro.jpg" width="900" height="1600" loading="lazy"
+               alt="Placa pasamuro cuadrada con perforación circular, junto a cañones esmaltados">
+        </figure>
+        <div class="ficha__txt">
+          <h3>Pasamuros</h3>
+          <p>La placa que sella donde el cañón cruza el muro o la techumbre. Se corta
+             al diámetro exacto del tubo.</p>
+        </div>
+      </li>
+    </ul>
+  </div>
+</section>
+
+
+<!-- ============================================================
+     ACCESORIOS
+     ============================================================ -->
+<section class="seccion catalogo catalogo--alt" id="accesorios">
+  <div class="contenedor">
+    <p class="etiqueta rev">04 — Accesorios</p>
+    <h2 class="titulo rev">Lo que se lleva<br>en la misma vuelta</h2>
+
+    <ul class="tarjetas rev">
+      <li class="tarjeta">
+        <h3>Escobillas deshollinadoras</h3>
+        <p>Para limpiar el cañón por dentro sin desarmarlo. En varios diámetros.</p>
+      </li>
+      <li class="tarjeta">
+        <h3>Aislante térmico</h3>
+        <p>Lana mineral en sacos, para el paso por techumbre y entretecho.</p>
+      </li>
+      <li class="tarjeta">
+        <h3>Tarros y basureros</h3>
+        <p>Tambores metálicos pintados, de los que se ven en la estantería del local.</p>
+      </li>
+      <li class="tarjeta">
+        <h3>Palas para ceniza</h3>
+        <p>Hechas en el taller, del mismo material que el resto.</p>
+      </li>
+    </ul>
+  </div>
+</section>
+
+
+<!-- ============================================================
+     LLAMADO FINAL
+     ============================================================ -->
+<section class="seccion llamado" id="llamado">
+  <div class="contenedor llamado__cuerpo rev">
+    <h2 class="titulo">¿No encuentras<br>tu medida?</h2>
+    <p>
+      Mándanos una foto de lo que tienes y la medida aproximada. Con eso alcanza
+      para decirte precio y en cuánto lo tenemos.
+    </p>
+    <a class="btn btn--sol" href="index.html#cotiza"
+       data-wa data-wa-msg="Hola, vi el catálogo y necesito una pieza. Les mando la medida:">
+      Consultar por WhatsApp
+    </a>
+    <p class="llamado__pie">
+      <a class="volver" href="index.html">← Volver a la página principal</a>
+    </p>
+  </div>
+</section>
+
+
+<!-- ============================================================
+     PIE
+     ============================================================ -->
+<footer class="pie">
+  <div class="contenedor pie__grid">
+    <div>
+      <img class="pie__logo" src="images/logo-claro.png" width="680" height="285"
+           loading="lazy" alt="Calor de Hogar — Fábrica de cocinas y hojalatería">
+      <p class="pie__sub">Lord Cochrane 121 · Loncoche · La Araucanía</p>
+    </div>
+
+    <nav class="pie__nav" aria-label="Pie">
+      <a href="index.html">Inicio</a>
+      <a href="#sombreretes">Sombreretes</a>
+      <a href="#canones">Cañones</a>
+      <a href="#uniones">Uniones</a>
+      <a href="index.html#contacto">Contacto</a>
+    </nav>
+  </div>
+
+  <p class="pie__firma">
+    Sitio hecho por <a href="https://yordyserna.github.io" target="_blank" rel="noopener">Yordy Serna</a>
+  </p>
+</footer>
+
+
+<a class="flotante" href="index.html#cotiza" id="flotante"
+   data-wa data-wa-msg="Hola, vi el catálogo y quiero consultar por una pieza."
+   aria-label="Escribir por WhatsApp">
+  <svg viewBox="0 0 24 24" width="26" height="26" aria-hidden="true" fill="currentColor">
+    <path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38a9.87 9.87 0 004.79 1.22h.01c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0012.04 2zm0 18.15h-.01a8.2 8.2 0 01-4.19-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.19 8.19 0 01-1.26-4.38c0-4.54 3.7-8.23 8.25-8.23a8.2 8.2 0 018.24 8.24c0 4.54-3.7 8.23-8.24 8.23zm4.52-6.16c-.25-.12-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.13-.16.24-.64.8-.78.97-.15.16-.29.18-.54.06-.25-.13-1.05-.39-1.99-1.23-.74-.66-1.23-1.47-1.38-1.72-.14-.25-.01-.38.11-.5.11-.11.25-.29.37-.43.13-.15.17-.25.25-.41.08-.17.04-.31-.02-.43-.06-.12-.56-1.34-.76-1.84-.2-.48-.41-.42-.56-.42-.14-.01-.31-.01-.47-.01-.17 0-.43.06-.66.31-.23.25-.86.85-.86 2.06s.89 2.39 1.01 2.56c.12.16 1.74 2.67 4.22 3.74.59.25 1.05.41 1.41.52.59.19 1.13.16 1.56.1.47-.07 1.47-.6 1.67-1.18.21-.58.21-1.07.15-1.18-.06-.11-.23-.17-.48-.29z"/>
+  </svg>
+  <span>WhatsApp</span>
+</a>
+
+
+<!-- Visor de imágenes, el mismo de la portada -->
+<div class="visor" id="visor" hidden>
+  <button class="visor__cerrar" id="visor-cerrar" aria-label="Cerrar">&times;</button>
+  <button class="visor__nav visor__nav--ant" id="visor-ant" aria-label="Anterior">&#8249;</button>
+  <figure class="visor__marco">
+    <img id="visor-img" src="" alt="">
+    <figcaption id="visor-pie"></figcaption>
+  </figure>
+  <button class="visor__nav visor__nav--sig" id="visor-sig" aria-label="Siguiente">&#8250;</button>
+</div>
+
+<script src="js/datos.js?v=20260807"></script>
+<script src="js/main.js?v=20260807"></script>
+</body>
+</html>

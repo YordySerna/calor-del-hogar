@@ -1511,3 +1511,186 @@ p{ margin:0 0 1.1em; }
   .galeria__item img{ transition:filter var(--t-rapida); }
   .galeria__item:hover img{ transform:none; }
 }
+
+
+/* ============================================================
+   ============================================================
+   CATÁLOGO (catalogo.html)
+   Comparte paleta, fuentes y componentes con la portada. Solo
+   se agrega lo que esa página necesita de más.
+   ============================================================
+   ============================================================ */
+
+/* ------------------------------------------------------------
+   Puerta al catálogo, en la portada
+   ------------------------------------------------------------ */
+.puerta{
+  margin-top:2.6em;
+  display:flex; flex-direction:column; gap:20px;
+  align-items:flex-start;
+  border:1px solid var(--borde);
+  border-left:3px solid var(--oxido);
+  border-radius:var(--radio);
+  background:
+    linear-gradient(to right, rgba(200,85,30,.12), rgba(200,85,30,0) 70%),
+    rgba(18,35,42,.55);
+  padding:26px 24px;
+  transition:border-color var(--t-rapida), background var(--t-rapida);
+}
+.puerta:hover{ border-color:rgba(232,163,61,.4); }
+.puerta__ojo{
+  font-size:.72rem; letter-spacing:.22em; text-transform:uppercase;
+  font-weight:600; color:var(--oxido); margin:0 0 .5em;
+}
+.puerta__txt h3{
+  font-family:"Anton",sans-serif;
+  font-weight:400;
+  font-size:clamp(1.3rem,4.4vw,1.7rem);
+  text-transform:uppercase;
+  letter-spacing:.02em;
+  margin:0 0 .45em;
+}
+.puerta__txt p:last-child{ margin:0; color:var(--zinc); font-size:.97rem; max-width:52ch; }
+.puerta .btn{ flex:none; }
+
+@media (min-width:820px){
+  .puerta{
+    flex-direction:row; align-items:center; justify-content:space-between;
+    gap:38px; padding:30px 32px;
+  }
+}
+
+/* La portada del catálogo es más baja que la principal: es una
+   página de consulta, no la primera impresión del negocio. */
+.portada--catalogo{
+  min-height:auto;
+  padding-block:130px 70px;
+}
+@media (min-width:900px){
+  .portada--catalogo{ padding-block:170px 90px; }
+}
+
+/* El video nuevo viene de WhatsApp y es de baja resolución (392 px de
+   ancho). Estirado a pantalla completa se notaría, así que va con más
+   desenfoque que el de la portada principal: a este tamaño el grano
+   desaparece y queda solo el movimiento. */
+.portada--catalogo .portada__video{
+  filter:blur(16px) saturate(.8) brightness(.5);
+  transform:scale(1.2);
+}
+
+.volver{
+  color:var(--zinc);
+  text-decoration:none;
+  border-bottom:1px solid rgba(232,163,61,.4);
+  transition:color var(--t-rapida), border-color var(--t-rapida);
+}
+.volver:hover{ color:var(--ambar); border-color:var(--ambar); }
+.ojo .volver{ letter-spacing:.06em; }
+
+
+/* ------------------------------------------------------------
+   Aviso de medidas — lo primero que lee quien llega al catálogo
+   ------------------------------------------------------------ */
+.aviso{ padding-block:clamp(30px,5vw,46px); }
+.aviso__caja{
+  border:1px solid rgba(232,163,61,.3);
+  border-left:3px solid var(--oxido);
+  border-radius:var(--radio);
+  background:rgba(200,85,30,.07);
+  padding:22px 24px;
+}
+.aviso__titulo{
+  font-family:"Anton",sans-serif;
+  font-size:1.16rem;
+  text-transform:uppercase;
+  letter-spacing:.02em;
+  color:var(--ambar);
+  margin:0 0 .5em;
+}
+.aviso__caja p:last-child{ margin:0; color:#DCE3E5; }
+
+
+/* ------------------------------------------------------------
+   Fichas de producto
+   Las fotos vienen verticales (900×1600), así que la ficha se
+   arma en vertical: foto arriba, texto abajo. En pantallas
+   grandes van de a tres por fila.
+   ------------------------------------------------------------ */
+.catalogo--alt{
+  background:linear-gradient(to bottom, transparent, rgba(27,59,66,.5) 15%, rgba(27,59,66,.5) 85%, transparent);
+}
+
+.fichas{
+  list-style:none; margin:2.8em 0 0; padding:0;
+  display:grid; gap:18px;
+}
+
+.ficha{
+  display:flex; flex-direction:column;
+  background:rgba(18,35,42,.55);
+  border:1px solid var(--borde);
+  border-radius:var(--radio);
+  overflow:hidden;
+  transition:border-color var(--t-rapida), transform var(--t-rapida), background var(--t-rapida);
+}
+.ficha:hover{
+  border-color:rgba(232,163,61,.42);
+  background:rgba(18,35,42,.8);
+  transform:translateY(-3px);
+}
+
+.ficha__foto{
+  margin:0;
+  overflow:hidden;
+  background:#0C171C;
+  position:relative;
+}
+.ficha__foto img{
+  width:100%;
+  aspect-ratio:4/5;
+  object-fit:cover;
+  /* mismo tratamiento de color que el resto del sitio, para que las
+     fotos de WhatsApp no desentonen con las del taller */
+  filter:saturate(.88) contrast(1.05) brightness(1.02);
+  transition:transform .8s cubic-bezier(.22,.61,.36,1), filter var(--t-rapida);
+}
+.ficha:hover .ficha__foto img{
+  transform:scale(1.05);
+  filter:saturate(1) contrast(1) brightness(1.06);
+}
+/* velo cálido, igual que en la galería de la portada */
+.ficha__foto::after{
+  content:"";
+  position:absolute; inset:0;
+  pointer-events:none;
+  background:linear-gradient(to top, rgba(18,35,42,.55) 0%, transparent 55%);
+}
+
+.ficha__txt{ padding:20px 20px 22px; }
+.ficha__txt h3{
+  font-family:"Anton",sans-serif;
+  font-weight:400;
+  font-size:1.22rem;
+  text-transform:uppercase;
+  letter-spacing:.02em;
+  margin:0 0 .45em;
+  color:var(--cal);
+}
+.ficha__txt p{ margin:0; color:var(--zinc); font-size:.95rem; line-height:1.6; }
+
+/* el escalonado de entrada, como en las tarjetas de servicios */
+.js .ficha:nth-child(2){ transition-delay:.08s; }
+.js .ficha:nth-child(3){ transition-delay:.16s; }
+.js .ficha:nth-child(4){ transition-delay:.24s; }
+
+.llamado__pie{ margin:1.6em 0 0; font-size:.9rem; }
+
+@media (min-width:640px){
+  .fichas{ grid-template-columns:repeat(2,1fr); }
+}
+@media (min-width:960px){
+  .fichas{ grid-template-columns:repeat(3,1fr); gap:20px; }
+  /* la sección de sombreretes tiene cuatro: cuatro por fila */
+  #sombreretes .fichas{ grid-template-columns:repeat(4,1fr); }
+}

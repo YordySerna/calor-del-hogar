@@ -1,4 +1,4 @@
-| Teléfono | **LISTO** | mismo número del WhatsApp || Número de WhatsApp | **LISTO** | +56 9 6865 0001 |# Hojalatería Calor de Hogar — Loncoche
+# Hojalatería Calor de Hogar — Loncoche
 
 Sitio estático. HTML + CSS + JavaScript vanilla. Sin build, sin npm, sin frameworks.
 Abre con doble clic en `index.html` o se sube tal cual a cualquier hosting.
@@ -43,8 +43,8 @@ lo indexa y después cuesta mucho sacarlo.
 
 | Dato | Estado | Cómo conseguirlo |
 |---|---|---|
-| Número de WhatsApp | falta | preguntarle a Miguel |
-| Teléfono | falta | hay dos en la tarjeta del local, ilegibles en la foto |
+| Número de WhatsApp | **LISTO** | +56 9 6865 0001 |
+| Teléfono | **LISTO** | el mismo número del WhatsApp |
 | Correo | falta | termina en `loncoche@gmail.com`; el principio no se lee |
 | Horario de atención | falta | preguntarle a Miguel |
 | Coordenadas del local | falta | Google Maps → clic derecho sobre el local |

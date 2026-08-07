@@ -323,7 +323,14 @@
      ---------------------------------------------------------- */
   (function cotizar() {
     var boton = document.getElementById("btn-cotiza");
-    if (!boton || !numeroWhatsapp()) return;
+    if (!boton) return;
+
+    /* Antes esta función se cortaba acá cuando no había número cargado, y
+       el formulario quedaba muerto: se llenaba, se apretaba el botón y no
+       pasaba nada. Ahora, sin número, el botón copia la consulta al
+       portapapeles para que el cliente la pegue donde quiera. Es una
+       salida real en vez de un callejón. */
+    var hayNumero = !!numeroWhatsapp();
 
     var campos = {
       nombre:  document.getElementById("c-nombre"),
@@ -331,6 +338,8 @@
       trabajo: document.getElementById("c-trabajo"),
       detalle: document.getElementById("c-detalle")
     };
+
+    var texto = "";   // el mensaje armado, para WhatsApp o para copiar
 
     function valor(clave) {
       return campos[clave] && campos[clave].value ? campos[clave].value.trim() : "";
@@ -354,7 +363,8 @@
       if (detalle) l.push("", "Detalle:", detalle);
       l.push("", "(Escribo desde la página web.)");
 
-      boton.setAttribute("href", enlaceWhatsapp(l.join("\n")));
+      texto = l.join("\n");
+      if (hayNumero) boton.setAttribute("href", enlaceWhatsapp(texto));
     }
 
     var claves = Object.keys(campos);
@@ -367,13 +377,90 @@
     }
     armar();
 
-    // Enter en un campo de texto abre WhatsApp en vez de recargar la página
+    /* --- Sin número: el botón copia la consulta --- */
+    if (!hayNumero) {
+      var etiquetaOriginal = boton.textContent;
+      boton.textContent = "Copiar mi consulta";
+      boton.setAttribute("href", "#cotiza");
+
+      var nota = document.querySelector(".cotiza__nota");
+      if (nota) {
+        nota.textContent = "Se copia el texto listo para pegarlo donde quieras. " +
+                           "También puedes pasar por Lord Cochrane 121.";
+      }
+
+      boton.addEventListener("click", function (e) {
+        e.preventDefault();
+        armar();
+        copiar(texto, function (ok) {
+          if (ok) {
+            boton.textContent = "¡Copiado! Pégalo donde quieras";
+            boton.classList.add("btn--ok");
+            setTimeout(function () {
+              boton.textContent = "Copiar mi consulta";
+              boton.classList.remove("btn--ok");
+            }, 2600);
+          } else {
+            /* El portapapeles puede estar bloqueado (navegador viejo, permisos,
+               http sin cifrar). En vez de dejar al cliente sin salida, se le
+               muestra el texto ya seleccionado para que lo copie a mano. */
+            mostrarParaCopiar(texto);
+            boton.textContent = etiquetaOriginal;
+          }
+        });
+      });
+
+      function mostrarParaCopiar(txt) {
+        var caja = document.getElementById("copia-manual");
+        if (!caja) {
+          caja = document.createElement("div");
+          caja.id = "copia-manual";
+          caja.className = "copia";
+          caja.innerHTML =
+            '<p class="copia__titulo">Copia este texto y mándanoslo</p>' +
+            '<textarea class="copia__txt" readonly rows="7"></textarea>';
+          boton.parentNode.insertBefore(caja, boton.nextSibling);
+        }
+        var ta = caja.querySelector(".copia__txt");
+        ta.value = txt;
+        caja.hidden = false;
+        ta.focus();
+        ta.select();
+      }
+    }
+
+    /* Copia con la API moderna y, si no está disponible (o la página no
+       va por https), cae al textarea de toda la vida. */
+    function copiar(txt, listo) {
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(txt).then(function () { listo(true); },
+                                               function () { listo(respaldo(txt)); });
+      } else {
+        listo(respaldo(txt));
+      }
+    }
+    function respaldo(txt) {
+      try {
+        var ta = document.createElement("textarea");
+        ta.value = txt;
+        ta.setAttribute("readonly", "");
+        ta.style.cssText = "position:absolute;left:-9999px;top:0";
+        document.body.appendChild(ta);
+        ta.select();
+        var ok = document.execCommand("copy");
+        document.body.removeChild(ta);
+        return ok;
+      } catch (e) { return false; }
+    }
+
+    // Enter en un campo de texto dispara el botón en vez de recargar la página
     var form = document.getElementById("form-cotiza");
     if (form) {
       form.addEventListener("submit", function (e) {
         e.preventDefault();
         armar();
-        window.open(boton.getAttribute("href"), "_blank", "noopener");
+        if (hayNumero) window.open(boton.getAttribute("href"), "_blank", "noopener");
+        else boton.click();
       });
     }
   })();
@@ -437,6 +524,25 @@
 
         var fuente = v.getAttribute("data-fuente");
         if (!fuente) return;
+
+        /* El poster también se pide tarde. Antes los ocho posters se
+           descargaban al abrir la página aunque el visitante no bajara
+           nunca: eran unos 800 KB regalados. Ahora el atributo real se
+           pone recién cuando el video se acerca a la pantalla. */
+        var posterDiferido = v.getAttribute("data-poster");
+        if (posterDiferido) {
+          if ("IntersectionObserver" in window) {
+            var obsPoster = new IntersectionObserver(function (e) {
+              if (e[0].isIntersecting) {
+                v.setAttribute("poster", posterDiferido);
+                obsPoster.disconnect();
+              }
+            }, { rootMargin: "300px 0px" });
+            obsPoster.observe(caja);
+          } else {
+            v.setAttribute("poster", posterDiferido);
+          }
+        }
 
         var cargado = false;
         // cada video trae su propia invitación escrita en el HTML

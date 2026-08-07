@@ -44,6 +44,19 @@
   border:0;
 }
 
+/* Salto al contenido: invisible hasta que alguien tabula. */
+.saltar{
+  position:absolute; left:12px; top:-60px;
+  z-index:200;
+  background:var(--oxido); color:#fff;
+  padding:.7em 1.2em;
+  border-radius:var(--radio);
+  font-weight:600;
+  text-decoration:none;
+  transition:top var(--t-rapida);
+}
+.saltar:focus{ top:12px; }
+
 html{ scroll-behavior:smooth; -webkit-text-size-adjust:100%; }
 
 body{
@@ -145,13 +158,24 @@ a{ color:inherit; }
   margin:.1em 0 .5em;
 }
 
+/* El óxido puro sobre el carbón da 3,67:1 de contraste y no pasa el
+   mínimo AA para texto chico. Se usa el ámbar, que da 7,49:1 y mantiene
+   el mismo carácter cálido. */
 .etiqueta{
   font-size:.72rem;
   letter-spacing:.22em;
   text-transform:uppercase;
   font-weight:600;
-  color:var(--oxido);
+  color:var(--ambar);
   margin:0 0 .4em;
+  display:flex; align-items:center; gap:.7em;
+}
+/* pequeño filo de plancha antes de la etiqueta */
+.etiqueta::before{
+  content:"";
+  width:18px; height:2px;
+  background:linear-gradient(to right, var(--oxido), var(--ambar));
+  flex:none;
 }
 
 .entrada{
@@ -215,6 +239,11 @@ p{ margin:0 0 1.1em; }
   transform:translateY(-2px);
 }
 .btn--ancho{ width:100%; }
+/* confirmación de "copiado" */
+.btn--ok{
+  background:#1FAF54 !important;
+  box-shadow:0 8px 22px rgba(31,175,84,.3) !important;
+}
 
 /* Enlace chico de "seguir hacia WhatsApp" que cierra varias secciones.
    No es un botón: no compite con el naranja, pero deja siempre una salida
@@ -1065,6 +1094,35 @@ p{ margin:0 0 1.1em; }
   text-align:center;
 }
 
+/* Última red del formulario: si ni siquiera se puede copiar al
+   portapapeles, el texto aparece acá listo para seleccionar a mano. */
+.copia{
+  border:1px solid rgba(232,163,61,.35);
+  border-radius:var(--radio);
+  background:rgba(200,85,30,.08);
+  padding:14px 14px 12px;
+}
+.copia__titulo{
+  margin:0 0 .6em;
+  font-size:.74rem;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  font-weight:600;
+  color:var(--ambar);
+}
+.copia__txt{
+  width:100%;
+  resize:vertical;
+  padding:.7em .8em;
+  background:rgba(12,23,28,.7);
+  border:1px solid var(--borde);
+  border-radius:var(--radio);
+  color:var(--cal);
+  font-family:inherit;
+  font-size:.95rem;
+  line-height:1.5;
+}
+
 
 /* ============================================================
    LLAMADO FINAL
@@ -1515,6 +1573,114 @@ p{ margin:0 0 1.1em; }
 
 /* ============================================================
    ============================================================
+   EFECTOS DE TIPOGRAFÍA
+   El rubro es la plancha metálica, así que los efectos imitan
+   cómo se comporta el metal con la luz: reflejo que recorre,
+   grabado en relieve y filo encendido. Todo en CSS.
+
+   Van con @supports porque usan background-clip:text. Si el
+   navegador no lo soporta, el texto se queda con su color
+   normal en vez de desaparecer.
+   ============================================================
+   ============================================================ */
+
+/* ------------------------------------------------------------
+   1. ZINC — el titular con la veta de una plancha galvanizada,
+   y un reflejo que lo cruza muy de vez en cuando, como cuando
+   pasas la mano por encima del metal.
+   ------------------------------------------------------------ */
+@supports ((-webkit-background-clip:text) or (background-clip:text)) {
+  .t-zinc{
+    background-image:linear-gradient(
+      100deg,
+      #C3CCD1 0%,
+      #F4F1EB 18%,
+      #9FAAB0 34%,
+      #F7F5F0 46%,
+      #B4BEC3 62%,
+      #EDEAE4 78%,
+      #A8B2B8 100%
+    );
+    background-size:220% 100%;
+    background-position:0% 0;
+    -webkit-background-clip:text;
+            background-clip:text;
+    color:transparent;
+    -webkit-text-fill-color:transparent;
+    animation:reflejoZinc 9s ease-in-out infinite;
+  }
+  @keyframes reflejoZinc{
+    0%,   62% { background-position:  0% 0; }
+    100%      { background-position:100% 0; }
+  }
+
+  /* ----------------------------------------------------------
+     2. BRASA — para el titular del llamado final: el degradado
+     del metal caliente, del ámbar al óxido.
+     ---------------------------------------------------------- */
+  .t-brasa{
+    background-image:linear-gradient(100deg, #F2C078 0%, #E8A33D 26%, #C8551E 60%, #8A2E12 100%);
+    -webkit-background-clip:text;
+            background-clip:text;
+    color:transparent;
+    -webkit-text-fill-color:transparent;
+  }
+}
+
+/* ------------------------------------------------------------
+   3. GRABADO — texto hundido en la plancha. No usa background-clip,
+   así que funciona en todos lados.
+   ------------------------------------------------------------ */
+.t-grabado{
+  color:#8E9AA0;
+  text-shadow:
+    0 1px 0 rgba(255,255,255,.10),
+    0 -1px 1px rgba(0,0,0,.55);
+}
+
+/* ------------------------------------------------------------
+   4. FILO — una línea encendida bajo el titular, como el borde
+   de la plancha recién cortada. Crece al entrar en pantalla.
+   ------------------------------------------------------------ */
+.t-filo{ position:relative; padding-bottom:.28em; }
+.t-filo::after{
+  content:"";
+  position:absolute; left:0; bottom:0;
+  height:3px; width:100%;
+  background:linear-gradient(to right, var(--oxido), var(--ambar) 45%, transparent 100%);
+  transform:scaleX(0); transform-origin:left;
+  transition:transform 1.1s cubic-bezier(.22,.61,.36,1) .15s;
+}
+.js .rev.visto .t-filo::after,
+.js .t-filo.visto::after{ transform:scaleX(1); }
+/* sin JS la línea se ve igual, solo que sin animación */
+html:not(.js) .t-filo::after{ transform:scaleX(1); }
+
+/* ------------------------------------------------------------
+   5. REMACHE — el punto de metal antes de un dato, como el
+   remache que cierra una pieza.
+   ------------------------------------------------------------ */
+.t-remache::before{
+  content:"";
+  display:inline-block;
+  width:9px; height:9px;
+  margin-right:.6em;
+  border-radius:50%;
+  background:radial-gradient(circle at 35% 30%, #F2EFE9 0%, #9FAAB0 45%, #5A666C 100%);
+  box-shadow:0 1px 2px rgba(0,0,0,.6);
+  vertical-align:middle;
+}
+
+/* Con menos movimiento el reflejo se detiene, pero la veta del metal
+   se queda: es color, no movimiento. */
+@media (prefers-reduced-motion: reduce){
+  .t-zinc{ animation:none; }
+  .t-filo::after{ transition:none; transform:scaleX(1); }
+}
+
+
+/* ============================================================
+   ============================================================
    CATÁLOGO (catalogo.html)
    Comparte paleta, fuentes y componentes con la portada. Solo
    se agrega lo que esa página necesita de más.
@@ -1703,6 +1869,9 @@ p{ margin:0 0 1.1em; }
 @media (min-width:760px){
   .catalogo__video{ grid-template-columns:340px 1fr; gap:34px; }
 }
+
+/* Los dos recorridos del local, al cierre del catálogo */
+.videos--catalogo{ margin-top:2.4em; }
 
 @media (min-width:640px){
   .fichas{ grid-template-columns:repeat(2,1fr); }

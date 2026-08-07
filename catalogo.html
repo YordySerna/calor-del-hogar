@@ -22,10 +22,12 @@
 
 <!-- Misma hoja de estilos que la portada: la paleta y las fuentes son las
      mismas, y lo propio del catálogo va al final del archivo. -->
-<link rel="stylesheet" href="css/estilo.css?v=20260807">
+<link rel="stylesheet" href="css/estilo.css?v=20260807b">
 </head>
 
 <body>
+
+<a class="saltar" href="#contenido">Saltar al contenido</a>
 
 <!-- ============================================================
      BARRA — igual que la portada, pero los enlaces vuelven a index
@@ -57,6 +59,7 @@
   <a href="#canones">Cañones y tubos</a>
   <a href="#uniones">Uniones y piezas</a>
   <a href="#accesorios">Accesorios</a>
+  <a href="#local">El local</a>
   <a href="index.html">Volver al inicio</a>
   <a href="index.html#contacto">Contacto</a>
 </nav>
@@ -67,6 +70,8 @@
      El video es una campana terminada girando al sol, grabada
      afuera del taller. Va desenfocado, igual que en la portada.
      ============================================================ -->
+<main id="contenido">
+
 <section class="portada portada--catalogo" id="inicio">
 
   <div class="portada__fondo">
@@ -82,7 +87,7 @@
     <p class="ojo rev"><a class="volver" href="index.html">← Volver al inicio</a></p>
 
     <h1 class="portada__titulo rev">
-      <span class="l1">Nuestro</span>
+      <span class="l1 t-zinc">Nuestro</span>
       <span class="l2">trabajo</span>
     </h1>
 
@@ -130,7 +135,7 @@
 <section class="seccion catalogo" id="sombreretes">
   <div class="contenedor">
     <p class="etiqueta rev">01 — Sombreretes</p>
-    <h2 class="titulo rev">Los gorros<br>del cañón</h2>
+    <h2 class="titulo rev t-filo">Los gorros<br>del cañón</h2>
     <p class="entrada rev">
       Van arriba de todo y hacen dos cosas: que el tiro funcione y que no entre
       agua ni viento por la salida del techo. Cambian según el techo, el viento
@@ -191,7 +196,7 @@
          solo pesa el poster. Mismo criterio que los clips de la portada. -->
     <div class="catalogo__video rev">
       <figure class="video">
-        <video poster="images/catalogo-taller-poster.jpg" preload="none"
+        <video data-poster="images/catalogo-taller-poster.jpg" preload="none"
                playsinline
                data-fuente="images/catalogo-taller.mp4"
                aria-label="El maestro armando a mano un sombrerete de copa en el banco del taller"></video>
@@ -216,7 +221,7 @@
 <section class="seccion catalogo catalogo--alt" id="canones">
   <div class="contenedor">
     <p class="etiqueta rev">02 — Cañones y tubos</p>
-    <h2 class="titulo rev">Tres materiales,<br>según dónde vaya</h2>
+    <h2 class="titulo rev t-filo">Tres materiales,<br>según dónde vaya</h2>
     <p class="entrada rev">
       El tubo que sube por dentro de la casa no tiene por qué ser el mismo que sale
       al techo. Cambia el material según lo que se vea y cuánta intemperie aguante.
@@ -269,7 +274,7 @@
 <section class="seccion catalogo" id="uniones">
   <div class="contenedor">
     <p class="etiqueta rev">03 — Uniones y piezas</p>
-    <h2 class="titulo rev">Lo que arma<br>el recorrido</h2>
+    <h2 class="titulo rev t-filo">Lo que arma<br>el recorrido</h2>
     <p class="entrada rev">
       Un cañón casi nunca sube derecho. Estas son las piezas que le dan la vuelta,
       lo dejan pasar por el muro y permiten limpiarlo después.
@@ -322,26 +327,125 @@
 <section class="seccion catalogo catalogo--alt" id="accesorios">
   <div class="contenedor">
     <p class="etiqueta rev">04 — Accesorios</p>
-    <h2 class="titulo rev">Lo que se lleva<br>en la misma vuelta</h2>
+    <h2 class="titulo rev t-filo">Lo que se lleva<br>en la misma vuelta</h2>
 
-    <ul class="tarjetas rev">
-      <li class="tarjeta">
-        <h3>Escobillas deshollinadoras</h3>
-        <p>Para limpiar el cañón por dentro sin desarmarlo. En varios diámetros.</p>
+    <ul class="fichas">
+      <li class="ficha rev">
+        <figure class="ficha__foto">
+          <img src="images/producto-tambores-colores.jpg" width="1500" height="1125" loading="lazy"
+               alt="Tambores metálicos pintados en amarillo, verde y rojo, en la estantería del local">
+        </figure>
+        <div class="ficha__txt">
+          <h3>Tarros y tambores</h3>
+          <p>Pintados en amarillo, verde y rojo. Sirven de basurero, de leñero o de
+             macetero, que es para lo que terminan usándose casi siempre.</p>
+        </div>
       </li>
-      <li class="tarjeta">
-        <h3>Aislante térmico</h3>
-        <p>Lana mineral en sacos, para el paso por techumbre y entretecho.</p>
+
+      <li class="ficha rev">
+        <figure class="ficha__foto">
+          <img src="images/producto-palas-y-tarros.jpg" width="1500" height="1125" loading="lazy"
+               alt="Palas para ceniza colgadas junto a tarros metálicos de colores y escobillas deshollinadoras">
+        </figure>
+        <div class="ficha__txt">
+          <h3>Palas y escobillas</h3>
+          <p>Palas para la ceniza, hechas acá mismo, y escobillas para limpiar el cañón
+             por dentro sin desarmar la instalación.</p>
+        </div>
       </li>
-      <li class="tarjeta">
-        <h3>Tarros y basureros</h3>
-        <p>Tambores metálicos pintados, de los que se ven en la estantería del local.</p>
-      </li>
-      <li class="tarjeta">
-        <h3>Palas para ceniza</h3>
-        <p>Hechas en el taller, del mismo material que el resto.</p>
+
+      <li class="ficha rev">
+        <figure class="ficha__foto">
+          <img src="images/producto-canones-apilados.jpg" width="1500" height="1125" loading="lazy"
+               alt="Cañones y codos galvanizados apilados en la estantería, con planchas al costado">
+        </figure>
+        <div class="ficha__txt">
+          <h3>Aislante y plancha suelta</h3>
+          <p>Lana mineral en sacos para el paso por techumbre, y plancha cortada a la
+             medida si prefieres armar tú mismo.</p>
+        </div>
       </li>
     </ul>
+  </div>
+</section>
+
+
+<!-- ============================================================
+     EL LOCAL
+     Cierra el catálogo mostrando dónde se compra. Aprovecha las
+     fotos del local que no estaban usándose en ninguna parte.
+     ============================================================ -->
+<section class="seccion catalogo" id="local">
+  <div class="contenedor">
+    <p class="etiqueta rev">05 — Dónde</p>
+    <h2 class="titulo rev t-filo">Todo esto está<br>en el local</h2>
+    <p class="entrada rev">
+      Lo que ves en el catálogo no es un depósito lejano: está a la vista en
+      Lord Cochrane 121, y se puede mirar y medir antes de llevarlo.
+    </p>
+
+    <ul class="fichas">
+      <li class="ficha rev">
+        <figure class="ficha__foto">
+          <img src="images/local-entrada.jpg" width="1500" height="1125" loading="lazy"
+               alt="Entrada del local vista desde la vereda, con la cortina levantada y las estanterías a ambos lados">
+        </figure>
+        <div class="ficha__txt">
+          <h3>La entrada</h3>
+          <p>Lord Cochrane 121. Con la cortina arriba se ve el local completo desde
+             la vereda.</p>
+        </div>
+      </li>
+
+      <li class="ficha rev">
+        <figure class="ficha__foto">
+          <img src="images/local-interior-mostrador.jpg" width="1500" height="1125" loading="lazy"
+               alt="Interior del local: mostrador al fondo y estanterías con campanas, cañones y tarros">
+        </figure>
+        <div class="ficha__txt">
+          <h3>El mostrador</h3>
+          <p>Acá se atiende. Se paga en efectivo, con débito o crédito, y hay Caja
+             Vecina en el mismo local.</p>
+        </div>
+      </li>
+
+      <li class="ficha rev">
+        <figure class="ficha__foto">
+          <img src="images/local-exhibicion-exterior.jpg" width="1500" height="1125" loading="lazy"
+               alt="Estanterías con piezas de hojalatería vistas desde afuera del local, junto a la calle">
+        </figure>
+        <div class="ficha__txt">
+          <h3>La exhibición</h3>
+          <p>Buena parte del stock queda hacia la calle: se alcanza a ver qué hay
+             antes de entrar.</p>
+        </div>
+      </li>
+    </ul>
+
+    <!-- Dos recorridos cortos, sin descargar nada hasta que los toquen -->
+    <div class="videos videos--catalogo rev">
+      <figure class="video">
+        <video data-poster="images/local-entrada-video-poster.jpg" preload="none" playsinline
+               data-fuente="images/local-entrada-video.mp4"
+               aria-label="Recorrido entrando al local desde la vereda"></video>
+        <button class="video__play" type="button">
+          <span class="video__icono" aria-hidden="true"></span>
+          <span class="video__txt">Entrar al local</span>
+        </button>
+        <figcaption>Entrando por Lord Cochrane</figcaption>
+      </figure>
+
+      <figure class="video">
+        <video data-poster="images/local-patio-poster.jpg" preload="none" playsinline
+               data-fuente="images/local-patio.mp4"
+               aria-label="Recorrido por el patio del local con planchas y material"></video>
+        <button class="video__play" type="button">
+          <span class="video__icono" aria-hidden="true"></span>
+          <span class="video__txt">Ver el patio</span>
+        </button>
+        <figcaption>El patio, donde se guarda la plancha</figcaption>
+      </figure>
+    </div>
   </div>
 </section>
 
@@ -367,6 +471,9 @@
 </section>
 
 
+</main>
+
+
 <!-- ============================================================
      PIE
      ============================================================ -->
@@ -383,6 +490,7 @@
       <a href="#sombreretes">Sombreretes</a>
       <a href="#canones">Cañones</a>
       <a href="#uniones">Uniones</a>
+      <a href="#local">El local</a>
       <a href="index.html#contacto">Contacto</a>
     </nav>
   </div>
@@ -414,7 +522,7 @@
   <button class="visor__nav visor__nav--sig" id="visor-sig" aria-label="Siguiente">&#8250;</button>
 </div>
 
-<script src="js/datos.js?v=20260807"></script>
-<script src="js/main.js?v=20260807"></script>
+<script src="js/datos.js?v=20260807b"></script>
+<script src="js/main.js?v=20260807b"></script>
 </body>
 </html>

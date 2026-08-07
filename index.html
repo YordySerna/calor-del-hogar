@@ -38,7 +38,7 @@
      los navegadores lo guardan bastante más. Sin este número, quien ya visitó
      el sitio sigue viendo los estilos viejos aunque se publique una versión
      nueva. Al cambiar cualquier cosa del CSS, subir también esta fecha. -->
-<link rel="stylesheet" href="css/estilo.css?v=20260807">
+<link rel="stylesheet" href="css/estilo.css?v=20260807b">
 
 <!-- Ficha de negocio local para Google. Es lo que hace que el local pueda
      salir en el mapa y en las búsquedas de "hojalatería Loncoche".
@@ -75,6 +75,10 @@
 </head>
 
 <body>
+
+<!-- Primer elemento enfocable de la página: quien navega con teclado o
+     lector de pantalla salta el menú de una vez. Solo se ve al tabular. -->
+<a class="saltar" href="#contenido">Saltar al contenido</a>
 
 <!-- ============================================================
      BARRA SUPERIOR
@@ -123,6 +127,8 @@
 <!-- ============================================================
      PORTADA — video del taller desenfocado + manchas cálidas
      ============================================================ -->
+<main id="contenido">
+
 <section class="portada" id="inicio">
 
   <!-- Fondo de video. Si el navegador no lo carga o el usuario pidió menos
@@ -144,7 +150,7 @@
          comuna, que es lo que la gente escribe en el buscador. No es relleno
          de palabras clave: es literalmente lo que hace el negocio. -->
     <h1 class="portada__titulo rev">
-      <span class="l1">Calor</span>
+      <span class="l1 t-zinc">Calor</span>
       <span class="l2">de Hogar</span>
       <span class="solo-lectores">— Hojalatería y fábrica de cocinas en Loncoche</span>
     </h1>
@@ -203,7 +209,7 @@
 
     <div class="oficio__texto">
       <p class="etiqueta rev">El oficio</p>
-      <h2 class="titulo rev">Acá la plancha<br>se trabaja a mano</h2>
+      <h2 class="titulo rev t-filo">Acá la plancha<br>se trabaja a mano</h2>
 
       <p class="rev">
         En el taller de Lord Cochrane las plantillas están colgadas en la pared, una al
@@ -251,7 +257,7 @@
   <div class="contenedor">
 
     <p class="etiqueta rev">Servicios</p>
-    <h2 class="titulo rev">Qué hacemos</h2>
+    <h2 class="titulo rev t-filo">Qué hacemos</h2>
     <p class="entrada rev">
       Trabajo de hojalatería para casas, cocinas y techumbres. Si no está en la lista,
       igual conviene preguntar: gran parte de lo que sale del taller es a pedido.
@@ -363,7 +369,7 @@
 
     <div class="proceso__texto">
       <p class="etiqueta rev">Cómo funciona</p>
-      <h2 class="titulo rev">De la medida<br>a la pieza</h2>
+      <h2 class="titulo rev t-filo">De la medida<br>a la pieza</h2>
       <p class="entrada rev">
         No hace falta saber de hojalatería para pedir. Con una foto y una medida
         aproximada alcanza para partir.
@@ -409,7 +415,7 @@
          alguien toca play, así que quien solo pasa scrolleando no gasta
          datos. Mientras tanto se ve el poster, que pesa 110 KB. -->
     <figure class="video proceso__video rev">
-      <video poster="images/taller-maestro-poster.jpg" preload="none"
+      <video data-poster="images/taller-maestro-poster.jpg" preload="none"
              playsinline
              data-fuente="images/taller-maestro.mp4"
              aria-label="El maestro armando una pieza de plancha en el banco del taller"></video>
@@ -430,7 +436,7 @@
 <section class="seccion trabajos" id="trabajos">
   <div class="contenedor">
     <p class="etiqueta rev">Trabajos</p>
-    <h2 class="titulo rev">El taller por dentro</h2>
+    <h2 class="titulo rev t-filo">El taller por dentro</h2>
     <p class="entrada rev">
       Fotos del local y de las piezas listas. Toca cualquiera para verla más grande.
     </p>
@@ -508,7 +514,7 @@
 
     <div class="videos">
       <figure class="video rev">
-        <video poster="images/taller-banco-poster.jpg" preload="none"
+        <video data-poster="images/taller-banco-poster.jpg" preload="none"
                playsinline
                data-fuente="images/taller-banco.mp4"
                aria-label="Recorrido por el banco de trabajo con las plantillas colgadas"></video>
@@ -520,7 +526,7 @@
       </figure>
 
       <figure class="video rev">
-        <video poster="images/taller-general-poster.jpg" preload="none"
+        <video data-poster="images/taller-general-poster.jpg" preload="none"
                playsinline
                data-fuente="images/taller-general.mp4"
                aria-label="Vista general del taller con las máquinas y el material"></video>
@@ -532,7 +538,7 @@
       </figure>
 
       <figure class="video rev">
-        <video poster="images/local-estanterias-poster.jpg" preload="none"
+        <video data-poster="images/local-estanterias-poster.jpg" preload="none"
                playsinline
                data-fuente="images/local-estanterias.mp4"
                aria-label="Recorrido por las estanterías del local con ductos y piezas terminadas"></video>
@@ -615,7 +621,7 @@
 <section class="seccion porque" id="porque">
   <div class="contenedor">
     <p class="etiqueta rev">Por qué nosotros</p>
-    <h2 class="titulo rev">Cuatro razones concretas</h2>
+    <h2 class="titulo rev t-filo">Cuatro razones concretas</h2>
 
     <ul class="razones">
       <li class="razon rev">
@@ -718,7 +724,7 @@
     </p>
 
     <figure class="video entrevista__video rev">
-      <video poster="images/entrevista-municipalidad-poster.jpg" preload="none"
+      <video data-poster="images/entrevista-municipalidad-poster.jpg" preload="none"
              playsinline
              data-fuente="images/entrevista-municipalidad.mp4"
              aria-label="Entrevista de la Municipalidad de Loncoche grabada en el taller de Calor de Hogar"></video>
@@ -742,7 +748,7 @@
 
     <div class="faq__intro">
       <p class="etiqueta rev">Preguntas</p>
-      <h2 class="titulo rev">Antes de<br>escribirnos</h2>
+      <h2 class="titulo rev t-filo">Antes de<br>escribirnos</h2>
       <p class="entrada rev">
         Las dudas que llegan más seguido al mostrador. Si la tuya no está,
         se pregunta por WhatsApp y listo.
@@ -895,7 +901,7 @@
 
     <div class="contacto__datos">
       <p class="etiqueta rev">Contacto</p>
-      <h2 class="titulo rev">Visitar el taller</h2>
+      <h2 class="titulo rev t-filo">Visitar el taller</h2>
 
       <dl class="datos rev">
         <div>
@@ -947,6 +953,9 @@
 
   </div>
 </section>
+
+
+</main>
 
 
 <!-- ============================================================
@@ -1006,7 +1015,7 @@
 <!-- Mismo motivo que el CSS: sin el ?v=, un visitante que ya entró seguiría
      usando el datos.js viejo y no vería el número de WhatsApp cuando se cargue.
      Al editar datos.js o main.js, subir esta fecha. -->
-<script src="js/datos.js?v=20260807"></script>
-<script src="js/main.js?v=20260807"></script>
+<script src="js/datos.js?v=20260807b"></script>
+<script src="js/main.js?v=20260807b"></script>
 </body>
 </html>

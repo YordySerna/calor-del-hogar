@@ -1686,6 +1686,24 @@ p{ margin:0 0 1.1em; }
 
 .llamado__pie{ margin:1.6em 0 0; font-size:.9rem; }
 
+/* El video del catálogo es vertical (478×850). Se le pone un ancho máximo
+   para que no ocupe media pantalla de alto en escritorio. */
+.catalogo__video{
+  margin-top:2.6em;
+  display:grid; gap:22px;
+  align-items:center;
+}
+.catalogo__video .video{ margin:0; max-width:340px; }
+.catalogo__videotxt{
+  margin:0;
+  color:var(--zinc);
+  font-size:1.02rem;
+  max-width:44ch;
+}
+@media (min-width:760px){
+  .catalogo__video{ grid-template-columns:340px 1fr; gap:34px; }
+}
+
 @media (min-width:640px){
   .fichas{ grid-template-columns:repeat(2,1fr); }
 }

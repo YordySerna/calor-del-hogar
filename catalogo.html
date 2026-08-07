@@ -71,7 +71,7 @@
 
   <div class="portada__fondo">
     <video class="portada__video" id="video-catalogo"
-           poster="images/cat-sombreretes-variedad.jpg"
+           poster="images/catalogo-loop-poster.jpg"
            muted playsinline preload="metadata" aria-hidden="true">
       <source src="images/catalogo-loop.mp4" type="video/mp4">
     </video>
@@ -186,6 +186,26 @@
         </div>
       </li>
     </ul>
+
+    <!-- El video no se descarga hasta que alguien toca play: mientras tanto
+         solo pesa el poster. Mismo criterio que los clips de la portada. -->
+    <div class="catalogo__video rev">
+      <figure class="video">
+        <video poster="images/catalogo-taller-poster.jpg" preload="none"
+               playsinline
+               data-fuente="images/catalogo-taller.mp4"
+               aria-label="El maestro armando a mano un sombrerete de copa en el banco del taller"></video>
+        <button class="video__play" type="button">
+          <span class="video__icono" aria-hidden="true"></span>
+          <span class="video__txt">Ver cómo se arma</span>
+        </button>
+        <figcaption>Un sombrerete de copa, armado a mano</figcaption>
+      </figure>
+      <p class="catalogo__videotxt">
+        Así se arma uno. La pieza se va calzando y remachando en el banco, sin
+        moldes: por eso puede salir en la medida que haga falta.
+      </p>
+    </div>
   </div>
 </section>
 

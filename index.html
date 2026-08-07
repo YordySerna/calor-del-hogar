@@ -61,15 +61,73 @@
     "addressRegion": "Región de La Araucanía",
     "addressCountry": "CL"
   },
-  "areaServed": "Loncoche y alrededores",
+  "telephone": "+56968650001",
+  "areaServed": [
+    { "@type": "City", "name": "Loncoche" },
+    { "@type": "City", "name": "Gorbea" },
+    { "@type": "City", "name": "Pitrufquén" },
+    { "@type": "City", "name": "Villarrica" },
+    { "@type": "City", "name": "Lanco" }
+  ],
   "paymentAccepted": "Efectivo, tarjeta de débito, tarjeta de crédito",
   "currenciesAccepted": "CLP",
   "founder": { "@type": "Person", "name": "Miguel A. Bustamante Q." },
+  "makesOffer": [
+    { "@type": "Offer", "itemOffered": { "@type": "Product", "name": "Cocinas a leña fabricadas a medida" } },
+    { "@type": "Offer", "itemOffered": { "@type": "Product", "name": "Cañones de chimenea galvanizados y esmaltados" } },
+    { "@type": "Offer", "itemOffered": { "@type": "Product", "name": "Sombreretes y capuchones" } },
+    { "@type": "Offer", "itemOffered": { "@type": "Product", "name": "Canaletas y bajadas de agua" } },
+    { "@type": "Offer", "itemOffered": { "@type": "Product", "name": "Campanas de cocina y quincho" } }
+  ],
   "image": [
     "https://calordehogarloncoche.cl/images/local-fachada.jpg",
     "https://calordehogarloncoche.cl/images/taller-banco-trabajo.jpg"
   ],
   "url": "https://calordehogarloncoche.cl/"
+}
+</script>
+
+<!-- Las preguntas frecuentes, en el formato que Google entiende. Con esto
+     puede mostrarlas desplegadas debajo del resultado de búsqueda, lo que
+     ocupa más espacio en la pantalla y responde antes de que hagan clic.
+     El texto es el mismo que está escrito abajo en la sección #faq: si se
+     edita allá, hay que editarlo acá también. -->
+<script type="application/ld+json" id="ficha-preguntas">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "¿Puedo llegar con mi propia medida?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Sí, es lo habitual. Puedes traer la medida anotada, la pieza vieja o una foto con algo al lado que sirva de referencia. Con eso se fabrica igual." }
+    },
+    {
+      "@type": "Question",
+      "name": "¿Qué datos necesito para pedir un cañón?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Principalmente dos: el diámetro que usa la cocina o la estufa, y cuántos metros de recorrido necesitas. Si además sabes cuántos codos lleva, mejor todavía." }
+    },
+    {
+      "@type": "Question",
+      "name": "¿Hacen cocinas a leña desde cero?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Sí, y somos los únicos en Loncoche que las fabricamos completas en el taller: horno, placa, cajones, puertas y tiradores salen de acá. Si tienes otra idea en mente, se conversa y se ve cómo hacerla." }
+    },
+    {
+      "@type": "Question",
+      "name": "¿Hacen piezas que no están en la lista?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Sí. El cartel del taller dice fábrica de cocinas y hojalatería en general, y esa es la idea: si es una pieza en plancha, se estudia. Llegas con el modelo o con la medida y se conversa." }
+    },
+    {
+      "@type": "Question",
+      "name": "¿Atienden fuera de Loncoche?",
+      "acceptedAnswer": { "@type": "Answer", "text": "El taller está en Lord Cochrane 121 y ahí se retira. Si escribes desde otra comuna, cuéntanos desde dónde y vemos cómo hacerlo llegar." }
+    },
+    {
+      "@type": "Question",
+      "name": "¿Se puede pagar con tarjeta?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Sí: débito y crédito por Transbank. También hay Caja Vecina en el mismo local." }
+    }
+  ]
 }
 </script>
 </head>

@@ -1572,6 +1572,160 @@ p{ margin:0 0 1.1em; }
 
 
 /* ============================================================
+   COCINAS A LEÑA
+   La primera foto manda: ocupa dos columnas y el doble de alto,
+   porque una cocina terminada es lo que cierra la venta.
+   ============================================================ */
+
+.cocinas__intro{ max-width:62ch; margin-top:.4em; }
+.cocinas__intro p{ color:#DCE3E5; font-size:1.06rem; }
+
+/* el dato que la familia pidió destacar */
+.cocinas__unico{
+  border-left:3px solid var(--oxido);
+  padding:14px 0 14px 16px;
+  background:linear-gradient(to right, rgba(200,85,30,.12), transparent 80%);
+  border-radius:0 var(--radio) var(--radio) 0;
+}
+.cocinas__unico strong{
+  display:block;
+  font-family:"Anton",sans-serif;
+  font-weight:400;
+  font-size:1.2rem;
+  text-transform:uppercase;
+  letter-spacing:.02em;
+  color:var(--ambar);
+  margin-bottom:.3em;
+}
+
+.cocinas__grid{
+  list-style:none; margin:2.6em 0 0; padding:0;
+  display:grid; gap:14px;
+}
+.cocina figure{
+  margin:0;
+  position:relative;
+  overflow:hidden;
+  border-radius:var(--radio);
+  background:#0C171C;
+  border:1px solid var(--borde);
+  height:100%;
+}
+.cocina img{
+  width:100%; height:100%;
+  aspect-ratio:4/3;
+  object-fit:cover;
+  filter:saturate(.9) contrast(1.04) brightness(1.03);
+  transition:transform .8s cubic-bezier(.22,.61,.36,1);
+}
+.cocina:hover img{ transform:scale(1.05); }
+.cocina figcaption{
+  position:absolute; left:0; right:0; bottom:0;
+  padding:34px 16px 13px;
+  font-size:.86rem;
+  font-weight:600;
+  letter-spacing:.04em;
+  background:linear-gradient(to top, rgba(12,23,28,.94), transparent);
+  pointer-events:none;
+}
+
+.cocinas__pie{
+  margin-top:2.4em;
+  display:grid; gap:18px;
+  align-items:center;
+  border-top:1px solid var(--borde);
+  padding-top:2em;
+}
+.cocinas__pie p{ margin:0; color:var(--zinc); font-size:1.02rem; max-width:56ch; }
+.cocinas__pie strong{ color:var(--cal); }
+.cocinas__pie .btn{ justify-self:start; }
+
+.js .cocina:nth-child(2){ transition-delay:.07s; }
+.js .cocina:nth-child(3){ transition-delay:.14s; }
+.js .cocina:nth-child(4){ transition-delay:.21s; }
+.js .cocina:nth-child(5){ transition-delay:.28s; }
+
+@media (min-width:700px){
+  .cocinas__grid{ grid-template-columns:repeat(3,1fr); }
+  /* la esmaltada blanca es la mejor foto: manda sobre las demás */
+  .cocina:first-child{ grid-column:span 2; grid-row:span 2; }
+  .cocina:first-child img{ aspect-ratio:auto; }
+  .cocinas__pie{ grid-template-columns:1fr auto; gap:30px; }
+  .cocinas__pie .btn{ justify-self:end; }
+}
+
+
+/* ============================================================
+   QUIÉNES SOMOS
+   Tres retratos del negocio: el maestro, el hijo y el cartel de
+   la entrada. Van del mismo tamaño, sin jerarquía entre ellos,
+   porque las tres cosas pesan lo mismo para la familia.
+   ============================================================ */
+
+.somos{
+  background:linear-gradient(to bottom, transparent, rgba(27,59,66,.5) 15%, rgba(27,59,66,.5) 85%, transparent);
+}
+
+.somos__grid{
+  list-style:none; margin:2.8em 0 0; padding:0;
+  display:grid; gap:20px;
+}
+
+.somos__item figure{
+  margin:0;
+  height:100%;
+  display:flex; flex-direction:column;
+  background:rgba(18,35,42,.6);
+  border:1px solid var(--borde);
+  border-radius:var(--radio);
+  overflow:hidden;
+  transition:border-color var(--t-rapida), transform var(--t-rapida);
+}
+.somos__item:hover figure{
+  border-color:rgba(232,163,61,.4);
+  transform:translateY(-3px);
+}
+.somos__item img{
+  width:100%;
+  aspect-ratio:4/3;
+  object-fit:cover;
+  filter:saturate(.9) contrast(1.04) brightness(1.02);
+}
+/* el cartel es un cuadro colgado: se encuadra hacia arriba */
+.somos__item:last-child img{ object-position:center 38%; }
+
+.somos__item figcaption{
+  padding:18px 20px 22px;
+  display:flex; flex-direction:column; gap:.5em;
+}
+.somos__item figcaption strong{
+  font-family:"Anton",sans-serif;
+  font-weight:400;
+  font-size:1.14rem;
+  text-transform:uppercase;
+  letter-spacing:.02em;
+  color:var(--cal);
+}
+.somos__item figcaption span{ color:var(--zinc); font-size:.95rem; line-height:1.6; }
+
+.somos__cierre{
+  margin:2.4em auto 0;
+  max-width:60ch;
+  text-align:center;
+  font-size:1.06rem;
+  color:#DCE3E5;
+}
+.somos__cierre strong{ color:var(--ambar); font-weight:600; }
+
+.js .somos__item:nth-child(2){ transition-delay:.08s; }
+.js .somos__item:nth-child(3){ transition-delay:.16s; }
+
+@media (min-width:760px){
+  .somos__grid{ grid-template-columns:repeat(3,1fr); }
+}
+
+
+/* ============================================================
    ============================================================
    EFECTOS DE TIPOGRAFÍA
    El rubro es la plancha metálica, así que los efectos imitan

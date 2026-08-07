@@ -20,11 +20,11 @@ window.CALOR_DE_HOGAR = {
 
   /* Número de WhatsApp en formato internacional, SOLO dígitos.
      Ejemplo para Chile: "56961234567"  (56 + 9 + los 8 dígitos) */
-  whatsapp: "",
+  whatsapp: "56968650001",
 
   /* Teléfono para llamar. Con + y sin espacios: "+56961234567".
      Si es el mismo que el WhatsApp, se puede repetir. */
-  telefono: "",
+  telefono: "+56968650001",
 
   /* Correo de contacto. En la tarjeta del local termina en
      "loncoche@gmail.com", pero el principio no se alcanza a leer

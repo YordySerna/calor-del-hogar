@@ -1,4 +1,4 @@
-# Hojalatería Calor de Hogar — Loncoche
+| Teléfono | **LISTO** | mismo número del WhatsApp || Número de WhatsApp | **LISTO** | +56 9 6865 0001 |# Hojalatería Calor de Hogar — Loncoche
 
 Sitio estático. HTML + CSS + JavaScript vanilla. Sin build, sin npm, sin frameworks.
 Abre con doble clic en `index.html` o se sube tal cual a cualquier hosting.

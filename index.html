@@ -38,7 +38,7 @@
      los navegadores lo guardan bastante más. Sin este número, quien ya visitó
      el sitio sigue viendo los estilos viejos aunque se publique una versión
      nueva. Al cambiar cualquier cosa del CSS, subir también esta fecha. -->
-<link rel="stylesheet" href="css/estilo.css?v=20260807b">
+<link rel="stylesheet" href="css/estilo.css?v=20260807c">
 
 <!-- Ficha de negocio local para Google. Es lo que hace que el local pueda
      salir en el mapa y en las búsquedas de "hojalatería Loncoche".
@@ -93,8 +93,9 @@
   </a>
 
   <nav class="nav" aria-label="Principal">
-    <a href="#oficio">El oficio</a>
-    <a href="#servicios">Servicios</a>
+    <a href="#cocinas">Cocinas</a>
+    <a href="#somos">Quiénes somos</a>
+    <a href="catalogo.html">Catálogo</a>
     <a href="#proceso">Cómo funciona</a>
     <a href="#trabajos">Trabajos</a>
     <a href="#contacto">Contacto</a>
@@ -112,7 +113,9 @@
 
 <!-- menú desplegable en móvil -->
 <nav class="nav-movil" id="nav-movil" aria-label="Principal móvil">
+  <a href="#cocinas">Cocinas a leña</a>
   <a href="#oficio">El oficio</a>
+  <a href="#somos">Quiénes somos</a>
   <a href="#servicios">Servicios</a>
   <a href="#proceso">Cómo funciona</a>
   <a href="#trabajos">Trabajos</a>
@@ -161,18 +164,23 @@
       no traídas de otra parte.
     </p>
 
+    <!-- El catálogo va en la portada, no escondido al fondo: es lo que la
+         gente quiere ver primero y estaba enterrado bajo la galería. -->
     <div class="portada__botones rev">
       <a class="btn btn--sol" href="#cotiza"
          data-wa data-wa-msg="Hola, quiero cotizar un trabajo de hojalatería.">
         Pedir cotización por WhatsApp
       </a>
-      <a class="btn btn--linea" href="#oficio">Ver el taller</a>
+      <a class="btn btn--linea" href="catalogo.html">
+        Conoce más de nuestro trabajo
+        <span aria-hidden="true">→</span>
+      </a>
     </div>
 
     <ul class="portada__sellos rev">
-      <li>Fabricación propia</li>
+      <li>Cocinas a leña desde cero</li>
+      <li>Únicos en Loncoche</li>
       <li>Trabajos a medida</li>
-      <li>Se paga con tarjeta</li>
     </ul>
   </div>
 
@@ -198,6 +206,82 @@
     <li class="rev"><strong>Atiende el maestro</strong><span>hablas con quien hace la pieza</span></li>
     <li class="rev"><strong>Débito y crédito</strong><span>Transbank y Caja Vecina</span></li>
   </ul>
+</section>
+
+
+<!-- ============================================================
+     COCINAS A LEÑA — el argumento más fuerte del negocio
+     Va temprano a propósito: es lo que nadie más hace en la zona.
+     El dato de "únicos en Loncoche" lo entregó la familia.
+     ============================================================ -->
+<section class="seccion cocinas" id="cocinas">
+  <div class="contenedor">
+    <p class="etiqueta rev">Cocinas a leña</p>
+    <h2 class="titulo rev t-filo">Las hacemos<br>desde cero</h2>
+
+    <div class="cocinas__intro rev">
+      <p>
+        No se arman con piezas compradas: se fabrican completas en el taller, desde
+        la plancha plana. El horno, la placa, los cajones, las puertas y los tiradores
+        salen de acá, cortados y doblados a medida.
+      </p>
+      <p class="cocinas__unico">
+        <span class="t-remache"></span>
+        <strong>Somos los únicos en Loncoche que fabrican cocinas a leña desde cero.</strong>
+        Lo demás que se vende en la zona viene armado de otra parte.
+      </p>
+    </div>
+
+    <ul class="cocinas__grid">
+      <li class="cocina rev">
+        <figure>
+          <img src="images/cocina-blanca.jpg" width="1400" height="913" loading="lazy"
+               alt="Cocina a leña esmaltada blanca con tres discos, horno y cajones, terminada en el taller">
+          <figcaption>Esmaltada blanca, con horno y cajonera</figcaption>
+        </figure>
+      </li>
+      <li class="cocina rev">
+        <figure>
+          <img src="images/cocina-inox-horno.jpg" width="1400" height="913" loading="lazy"
+               alt="Cocina a leña de acero inoxidable con el horno abierto, mostrando las parrillas interiores">
+          <figcaption>Inoxidable, horno abierto</figcaption>
+        </figure>
+      </li>
+      <li class="cocina rev">
+        <figure>
+          <img src="images/cocina-inox-abierta.jpg" width="1400" height="1624" loading="lazy"
+               alt="Cocina a leña de acero inoxidable con horno y cajón cenicero abiertos">
+          <figcaption>El cenicero y el horno, por dentro</figcaption>
+        </figure>
+      </li>
+      <li class="cocina rev">
+        <figure>
+          <img src="images/cocina-madera.jpg" width="1400" height="913" loading="lazy"
+               alt="Cocina a leña con frente de madera y cañón montado, terminada en el taller">
+          <figcaption>Con frente de madera y su cañón</figcaption>
+        </figure>
+      </li>
+      <li class="cocina rev">
+        <figure>
+          <img src="images/cocina-inox-taller.jpg" width="1400" height="1624" loading="lazy"
+               alt="Cocina a leña de acero inoxidable recién terminada, sobre el banco del taller">
+          <figcaption>Recién terminada, antes de salir</figcaption>
+        </figure>
+      </li>
+    </ul>
+
+    <div class="cocinas__pie rev">
+      <p>
+        <strong>¿Tienes otra idea en la cabeza?</strong> No hace falta que sea igual a
+        alguna de estas. Si llegas con una foto, un dibujo o la medida del hueco donde
+        va, se conversa y se ve cómo hacerla.
+      </p>
+      <a class="btn btn--sol" href="#cotiza"
+         data-wa data-wa-msg="Hola, quiero consultar por una cocina a leña hecha a medida. Les cuento lo que tengo pensado:">
+        Conversar mi cocina a medida
+      </a>
+    </div>
+  </div>
 </section>
 
 
@@ -239,13 +323,77 @@
 
     <!-- Observamos el contenedor, no la imagen recortada: un elemento con la
          máscara cerrada nunca dispararía el IntersectionObserver.
-         Esta foto es la que sostiene todo el texto de al lado: se ven las
-         plantillas colgadas, rotuladas a mano una por una. -->
+         Acá va el maestro trabajando: el texto habla de sus manos, así que
+         la foto tiene que ser él y no un plano del mesón vacío. -->
     <div class="oficio__foto rev">
-      <img src="images/taller-banco-trabajo.jpg" width="1500" height="1125" loading="lazy"
-           alt="Banco de trabajo del taller: decenas de plantillas de zinc colgadas en la pared, rotuladas a mano, y piezas de cañón terminadas sobre el mesón">
+      <img src="images/quienes-maestro.jpg" width="1400" height="1207" loading="lazy"
+           alt="Miguel trabajando en el banco del taller, con las herramientas colgadas en la pared de madera detrás">
     </div>
 
+  </div>
+</section>
+
+
+<!-- ============================================================
+     QUIÉNES SOMOS
+     Lo que la familia pidió que estuviera: que son un taller
+     familiar, que el hijo ya trabaja en el oficio, y la frase que
+     tienen enmarcada en la entrada. Esa frase no la ponemos por
+     decorar: es identidad del negocio y ellos la pidieron.
+     ============================================================ -->
+<section class="seccion somos" id="somos">
+  <div class="contenedor">
+    <p class="etiqueta rev">Quiénes somos</p>
+    <h2 class="titulo rev t-filo">Un taller<br>de familia</h2>
+    <p class="entrada rev">
+      Calor de Hogar no es una cadena ni una sucursal. Es un taller donde el
+      maestro atiende, fabrica y responde, y donde el oficio se está pasando
+      de padre a hijo como se ha hecho siempre en este rubro.
+    </p>
+
+    <ul class="somos__grid">
+      <li class="somos__item rev">
+        <figure>
+          <img src="images/retrato-maestro-logo.jpg" width="1400" height="913" loading="lazy"
+               alt="Miguel A. Bustamante con su overol de trabajo, junto a una cocina a leña terminada y el logo de Calor de Hogar">
+          <figcaption>
+            <strong>Miguel A. Bustamante Q.</strong>
+            <span>El maestro. Es quien toma la medida, corta la plancha y responde
+                  el WhatsApp: no hay vendedor en el medio.</span>
+          </figcaption>
+        </figure>
+      </li>
+
+      <li class="somos__item rev">
+        <figure>
+          <img src="images/quienes-hijo.jpg" width="1400" height="1207" loading="lazy"
+               alt="El hijo de Miguel trabajando en el taller con guantes y herramienta eléctrica">
+          <figcaption>
+            <strong>La segunda generación</strong>
+            <span>Su hijo ya trabaja en el taller. El oficio de la hojalatería se
+                  aprende así, al lado del banco, no en un manual.</span>
+          </figcaption>
+        </figure>
+      </li>
+
+      <li class="somos__item rev">
+        <figure>
+          <img src="images/local-cartel-identidad.jpg" width="1500" height="1125" loading="lazy"
+               alt="Cartel enmarcado en la entrada del local con la frase Dios cambió mi historia y el nombre Hojalatería Calor de Hogar">
+          <figcaption>
+            <strong>“Dios cambió mi historia”</strong>
+            <span>El cartel que está colgado en la entrada desde siempre. Para la
+                  familia es el punto de partida de todo lo demás.</span>
+          </figcaption>
+        </figure>
+      </li>
+    </ul>
+
+    <p class="somos__cierre rev">
+      Por eso cada pieza sale terminada como si fuera para la casa de uno.
+      <strong>Es el apellido de la familia el que va en cada trabajo</strong>,
+      y en un pueblo como Loncoche eso se sabe al día siguiente.
+    </p>
   </div>
 </section>
 
@@ -1015,7 +1163,7 @@
 <!-- Mismo motivo que el CSS: sin el ?v=, un visitante que ya entró seguiría
      usando el datos.js viejo y no vería el número de WhatsApp cuando se cargue.
      Al editar datos.js o main.js, subir esta fecha. -->
-<script src="js/datos.js?v=20260807b"></script>
-<script src="js/main.js?v=20260807b"></script>
+<script src="js/datos.js?v=20260807c"></script>
+<script src="js/main.js?v=20260807c"></script>
 </body>
 </html>
